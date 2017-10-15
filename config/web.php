@@ -7,18 +7,29 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+    'user' => [
+        'class' => 'dektrium\user\Module',
+        'admins'=>['admin'],
+        'adminPermission'=>'admin',
+        'enableUnconfirmedLogin'=>true,
+    ],
+],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'MP-EJU0ft8lZewcf27eXZ3D5xELeWnJR',
         ],
+        'authManager'=>[
+            'class'=>'yii\rbac\DbManager'
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-        ],
+//        'user' => [
+//            'identityClass' => 'app\models\User',
+//            'enableAutoLogin' => true,
+//        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -39,14 +50,14 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
+           'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
