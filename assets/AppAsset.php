@@ -19,12 +19,12 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
        // 'css/site.css',
-//       
-//        'assetsb/bower_components/bootstrap/dist/css/bootstrap.min.css',
-//        'assetsb/bower_components/font-awesome/css/font-awesome.min.css',
-//        'assetsb/bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
-//        'assetsb/youplay/css/youplay.min.css',
-//         'css/custom.css'
+       
+       // 'assetsb/bower_components/bootstrap/dist/css/bootstrap.min.css',
+        'assetsb/bower_components/font-awesome/css/font-awesome.min.css',
+        'assetsb/bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
+        'assetsb/youplay/css/youplay.min.css',
+         'css/custom.css'
         
     ];
     public $js = [
@@ -38,8 +38,8 @@ class AppAsset extends AssetBundle
 //        'assetsb/youplay/js/youplay.min.js'
     ];
     public $depends = [
-       //'yii\web\YiiAsset',
-        //'yii\bootstrap\BootstrapAsset',
+       'yii\web\YiiAsset',
+      'yii\bootstrap\BootstrapPluginAsset',
        
         
     ];

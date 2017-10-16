@@ -24,21 +24,6 @@ AppAsset::register($this);
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" type="text/css" href="/assetsb/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-
-  <!-- FontAwesome -->
-  <link rel="stylesheet" type="text/css" href="/assetsb/bower_components/font-awesome/css/font-awesome.min.css" />
-
-  <!-- Owl Carousel -->
-  <link rel="stylesheet" type="text/css" href="/assetsb/bower_components/owl.carousel/dist/assets/owl.carousel.min.css" />
-  <!-- Youplay -->
-
-  <link rel="stylesheet" type="text/css" href="/assetsb/youplay/css/youplay.min.css" />
-
-  <!-- Custom Styles -->
-  <link rel="stylesheet" type="text/css" href="assetsb/css/custom.css" />
-<!--  <meta name="description" content="">-->
 
 
 
@@ -192,7 +177,7 @@ AppAsset::register($this);
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown dropdown-hover">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      John Doe <span class="badge bg-default">2</span> <span class="caret"></span> <span class="label">it is you</span>
+                      <?=\Yii::$app->user->identity->username  ?> <span class="badge bg-default">2</span> <span class="caret"></span> <span class="label">it is you</span>
                     </a>
             <div class="dropdown-menu">
               <ul role="menu">
@@ -292,14 +277,7 @@ AppAsset::register($this);
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
+
 
     <!-- Footer -->
     <footer class="youplay-footer-parallax">

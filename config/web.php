@@ -10,12 +10,28 @@ $config = [
     'modules' => [
     'user' => [
         'class' => 'dektrium\user\Module',
+         'controllerMap' => [
+            'admin' => 'app\modules\admin\controllers\AdminController'
+            ],
         'admins'=>['admin'],
         'adminPermission'=>'admin',
         'enableUnconfirmedLogin'=>true,
     ],
+         'admin'   => 'app\modules\admin\Adminka',
+         
+        
 ],
     'components' => [
+        
+        
+'view' => [
+        'theme' => [
+            'pathMap' => [
+                '@dektrium/user/views/admin' => '@app/modules/admin/views/admin'
+            ],
+        ],
+    ],
+        
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'MP-EJU0ft8lZewcf27eXZ3D5xELeWnJR',
