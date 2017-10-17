@@ -27,7 +27,10 @@ $config = [
 'view' => [
         'theme' => [
             'pathMap' => [
-                '@dektrium/user/views/admin' => '@app/modules/admin/views/admin'
+                '@dektrium/user/views/admin' => '@app/modules/admin/views/admin',
+                '@dektrium/user/views/security'=>'@app/views/security',
+                '@dektrium/user/views/registration'=>'@app/views/registration',
+                '@dektrium/user/views/recovery'=>'@app/views/recovery',
             ],
         ],
     ],

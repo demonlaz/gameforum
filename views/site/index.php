@@ -1,28 +1,12 @@
 <?php
 
 /* @var $this yii\web\View */
-
+use app\components\GlobalBanerWidget;
 $this->title = 'Геймер';
 ?>
 
     <!-- Banner -->
-    <section class="youplay-banner banner-top youplay-banner-parallax">
-      <div class="image" style="background-image: url('/images/banner-bg.jpg')">
-      </div>
-
-      <div class="info">
-        <div>
-          <div class="container">
-            <h1>Diablo III: <br>Reaper of Souls</h1>
-            <em>"One of the best grind games"</em>
-            <br>
-            <br>
-            <br>
-            <a class="btn btn-lg" href="#!">Purchase</a>
-          </div>
-        </div>
-      </div>
-    </section>
+<?= GlobalBanerWidget::widget(['prioritet'=>true]) ?>
     <!-- /Banner -->
 
     <!-- Images With Text -->

@@ -65,12 +65,22 @@ AppAsset::register($this);
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index-2.html">
+        <a class="navbar-brand" href="<?=\yii\helpers\Url::to('/') ?>">
           <img src="/images/logo.png" alt="">
         </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
+            <?php if(empty(Yii::$app->user->identity->username)): ?>
+           <li class='dropdown dropdown-hover'> 
+              <a href="<?=\yii\helpers\Url::to('/user/security/login') ?>" class="dropdown-toggle">Вход</a>
+          </li>
+       <?php   endif; ?>
+           <?php if(empty(Yii::$app->user->identity->username)): ?>
+           <li class='dropdown dropdown-hover'> 
+              <a href="<?=\yii\helpers\Url::to('/user/registration/register') ?>" class="dropdown-toggle">Регистрация</a>
+          </li>
+       <?php   endif; ?>
           <li class="dropdown dropdown-hover ">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                       Store <span class="caret"></span> <span class="label">games</span>
@@ -117,6 +127,7 @@ AppAsset::register($this);
               </ul>
             </div>
           </li>
+          
           <li class="dropdown dropdown-hover ">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                       Features <span class="caret"></span> <span class="label">full list</span>
@@ -176,8 +187,8 @@ AppAsset::register($this);
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown dropdown-hover">
-            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      <?=(!empty(\Yii::$app->user->identity->username))?\Yii::$app->user->identity->username : 'Войдите'  ?> <span class="badge bg-default">2</span> <span class="caret"></span> <span class="label">it is you</span>
+              <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                      <?=(!empty(\Yii::$app->user->identity->username))?\Yii::$app->user->identity->username.'<span class="badge bg-default">2</span> <span class="caret"></span> <span class="label">it is you</span>' : ''  ?> 
                     </a>
             <div class="dropdown-menu">
               <ul role="menu">
@@ -193,7 +204,7 @@ AppAsset::register($this);
                 </li>
                 <li class="divider"></li>
 
-                <li><a href="login.html">Log Out</a>
+                <li><a href=<?= \yii\helpers\Url::to('/site/logout')?>>Выйти</a>
                 </li>
                 <li class="dropdown dropdown-submenu pull-left">
                   <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More..</a>
