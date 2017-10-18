@@ -81,7 +81,7 @@ AppAsset::register($this);
               <a href="<?=\yii\helpers\Url::to('/user/registration/register') ?>" class="dropdown-toggle">Регистрация</a>
           </li>
        <?php   endif; ?>
-          <li class="dropdown dropdown-hover ">
+       <!--   <li class="dropdown dropdown-hover ">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                       Store <span class="caret"></span> <span class="label">games</span>
                     </a>
@@ -103,7 +103,7 @@ AppAsset::register($this);
                 </li>
               </ul>
             </div>
-          </li>
+          </li>-->
           <li class="dropdown dropdown-hover ">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                       Blog <span class="caret"></span> <span class="label">news</span>
@@ -222,7 +222,7 @@ AppAsset::register($this);
           </li>
           <li>
             <a class="search-toggle" href="search.html">
-              <i class="fa fa-search"></i>
+                <span class="glyphicon glyphicon-search"></span>
             </a>
           </li>
           <li class="dropdown dropdown-hover dropdown-cart">
