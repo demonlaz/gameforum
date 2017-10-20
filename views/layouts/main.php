@@ -81,6 +81,12 @@ AppAsset::register($this);
               <a href="<?=\yii\helpers\Url::to('/user/registration/register') ?>" class="dropdown-toggle">Регистрация</a>
           </li>
        <?php   endif; ?>
+           <?php if(!empty(Yii::$app->user->identity->isAdmin)): ?>
+           <li class='dropdown dropdown-hover'> 
+              <a href="<?=\yii\helpers\Url::to('/admin/admin') ?>" class="dropdown-toggle">админка</a>
+          </li>
+       <?php   endif; ?>
+          
        <!--   <li class="dropdown dropdown-hover ">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                       Store <span class="caret"></span> <span class="label">games</span>
@@ -106,8 +112,9 @@ AppAsset::register($this);
           </li>-->
           <li class="dropdown dropdown-hover ">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      Blog <span class="caret"></span> <span class="label">news</span>
+                      Категория <span class="caret"><span class="glyphicon glyphicon-arrow-down"></span>
                     </a>
+             
             <div class="dropdown-menu">
               <ul role="menu">
                 <li><a href="blog-1.html">Blog Style 1</a>
@@ -188,14 +195,13 @@ AppAsset::register($this);
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown dropdown-hover">
               <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      <?=(!empty(\Yii::$app->user->identity->username))?\Yii::$app->user->identity->username.'<span class="badge bg-default">2</span> <span class="caret"></span> <span class="label">it is you</span>' : ''  ?> 
+                      <?=(!empty(\Yii::$app->user->identity->username))?\Yii::$app->user->identity->username.'<span class="badge bg-default">2</span> <span class="caret"></span> <span class="glyphicon glyphicon-user"></span>' : ''  ?> 
                     </a>
             <div class="dropdown-menu">
               <ul role="menu">
                 <li>
                 </li>
-                <li><a href="http://themeforest.net/item/youplay-game-template-based-on-bootstrap/11306207?ref=_nK">Purchase</a>
-                </li>
+              
                 <li class="divider"></li>
 
                 <li><a href="user-profile.html">Profile <span class="badge pull-right bg-warning">13</span></a>

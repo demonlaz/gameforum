@@ -1,7 +1,7 @@
 <?php
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-
+if(!empty(Yii::$app->user->identity->isAdmin)):
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -26,4 +26,6 @@ dmstr\web\AdminLteAsset::register($this);
 <?php $this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php $this->endPage() ;
+endif;
+        ?>

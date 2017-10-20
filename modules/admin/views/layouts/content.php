@@ -1,7 +1,7 @@
 <?php
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
-
+if(!empty(Yii::$app->user->identity->isAdmin)):
 ?>
 <div class="content-wrapper" style="background-color: lightslategrey;">
     <section class="content-header">
@@ -233,3 +233,7 @@ use dmstr\widgets\Alert;
 <!-- Add the sidebar's background. This div must be placed
      immediately after the control sidebar -->
 <div class='control-sidebar-bg'></div>
+
+
+
+<?php endif; ?>

@@ -44,6 +44,8 @@ $config = [
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            'defaultDuration'=>10
+          
         ],
 //        'user' => [
 //            'identityClass' => 'app\models\User',

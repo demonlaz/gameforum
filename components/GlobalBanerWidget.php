@@ -22,7 +22,12 @@ class GlobalBanerWidget extends Widget {
     
     
     public function run() {
-       $modelgames=Games::find()->where(['global'=>1])->select('namegames,globalimag')->one();
+       $modelgames= Games::getDb()->cache(function($games){
+            return Games::find()->where(['global'=>1])->select('namegames,globalimag')->one();;
+            
+        },\Yii::$app->params['cache10']);
+        
+       
         
         
         return $this->render('globalbaner',['modelgames'=>$modelgames,'prioritet'=>$this->prioritet]);

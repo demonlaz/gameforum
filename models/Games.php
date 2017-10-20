@@ -15,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $url_dowload
  * @property boolean $global
  * @property boolean $popular
+ * @property boolean $central
  * @property string $date_add
  * @property string $date_up
  * @property string $tehnik_trebov
@@ -36,7 +37,7 @@ class Games extends \yii\db\ActiveRecord
     {
         return [
             [['content','tehnik_trebov'], 'string'],
-            [['global', 'popular'], 'boolean'],
+            [['global', 'popular','central'], 'boolean'],
             [['date_add', 'date_up'], 'safe'],
             [['namegames', 'globalimag', 'url_dowload'], 'string', 'max' => 255],
         ];
