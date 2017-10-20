@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 16 2017 г., 20:22
+-- Время создания: Окт 20 2017 г., 22:11
 -- Версия сервера: 5.7.16-log
 -- Версия PHP: 7.1.0
 
@@ -75,6 +75,62 @@ CREATE TABLE `auth_rule` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `caregory`
+--
+
+CREATE TABLE `caregory` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `id_parent` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `games`
+--
+
+CREATE TABLE `games` (
+  `id` int(11) NOT NULL,
+  `namegames` varchar(255) DEFAULT NULL COMMENT 'название игры',
+  `globalimag` varchar(255) DEFAULT NULL COMMENT 'главная картинка',
+  `content` text COMMENT 'описание игры',
+  `url_dowload` varchar(255) DEFAULT NULL COMMENT 'сайт производитель',
+  `tehnik_trebov` text,
+  `global` bit(1) DEFAULT NULL COMMENT 'главаня игра 1 да',
+  `popular` bit(1) DEFAULT NULL COMMENT 'популярная игра 1 да',
+  `central` bit(1) DEFAULT NULL COMMENT '1 отоброжать ',
+  `date_add` datetime DEFAULT NULL COMMENT 'дата дабавления возможно смнеить на int',
+  `date_up` datetime DEFAULT NULL COMMENT 'дата обновления возможно смнеить на int'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `games`
+--
+
+INSERT INTO `games` (`id`, `namegames`, `globalimag`, `content`, `url_dowload`, `tehnik_trebov`, `global`, `popular`, `central`, `date_add`, `date_up`) VALUES
+(1, 'DIABLO III', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
+(2, '5', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
+(3, '4', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
+(4, '3', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
+(5, '2', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
+(6, '1', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `images`
+--
+
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL,
+  `id_parent_games` int(11) DEFAULT NULL COMMENT 'id игры',
+  `images_games` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `migration`
 --
 
@@ -126,7 +182,8 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`, `timezone`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'Дмитрий', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', 'Pacific/Apia');
 
 -- --------------------------------------------------------
 
@@ -164,7 +221,8 @@ CREATE TABLE `token` (
 --
 
 INSERT INTO `token` (`user_id`, `code`, `created_at`, `type`) VALUES
-(1, 'Yr9rDedCAg1l5oD4WLsl6pH6CVuOoJBB', 1508068444, 0);
+(1, 'Yr9rDedCAg1l5oD4WLsl6pH6CVuOoJBB', 1508068444, 0),
+(2, 'ksUziU9JJxn0sHBAx1thvAJDSSdrYqCp', 1508322611, 0);
 
 -- --------------------------------------------------------
 
@@ -193,7 +251,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`, `last_login_at`) VALUES
-(1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, NULL);
+(1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, 1508404805),
+(2, 'demonlaz', 'demon-l_91@mail.ru', '$2y$10$STVgNM8qykp8fFlbg5bChuEa66udwMObPKiwbzrz6LbBXsvAHng5e', '2eAinV9k1Wh_b_afC4Epe86DHJ049_uf', 1508323273, NULL, NULL, '127.0.0.1', 1508322611, 1508322611, 0, 1508393978);
 
 --
 -- Индексы сохранённых таблиц
@@ -225,6 +284,24 @@ ALTER TABLE `auth_item_child`
 --
 ALTER TABLE `auth_rule`
   ADD PRIMARY KEY (`name`);
+
+--
+-- Индексы таблицы `caregory`
+--
+ALTER TABLE `caregory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `games`
+--
+ALTER TABLE `games`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `migration`
@@ -266,6 +343,21 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `caregory`
+--
+ALTER TABLE `caregory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `games`
+--
+ALTER TABLE `games`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT для таблицы `images`
+--
+ALTER TABLE `images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT для таблицы `social_account`
 --
 ALTER TABLE `social_account`
@@ -274,7 +366,7 @@ ALTER TABLE `social_account`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
