@@ -134,7 +134,7 @@ AppAsset::register($this);
               </ul>
             </div>
           </li>
-          
+                  
           <li class="dropdown dropdown-hover ">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                       Features <span class="caret"></span> <span class="label">full list</span>

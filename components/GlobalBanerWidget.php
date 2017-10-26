@@ -23,7 +23,7 @@ class GlobalBanerWidget extends Widget {
     
     public function run() {
        $modelgames= Games::getDb()->cache(function($games){
-            return Games::find()->where(['global'=>1])->select('namegames,globalimag')->one();;
+            return Games::find()->where(['global'=>1])->indexBy('id')->one();;
             
         },\Yii::$app->params['cache10']);
         

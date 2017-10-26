@@ -1,24 +1,26 @@
 <?php
 
 namespace app\models;
-
-use Yii;
 use yii\behaviors\TimestampBehavior;
+use app\models\News;
 
 /**
  * This is the model class for table "games".
  *
  * @property integer $id
  * @property string $namegames
+ * @property string $namegamesdop
+ * @property string $stampgames
+ * @property double $rating
  * @property string $globalimag
  * @property string $content
  * @property string $url_dowload
+ * @property string $tehnik_trebov
  * @property boolean $global
  * @property boolean $popular
  * @property boolean $central
  * @property string $date_add
  * @property string $date_up
- * @property string $tehnik_trebov
  */
 class Games extends \yii\db\ActiveRecord
 {
@@ -36,10 +38,11 @@ class Games extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content','tehnik_trebov'], 'string'],
-            [['global', 'popular','central'], 'boolean'],
+            [['rating'], 'number'],
+            [['content', 'tehnik_trebov'], 'string'],
+            [['global', 'popular', 'central'], 'boolean'],
             [['date_add', 'date_up'], 'safe'],
-            [['namegames', 'globalimag', 'url_dowload'], 'string', 'max' => 255],
+            [['namegames', 'namegamesdop', 'stampgames', 'globalimag', 'url_dowload'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,15 +54,27 @@ class Games extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'namegames' => 'Namegames',
+            'namegamesdop' => 'Namegamesdop',
+            'stampgames' => 'Stampgames',
+            'rating' => 'Rating',
             'globalimag' => 'Globalimag',
             'content' => 'Content',
             'url_dowload' => 'Url Dowload',
+            'tehnik_trebov' => 'Tehnik Trebov',
             'global' => 'Global',
             'popular' => 'Popular',
+            'central' => 'Central',
             'date_add' => 'Date Add',
             'date_up' => 'Date Up',
         ];
+        
+        
     }
+    
+//     public function getNews(){
+//        
+//        return $this->hasOne(News::className(), ['id_games'=>'id']);
+//    }
     
     public function behaviors()
   {

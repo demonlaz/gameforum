@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.4.15.7
+-- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 20 2017 г., 22:11
--- Версия сервера: 5.7.16-log
--- Версия PHP: 7.1.0
+-- Время создания: Окт 26 2017 г., 17:14
+-- Версия сервера: 5.5.50
+-- Версия PHP: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `auth_assignment`
 --
 
-CREATE TABLE `auth_assignment` (
+CREATE TABLE IF NOT EXISTS `auth_assignment` (
   `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` int(11) DEFAULT NULL
@@ -38,7 +38,7 @@ CREATE TABLE `auth_assignment` (
 -- Структура таблицы `auth_item`
 --
 
-CREATE TABLE `auth_item` (
+CREATE TABLE IF NOT EXISTS `auth_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` smallint(6) NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
@@ -54,7 +54,7 @@ CREATE TABLE `auth_item` (
 -- Структура таблицы `auth_item_child`
 --
 
-CREATE TABLE `auth_item_child` (
+CREATE TABLE IF NOT EXISTS `auth_item_child` (
   `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -65,7 +65,7 @@ CREATE TABLE `auth_item_child` (
 -- Структура таблицы `auth_rule`
 --
 
-CREATE TABLE `auth_rule` (
+CREATE TABLE IF NOT EXISTS `auth_rule` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `data` blob,
   `created_at` int(11) DEFAULT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `auth_rule` (
 -- Структура таблицы `caregory`
 --
 
-CREATE TABLE `caregory` (
+CREATE TABLE IF NOT EXISTS `caregory` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `id_parent` int(11) DEFAULT NULL
@@ -90,9 +90,12 @@ CREATE TABLE `caregory` (
 -- Структура таблицы `games`
 --
 
-CREATE TABLE `games` (
+CREATE TABLE IF NOT EXISTS `games` (
   `id` int(11) NOT NULL,
   `namegames` varchar(255) DEFAULT NULL COMMENT 'название игры',
+  `namegamesdop` varchar(255) DEFAULT NULL COMMENT 'дополнительно к названию игры',
+  `stampgames` varchar(255) DEFAULT NULL COMMENT 'пометка к игре',
+  `rating` float DEFAULT NULL COMMENT 'рейтинг игры макс 10',
   `globalimag` varchar(255) DEFAULT NULL COMMENT 'главная картинка',
   `content` text COMMENT 'описание игры',
   `url_dowload` varchar(255) DEFAULT NULL COMMENT 'сайт производитель',
@@ -102,19 +105,19 @@ CREATE TABLE `games` (
   `central` bit(1) DEFAULT NULL COMMENT '1 отоброжать ',
   `date_add` datetime DEFAULT NULL COMMENT 'дата дабавления возможно смнеить на int',
   `date_up` datetime DEFAULT NULL COMMENT 'дата обновления возможно смнеить на int'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `games`
 --
 
-INSERT INTO `games` (`id`, `namegames`, `globalimag`, `content`, `url_dowload`, `tehnik_trebov`, `global`, `popular`, `central`, `date_add`, `date_up`) VALUES
-(1, 'DIABLO III', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
-(2, '5', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
-(3, '4', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
-(4, '3', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
-(5, '2', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
-(6, '1', 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL);
+INSERT INTO `games` (`id`, `namegames`, `namegamesdop`, `stampgames`, `rating`, `globalimag`, `content`, `url_dowload`, `tehnik_trebov`, `global`, `popular`, `central`, `date_add`, `date_up`) VALUES
+(1, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8, 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
+(2, '5', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL),
+(3, '4', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL),
+(4, '3', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL),
+(5, '2', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL),
+(6, '1', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -122,7 +125,7 @@ INSERT INTO `games` (`id`, `namegames`, `globalimag`, `content`, `url_dowload`, 
 -- Структура таблицы `images`
 --
 
-CREATE TABLE `images` (
+CREATE TABLE IF NOT EXISTS `images` (
   `id` int(11) NOT NULL,
   `id_parent_games` int(11) DEFAULT NULL COMMENT 'id игры',
   `images_games` varchar(255) DEFAULT NULL
@@ -134,7 +137,7 @@ CREATE TABLE `images` (
 -- Структура таблицы `migration`
 --
 
-CREATE TABLE `migration` (
+CREATE TABLE IF NOT EXISTS `migration` (
   `version` varchar(180) NOT NULL,
   `apply_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -162,10 +165,33 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `news`
+--
+
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(11) NOT NULL,
+  `id_games` int(11) NOT NULL DEFAULT '0',
+  `title` text,
+  `content` text,
+  `date_add` datetime DEFAULT NULL,
+  `date_up` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='новости';
+
+--
+-- Дамп данных таблицы `news`
+--
+
+INSERT INTO `news` (`id`, `id_games`, `title`, `content`, `date_add`, `date_up`) VALUES
+(1, 3, 'хз', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 10:17:27', '2017-10-21 10:17:24'),
+(3, 1, '1', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 12:33:49', '2017-10-21 12:33:53');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `profile`
 --
 
-CREATE TABLE `profile` (
+CREATE TABLE IF NOT EXISTS `profile` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `public_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -191,7 +217,7 @@ INSERT INTO `profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gra
 -- Структура таблицы `social_account`
 --
 
-CREATE TABLE `social_account` (
+CREATE TABLE IF NOT EXISTS `social_account` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `provider` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -209,7 +235,7 @@ CREATE TABLE `social_account` (
 -- Структура таблицы `token`
 --
 
-CREATE TABLE `token` (
+CREATE TABLE IF NOT EXISTS `token` (
   `user_id` int(11) NOT NULL,
   `code` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` int(11) NOT NULL,
@@ -230,7 +256,7 @@ INSERT INTO `token` (`user_id`, `code`, `created_at`, `type`) VALUES
 -- Структура таблицы `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -244,7 +270,7 @@ CREATE TABLE `user` (
   `updated_at` int(11) NOT NULL,
   `flags` int(11) NOT NULL DEFAULT '0',
   `last_login_at` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `user`
@@ -310,6 +336,13 @@ ALTER TABLE `migration`
   ADD PRIMARY KEY (`version`);
 
 --
+-- Индексы таблицы `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_games` (`id_games`);
+
+--
 -- Индексы таблицы `profile`
 --
 ALTER TABLE `profile`
@@ -351,12 +384,17 @@ ALTER TABLE `caregory`
 -- AUTO_INCREMENT для таблицы `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `social_account`
 --
@@ -366,7 +404,7 @@ ALTER TABLE `social_account`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
