@@ -111,28 +111,13 @@ AppAsset::register($this);
             </div>
           </li>-->
           <li class="dropdown dropdown-hover ">
-            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      Категория <span class="caret"><span class="glyphicon glyphicon-arrow-down"></span>
+            <a href='#!' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                      Категория <span class="caret"></span>
                     </a>
              
-            <div class="dropdown-menu">
-              <ul role="menu">
-                <li><a href="blog-1.html">Blog Style 1</a>
-                </li>
-                <li><a href="blog-2.html">Blog Style 2</a>
-                </li>
-                <li><a href="blog-3.html">Blog Style 3</a>
-                </li>
-              </ul>
-              <ul role="menu">
-                <li><a href="blog-post-1.html">Blog Post 1</a>
-                </li>
-                <li><a href="blog-post-2.html">Blog Post 2</a>
-                </li>
-                <li><a href="blog-post-3.html">Blog Post 3</a>
-                </li>
-              </ul>
-            </div>
+          
+              <?= \app\components\CategoryWidget::widget(['items'=>5])?>
+  
           </li>
                   
           <li class="dropdown dropdown-hover ">
@@ -231,11 +216,11 @@ AppAsset::register($this);
                 <span class="glyphicon glyphicon-search"></span>
             </a>
           </li>
-          <li class="dropdown dropdown-hover dropdown-cart">
+<!--          <li class="dropdown dropdown-hover dropdown-cart">
             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
               <i class="fa fa-shopping-cart"></i>
-            </a>
-            <div class="dropdown-menu" style="width: 300px;">
+            </a>-->
+<!--            <div class="dropdown-menu" style="width: 300px;">
               <div class="row youplay-side-news">
                 <div class="col-xs-3 col-md-4">
                   <a href="#" class="angled-img">
@@ -277,7 +262,7 @@ AppAsset::register($this);
                 <a href="#" class="btn btn-default btn-sm">View Cart</a>
                 <a href="#" class="btn btn-default btn-sm">Checkout</a>
               </div>
-            </div>
+            </div>-->
           </li>
         </ul>
       </div>
@@ -350,14 +335,14 @@ AppAsset::register($this);
   </section>
   <!-- /Main Content -->
 
-  <!-- Search Block -->
+  <!-- Search Block поисковая форма требуется дороботка-->
   <div class="search-block">
     <a href="#!" class="search-toggle glyphicon glyphicon-remove"></a>
-<!--    <form action="">
+    <form action="">
       <div class="youplay-input">
         <input type="text" name="search" placeholder="Search...">
       </div>
-    </form>-->
+    </form>
   </div>
   <!-- /Search Block -->
    <!-- jQuery -->

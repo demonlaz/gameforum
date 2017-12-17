@@ -9,6 +9,7 @@ $this->title = 'Геймер';
 <?= GlobalBanerWidget::widget(['prioritet'=>true]) ?>
     <!-- /Banner -->
 
+    
     <!-- Images With Text -->
  <?= app\components\GlobalLentaWidget::widget(['global'=>true]) ?>
     <!-- /Images With Text -->
