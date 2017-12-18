@@ -71,10 +71,11 @@ class Games extends \yii\db\ActiveRecord
         
     }
     
-//     public function getNews(){
-//        
-//        return $this->hasOne(News::className(), ['id_games'=>'id']);
-//    }
+     public function getImages(){
+        
+        return $this->hasMany(Images::className(), ['id_parent_games'=>'id']);
+    }
+    
     
     public function behaviors()
   {

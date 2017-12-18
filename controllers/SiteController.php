@@ -130,17 +130,25 @@ class SiteController extends Controller {
             $paginations = new \yii\data\Pagination(['totalCount' => $query->count()]);
 
             $model = $query->offset($paginations->offset)->limit($paginations->limit)->all();
-            return $this->render('category', ['model' => $model, 'paginations' => $paginations]);
+            $modelCategoryName = \app\models\Category::findOne($id);
+            return $this->render('category', ['model' => $model, 'paginations' => $paginations, 'modelCategoryName' => $modelCategoryName]);
         } else {
 
-            return $this->redirect(['/site/index']);
+           
         }
     }
-    
-    public function actionGames($id=1){
-        
-        
-        return $this->render('games',[]);
+
+    public function actionGames($id = 1) {
+
+        if (is_numeric($id)) {
+        $model= \app\models\Games::findOne($id);
+        $category= \app\models\Category::findOne($model->category_id);
+              return $this->render('games', ['model'=>$model,'category'=>$category]);
+        } else {
+             return $this->redirect(['/site/index']);
+        }
+
+      
     }
 
 }

@@ -1,7 +1,11 @@
+<?php $this->title= yii\bootstrap\Html::encode($modelCategoryName->name) ?>
 <!-- Banner -->
 <?= \app\components\GlobalBanerWidget::widget(['prioritet' => true]) ?>
 <!-- /Banner -->
+<?php     use yii\helpers\Html;
+ $this->params['breadcrumbs'][] = Html::encode($modelCategoryName->name);
 
+?>
 
 <div class="container youplay-news news-grid">
     <!-- News List -->
@@ -17,7 +21,7 @@
                         <div class="bottom-info align-center">
                             <h3><?= $modelContents->namegames ?></h3>
                             <h6><?= $modelContents->namegamesdop ?></h6>
-                            <span class="date pull-right">Дата выхода   <span class="glyphicon glyphicon-calendar"></span> 
+                            <span class="date pull-left">Дата выхода   <span class="glyphicon glyphicon-calendar"></span> 
                                 <?= ($modelContents->date_exit) ? Yii::$app->formatter->asDate($modelContents->date_exit) : 'Не известно' ?></span>
 
                         </div>
