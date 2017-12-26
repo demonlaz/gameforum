@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 26 2017 г., 17:14
--- Версия сервера: 5.5.50
+-- Время создания: Дек 26 2017 г., 22:51
+-- Версия сервера: 5.7.13-log
 -- Версия PHP: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -75,14 +75,32 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `caregory`
+-- Структура таблицы `category`
 --
 
-CREATE TABLE IF NOT EXISTS `caregory` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `id_parent` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `id_parent`) VALUES
+(1, 'mmo', NULL),
+(2, 'strategi', NULL),
+(3, 'rpgnnn', NULL),
+(4, 'action', NULL),
+(5, 'emulator', NULL),
+(6, 'rpg', NULL),
+(7, 'emulator', NULL),
+(8, 'emulator', NULL),
+(9, 'action', NULL),
+(10, 'action', NULL),
+(11, 'rpgnnn', NULL),
+(12, 'strategi', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,21 +121,26 @@ CREATE TABLE IF NOT EXISTS `games` (
   `global` bit(1) DEFAULT NULL COMMENT 'главаня игра 1 да',
   `popular` bit(1) DEFAULT NULL COMMENT 'популярная игра 1 да',
   `central` bit(1) DEFAULT NULL COMMENT '1 отоброжать ',
+  `date_exit` datetime DEFAULT NULL COMMENT 'дата выхода игры ',
   `date_add` datetime DEFAULT NULL COMMENT 'дата дабавления возможно смнеить на int',
-  `date_up` datetime DEFAULT NULL COMMENT 'дата обновления возможно смнеить на int'
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `date_up` datetime DEFAULT NULL COMMENT 'дата обновления возможно смнеить на int',
+  `category_id` int(11) DEFAULT NULL COMMENT 'категория игры'
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `games`
 --
 
-INSERT INTO `games` (`id`, `namegames`, `namegamesdop`, `stampgames`, `rating`, `globalimag`, `content`, `url_dowload`, `tehnik_trebov`, `global`, `popular`, `central`, `date_add`, `date_up`) VALUES
-(1, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8, 'banner-bg.jpg', NULL, NULL, NULL, b'1', b'0', b'1', NULL, NULL),
-(2, '5', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL),
-(3, '4', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL),
-(4, '3', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL),
-(5, '2', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL),
-(6, '1', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL);
+INSERT INTO `games` (`id`, `namegames`, `namegamesdop`, `stampgames`, `rating`, `globalimag`, `content`, `url_dowload`, `tehnik_trebov`, `global`, `popular`, `central`, `date_exit`, `date_add`, `date_up`, `category_id`) VALUES
+(1, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, NULL, 9),
+(2, '5', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL, NULL, 9),
+(3, '4', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL, NULL, 9),
+(4, '3', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL, NULL, 9),
+(5, '2', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL, NULL, 9),
+(6, '1', NULL, NULL, NULL, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis certamen est, qui non credunt at.', NULL, NULL, b'0', b'0', b'1', '2017-12-17 16:58:21', NULL, NULL, 9),
+(7, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, NULL, 9),
+(8, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, NULL, 9),
+(11, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, NULL, 9);
 
 -- --------------------------------------------------------
 
@@ -129,7 +152,19 @@ CREATE TABLE IF NOT EXISTS `images` (
   `id` int(11) NOT NULL,
   `id_parent_games` int(11) DEFAULT NULL COMMENT 'id игры',
   `images_games` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `images`
+--
+
+INSERT INTO `images` (`id`, `id_parent_games`, `images_games`) VALUES
+(1, 1, 'banner-bg.jpg'),
+(2, 1, 'banner-witcher-3.jpg'),
+(3, 1, 'banner-bg.jpg'),
+(4, 1, 'banner-witcher-3.jpg'),
+(5, 1, 'banner-witcher-3.jpg'),
+(6, 1, 'banner-witcher-3.jpg');
 
 -- --------------------------------------------------------
 
@@ -277,8 +312,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`, `last_login_at`) VALUES
-(1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, 1508404805),
-(2, 'demonlaz', 'demon-l_91@mail.ru', '$2y$10$STVgNM8qykp8fFlbg5bChuEa66udwMObPKiwbzrz6LbBXsvAHng5e', '2eAinV9k1Wh_b_afC4Epe86DHJ049_uf', 1508323273, NULL, NULL, '127.0.0.1', 1508322611, 1508322611, 0, 1508393978);
+(1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, 1513516895),
+(2, 'demonlaz', 'demon-l_91@mail.ru', '$2y$10$STVgNM8qykp8fFlbg5bChuEa66udwMObPKiwbzrz6LbBXsvAHng5e', '2eAinV9k1Wh_b_afC4Epe86DHJ049_uf', 1508323273, NULL, NULL, '127.0.0.1', 1508322611, 1508322611, 0, 1513515768);
 
 --
 -- Индексы сохранённых таблиц
@@ -312,22 +347,24 @@ ALTER TABLE `auth_rule`
   ADD PRIMARY KEY (`name`);
 
 --
--- Индексы таблицы `caregory`
+-- Индексы таблицы `category`
 --
-ALTER TABLE `caregory`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `games`
 --
 ALTER TABLE `games`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categoryKey` (`category_id`);
 
 --
 -- Индексы таблицы `images`
 --
 ALTER TABLE `images`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_images_games` (`id_parent_games`);
 
 --
 -- Индексы таблицы `migration`
@@ -376,20 +413,20 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT для таблицы `caregory`
+-- AUTO_INCREMENT для таблицы `category`
 --
-ALTER TABLE `caregory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT для таблицы `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `news`
 --
@@ -427,6 +464,18 @@ ALTER TABLE `auth_item`
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `games`
+--
+ALTER TABLE `games`
+  ADD CONSTRAINT `categoryKey` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `images`
+--
+ALTER TABLE `images`
+  ADD CONSTRAINT `FK_images_games` FOREIGN KEY (`id_parent_games`) REFERENCES `games` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `profile`
