@@ -150,5 +150,18 @@ class SiteController extends Controller {
 
       
     }
+    
+    public function actionSearch($search=null){
+        
+        $model= new \app\models\SearchForm();
+         if ($model->validate()) {
+           $modelsGames= \app\models\Games::find()->where(['like','namegames', \yii\helpers\Html::encode($search)])->asArray()->all();
+           return $this->render('search',['model'=>$model,'modelsGames'=>$modelsGames]);
+         }else{
+              return $this->render('search',['model'=>$model]);
+         }
+        
+       
+    }
 
 }

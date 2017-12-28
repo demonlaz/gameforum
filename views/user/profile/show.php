@@ -26,8 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!-- Banner -->
     <div class="youplay-banner banner-top youplay-banner-parallax small">
-      <div class="image" style="background-image: url('/images/game-diablo-iii-1400x656.jpg')">
-      </div>
+    <?= \app\components\GlobalBanerWidget::widget(['prioritet'=>false]) ?>
 
       <div class="youplay-user-navigation">
         <div class="container">
