@@ -87,29 +87,7 @@ AppAsset::register($this);
           </li>
        <?php   endif; ?>
           
-       <!--   <li class="dropdown dropdown-hover ">
-            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      Store <span class="caret"></span> <span class="label">games</span>
-                    </a>
-            <div class="dropdown-menu">
-              <ul role="menu">
-                <li><a href="store-1.html">Store Style 1</a>
-                </li>
-                <li><a href="store-2.html">Store Style 2</a>
-                </li>
-                <li><a href="cart.html">Cart</a>
-                </li>
-              </ul>
-              <ul role="menu">
-                <li><a href="store-product-1.html">Product Style 1</a>
-                </li>
-                <li><a href="store-product-2.html">Product Style 2</a>
-                </li>
-                <li><a href="checkout.html">Checkout</a>
-                </li>
-              </ul>
-            </div>
-          </li>-->
+    
           <li class="dropdown dropdown-hover ">
             <a href='#!' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                       Категория <span class="caret"></span>
@@ -132,7 +110,7 @@ AppAsset::register($this);
                     <ul role="menu">
                       <li><a href="user-activity.html">Activity</a>
                       </li>
-                      <li><a href="user-profile.html">Profile</a>
+                      <li><a href="<?= \yii\helpers\Url::to(['/web/user/profile'])?>">Профиль</a>
                       </li>
                       <li><a href="user-messages.html">Messages</a>
                       </li>
@@ -189,24 +167,15 @@ AppAsset::register($this);
               
                 <li class="divider"></li>
 
-                <li><a href="user-profile.html">Profile <span class="badge pull-right bg-warning">13</span></a>
+                <li><a href="<?=\yii\helpers\Url::to(['/user/profile'])?>" >Профиль <span class="badge pull-right bg-warning">13</span></a>
                 </li>
-                <li><a href="cart.html">My Cart <span class="badge pull-right bg-default">3</span></a>
-                </li>
+               
                 <li class="divider"></li>
 
                 <li><a href=<?= \yii\helpers\Url::to('/site/logout')?>>Выйти</a>
                 </li>
                 <li class="dropdown dropdown-submenu pull-left">
-                  <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More..</a>
-                  <div class="dropdown-menu">
-                    <ul role="menu">
-                      <li><a href="#!">3rd level</a>
-                      </li>
-                      <li><a href="#!">3rd level</a>
-                      </li>
-                    </ul>
-                  </div>
+                
                 </li>
               </ul>
             </div>

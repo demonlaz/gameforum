@@ -25,7 +25,7 @@ foreach ($model as $news) :
             <div class="clearfix">
               <h3 class="h2 pull-left m-0"><a href="<?=Url::to(['/site/games','id'=>$games->id])?>"><?=$games->namegames."-"?><?=$news->title?></a></h3>
               <?php Yii::$app->formatter->locale='ru-RU' ?>
-              <span class="date pull-right"><span class="glyphicon glyphicon-calendar"></span>  <?= Yii::$app->formatter->asDatetime($news->date_up)?></span>
+              <span class="date pull-right"><span class="glyphicon glyphicon-calendar"></span>  <?= Yii::$app->formatter->asDate($news->date_up)?></span>
             </div>
             <div class="tags">
               <!--<i class="fa fa-tags"></i>  <a href="#">Bloodborne</a>, <a href="#">first try</a>, <a href="#">first boss problem</a>, <a href="#">newbie game</a>-->
