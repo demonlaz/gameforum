@@ -156,7 +156,8 @@ class SiteController extends Controller {
         $model= new \app\models\SearchForm();
          if ($model->validate()) {
            $modelsGames= \app\models\Games::find()->where(['like','namegames', \yii\helpers\Html::encode($search)])->asArray()->all();
-           return $this->render('search',['model'=>$model,'modelsGames'=>$modelsGames]);
+           $modelsNews= \app\models\News::find()->where(['like','title', \yii\helpers\Html::encode($search)])->all();
+           return $this->render('search',['model'=>$model,'modelsGames'=>$modelsGames,'modelsNews'=>$modelsNews]);
          }else{
               return $this->render('search',['model'=>$model]);
          }
