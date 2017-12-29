@@ -32,12 +32,14 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
+                    ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/admin/admin/index']],
+                    ['label' => 'Категории', 'icon' => 'edit', 'url' => ['/admin/category/index']],
+                    
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Пользователи', 'icon' => 'glyphicon glyphicon-user', 'url' => ['/admin/admin/index']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Same tools',
+                        'label' => 'Пример',
                         'icon' => 'share',
                         'url' => '#',
                         'items' => [

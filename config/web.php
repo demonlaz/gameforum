@@ -7,46 +7,41 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language'=>'ru-RU',
+    'language' => 'ru-RU',
     'modules' => [
-    'user' => [
-        'class' => 'dektrium\user\Module',
-         'controllerMap' => [
-            'admin' => 'app\modules\admin\controllers\AdminController'
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'controllerMap' => [
+                'admin' => 'app\modules\admin\controllers\AdminController'
             ],
-        'admins'=>['admin'],
-        'adminPermission'=>'admin',
-        'enableUnconfirmedLogin'=>true,
+            'admins' => ['admin'],
+            'adminPermission' => 'admin',
+            'enableUnconfirmedLogin' => true,
+        ],
+        'admin' => 'app\modules\admin\Adminka',
     ],
-         'admin'   => 'app\modules\admin\Adminka',
-         
-        
-],
     'components' => [
-        
-        
-'view' => [
-        'theme' => [
-            'pathMap' => [
-                '@dektrium/user/views/admin' => '@app/modules/admin/views/admin',
-                '@dektrium/user/views/security'=>'@app/views/security',
-                '@dektrium/user/views/registration'=>'@app/views/registration',
-                '@dektrium/user/views/recovery'=>'@app/views/recovery',
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@dektrium/user/views/admin' => '@app/modules/admin/views/admin',
+                    '@dektrium/user/views/security' => '@app/views/user/security',
+                    '@dektrium/user/views/registration' => '@app/views/user/registration',
+                    '@dektrium/user/views/recovery' => '@app/views/user/recovery',
+                    '@dektrium/user/views/profile' => '@app/views/user/profile',
+                ],
             ],
         ],
-    ],
-        
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'MP-EJU0ft8lZewcf27eXZ3D5xELeWnJR',
         ],
-        'authManager'=>[
-            'class'=>'yii\rbac\DbManager'
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager'
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
-            'defaultDuration'=>10
-          
+            'defaultDuration' => 10
         ],
 //        'user' => [
 //            'identityClass' => 'app\models\User',
@@ -72,17 +67,15 @@ $config = [
             ],
         ],
         'db' => $db,
-        
         'urlManager' => [
             'enablePrettyUrl' => true,
-           'showScriptName' => false,
+            'showScriptName' => false,
             'rules' => [
-                  '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
-        
     ],
     'params' => $params,
 ];
@@ -92,15 +85,15 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+            // uncomment the following to add your IP if you are not connecting from localhost.
+            //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+            // uncomment the following to add your IP if you are not connecting from localhost.
+            //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 

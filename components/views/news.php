@@ -13,7 +13,7 @@ foreach ($model as $news) :
       <div class="news-one">
         <div class="row vertical-gutter">
           <div class="col-md-4">
-            <a href="<?=Url::to(['/site/games','id'=>$games->id])?>" class="angled-img">
+            <a href="<?=Url::to(['/site/news','id'=>$news->id])?>" class="angled-img">
               <div class="img">
                   <img src="/imagesgames/<?=$games->globalimag?>" alt="">
               </div>
@@ -23,7 +23,7 @@ foreach ($model as $news) :
           </div>
           <div class="col-md-8">
             <div class="clearfix">
-              <h3 class="h2 pull-left m-0"><a href="<?=Url::to(['/site/games','id'=>$games->id])?>"><?=$games->namegames."-"?><?=$news->title?></a></h3>
+              <h3 class="h2 pull-left m-0"><a href="<?=Url::to(['/site/news','id'=>$news->id])?>"><?=$news->title?></a></h3>
               <?php Yii::$app->formatter->locale='ru-RU' ?>
               <span class="date pull-right"><span class="glyphicon glyphicon-calendar"></span>  <?= Yii::$app->formatter->asDate($news->date_up)?></span>
             </div>
@@ -33,9 +33,10 @@ foreach ($model as $news) :
             <div class="description">
                 <h4></h4>
               <p>
-                 <?=$news->content?> 
+                 <?=$news->content_short?> 
               </p>
             </div>
+            <a href="<?=Url::to(['/site/news','id'=>$news->id])?>" class="btn read-more pull-left">Подробнее</a>
             <a href="<?=Url::to(['/site/games','id'=>$games->id])?>" class="btn read-more pull-left">Об игре</a>
           </div>
         </div>

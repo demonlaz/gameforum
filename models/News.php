@@ -32,7 +32,9 @@ class News extends \yii\db\ActiveRecord
     {
         return [
             [['id_games'], 'integer'],
-            [['title', 'content'], 'string'],
+            [['title', 'content','content_short'], 'string'],
+            [['content_short'],'max'=>100],
+            [['title'],'max'=>50],
             [['date_add', 'date_up'], 'safe'],
         ];
     }
@@ -46,6 +48,7 @@ class News extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_games' => 'Id Games',
             'title' => 'Title',
+            'content_short'=>"Краткий контент",
             'content' => 'Content',
             'date_add' => 'Date Add',
             'date_up' => 'Date Up',

@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->namegames);
                     <h3>Все скриншоты</h3>
                     <div class="align-center">
     <?php foreach ($model->images as $modelContent): ?>
-                            <a href="/skringames/<?= $modelContent->images_games ?>" class="angled-img image-popup mr-0">
+                        <a href="/skringames/<?= $modelContent->images_games ?>" class="angled-img image-popup mr-0" target="_blank">
                                 <div class="img">
                                     <img src="/skringames/<?= $modelContent->images_games ?>" alt="">
                                 </div>
