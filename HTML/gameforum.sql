@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 26 2017 г., 22:51
+-- Время создания: Дек 29 2017 г., 21:38
 -- Версия сервера: 5.7.13-log
 -- Версия PHP: 7.0.8
 
@@ -90,17 +90,14 @@ CREATE TABLE IF NOT EXISTS `category` (
 
 INSERT INTO `category` (`id`, `name`, `id_parent`) VALUES
 (1, 'mmo', NULL),
-(2, 'strategi', NULL),
 (3, 'rpgnnn', NULL),
 (4, 'action', NULL),
 (5, 'emulator', NULL),
 (6, 'rpg', NULL),
 (7, 'emulator', NULL),
 (8, 'emulator', NULL),
-(9, 'action', NULL),
-(10, 'action', NULL),
-(11, 'rpgnnn', NULL),
-(12, 'strategi', NULL);
+(9, 'Тестовая', NULL),
+(10, 'action', NULL);
 
 -- --------------------------------------------------------
 
@@ -207,6 +204,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL,
   `id_games` int(11) NOT NULL DEFAULT '0',
   `title` text,
+  `content_short` text,
   `content` text,
   `date_add` datetime DEFAULT NULL,
   `date_up` datetime DEFAULT NULL
@@ -216,9 +214,9 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- Дамп данных таблицы `news`
 --
 
-INSERT INTO `news` (`id`, `id_games`, `title`, `content`, `date_add`, `date_up`) VALUES
-(1, 3, 'хз', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 10:17:27', '2017-10-21 10:17:24'),
-(3, 1, '1', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 12:33:49', '2017-10-21 12:33:53');
+INSERT INTO `news` (`id`, `id_games`, `title`, `content_short`, `content`, `date_add`, `date_up`) VALUES
+(1, 11, 'Заголовок', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 10:17:27', '2017-10-21 10:17:24'),
+(3, 1, '1', NULL, 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 12:33:49', '2017-10-21 12:33:53');
 
 -- --------------------------------------------------------
 
@@ -312,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`, `last_login_at`) VALUES
-(1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, 1513516895),
+(1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, 1514447253),
 (2, 'demonlaz', 'demon-l_91@mail.ru', '$2y$10$STVgNM8qykp8fFlbg5bChuEa66udwMObPKiwbzrz6LbBXsvAHng5e', '2eAinV9k1Wh_b_afC4Epe86DHJ049_uf', 1508323273, NULL, NULL, '127.0.0.1', 1508322611, 1508322611, 0, 1513515768);
 
 --
@@ -377,7 +375,7 @@ ALTER TABLE `migration`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_games` (`id_games`);
+  ADD KEY `games` (`id_games`);
 
 --
 -- Индексы таблицы `profile`
@@ -476,6 +474,12 @@ ALTER TABLE `games`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `FK_images_games` FOREIGN KEY (`id_parent_games`) REFERENCES `games` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `news`
+--
+ALTER TABLE `news`
+  ADD CONSTRAINT `games` FOREIGN KEY (`id_games`) REFERENCES `games` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `profile`
