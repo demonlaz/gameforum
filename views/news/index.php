@@ -4,7 +4,7 @@
 use \yii\helpers\Url;
 use yii\helpers\Html;
 
-$this->title = "Все новости"
+$this->title = "Архив новостей"
 ?>
 
 <section class="content-wrap">
@@ -47,12 +47,12 @@ $this->title = "Все новости"
                                     <h3 class="h2 pull-left m-0"><a href="<?= Url::to(['/news/post', 'id' => $news->id]) ?>"><?=$news->title?></a></h3>
                                 </div>
                                 <div class="tags">
-                                    <i class="fa fa-tags"></i>  <a href="#">Dark Souls II</a>, <a href="#">coming soon</a>, <a href="#">first review</a>, <a href="#">sale date</a>
+                                    <i class="glyphicon glyphicon-eye-open"></i>  <a href="<?= Url::to(['/site/games', 'id' => $games->id]) ?>"><?=$games->namegames?></a>
                                 </div>
                                 <div class="description">
-                                    Ille vivere. Ut ad te quaerebam ... purgare caeli. Sunt uh ... nonnullus propter errorem qui de rebus inter nos et iacere puto suus in causa, id est in mensa. Levir meus, priusquam oppugnarent tempus quis, admonere dicitur. Credo quod idem mihi praesidium.
+                                  <?=$news->content_short?>
                                 </div>
-                                <a href="blog-post-2.html" class="btn read-more pull-left">Read More</a>
+                                <a href="<?= Url::to(['/news/post', 'id' => $news->id]) ?>" class="btn read-more pull-left">Подробние</a>
                             </div>
                         </div>
                     </div>
@@ -64,21 +64,8 @@ $this->title = "Все новости"
                     
                     <?=\yii\widgets\LinkPager::widget(['pagination'=>$paginations,'options'=>['class'=>'pagination']]) ?>
                     
-            <!-- Pagination -->
-<!--            <ul class="pagination">
-                <li class="active"><a href="#!">1</a>
-                </li>
-                <li><a href="#!">2</a>
-                </li>
-                <li><a href="#!">3</a>
-                </li>
-                <li><a href="#!">4</a>
-                </li>
-                <li><a href="#!">Next</a>
-                </li>
-            </ul>
-             /Pagination 
-        --></div>
+ 
+     </div>
         <!-- /News List -->
 
         <!-- Left Side -->
@@ -88,18 +75,18 @@ $this->title = "Все новости"
 
             <!-- Side Categories -->
             <div class="side-block">
-                <h4 class="block-title">Categories</h4>
+                <h4 class="block-title">Категория игры</h4>
                 <ul class="block-content">
-                    <?= \app\components\CategoryWidget::widget(['items' => 5,'li'=>true])?>
+                    <?= \app\components\CategoryWidget::widget(['li'=>true])?>
                 </ul>
             </div>
             <!-- /Side Categories -->
 
             <!-- Side Popular News -->
-            <div class="side-block">
+<!--            <div class="side-block">
                 <h4 class="block-title">Popular News</h4>
                 <div class="block-content p-0">
-                    <!-- Single News Block -->
+                     Single News Block 
                     <div class="row youplay-side-news">
                         <div class="col-xs-3 col-md-4">
                             <a href="blog-post-1.html" class="angled-img">
@@ -113,9 +100,9 @@ $this->title = "Все новости"
                             <span class="date"><i class="fa fa-calendar"></i> Today</span>
                         </div>
                     </div>
-                    <!-- /Single News Block -->
+                     /Single News Block 
 
-                    <!-- Single News Block -->
+                     Single News Block 
                     <div class="row youplay-side-news">
                         <div class="col-xs-3 col-md-4">
                             <a href="#!" class="angled-img">
@@ -129,9 +116,9 @@ $this->title = "Все новости"
                             <span class="date"><i class="fa fa-calendar"></i> February 2, 2015</span>
                         </div>
                     </div>
-                    <!-- /Single News Block -->
+                     /Single News Block 
 
-                    <!-- Single News Block -->
+                     Single News Block 
                     <div class="row youplay-side-news">
                         <div class="col-xs-3 col-md-4">
                             <a href="#!" class="angled-img">
@@ -145,18 +132,18 @@ $this->title = "Все новости"
                             <span class="date"><i class="fa fa-calendar"></i> January 18, 2015</span>
                         </div>
                     </div>
-                    <!-- /Single News Block -->
+                     /Single News Block 
                 </div>
             </div>
-            <!-- /Side Popular News -->
+             /Side Popular News 
 
-            <!-- Our Twitter -->
+             Our Twitter 
             <div class="side-block">
                 <h4 class="block-title">Our Twitter</h4>
                 <div class="block-content">
                     <div class="youplay-twitter" data-twitter-user-name="nkdevv" data-twitter-count="3" data-twitter-hide-replies="false"></div>
                 </div>
-            </div>
+            </div>-->
             <!-- /Our Twitter -->
 
         </div>
