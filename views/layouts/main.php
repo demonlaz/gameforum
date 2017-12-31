@@ -96,7 +96,13 @@ AppAsset::register($this);
                             <?= \app\components\CategoryWidget::widget(['items' => 5]) ?>
 
                         </li>
+                        
+                              <li class="dropdown dropdown-hover ">
+                                  <a href='<?= \yii\helpers\Url::to(['/news/index'])?>' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Новости 
+                            </a>
 
+                        </li>
                    
                          <li>
                             <?php echo (isset($this->blocks['search']))?'':app\components\SearchWidget::widget() ?>
@@ -159,7 +165,7 @@ AppAsset::register($this);
                 <div class="wrapper" style="background-image: url('/images/footer-bg.jpg')">
 
                     <!-- Social Buttons -->
-                    <div class="social">
+<!--                    <div class="social">
                         <div class="container">
                             <h3>Connect socially with <strong>youplay</strong></h3>
 
@@ -190,13 +196,13 @@ AppAsset::register($this);
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- /Social Buttons -->
 
                     <!-- Copyright -->
                     <div class="copyright">
                         <div class="container">
-                            <strong>nK</strong> &copy; 2016. All rights reserved
+                            <strong>DL</strong> &copy; 2018. Все права защищены!
                         </div>
                     </div>
                     <!-- /Copyright -->

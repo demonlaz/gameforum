@@ -94,7 +94,7 @@ $this->title = 'Геймер';
 
 
     <!-- Features -->
-    <h2 class="container h1">Why Buy from Us</h2>
+<!--    <h2 class="container h1">Why Buy from Us</h2>
     <section class="youplay-features container">
       <div class="col-md-3 col-sm-6">
         <a class="feature angled-bg" href="#">
@@ -124,4 +124,4 @@ $this->title = 'Геймер';
           <small>The largest gaming community</small>
         </div>
       </div>
-    </section>
+    </section>-->

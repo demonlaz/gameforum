@@ -19,7 +19,10 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "dektrium/yii2-user": "^0.9.12",
-        "dmstr/yii2-adminlte-asset": "*"
+        "dmstr/yii2-adminlte-asset": "*",
+        "vova07/yii2-imperavi-widget": "*",
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "budyaga/yii2-cropper": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

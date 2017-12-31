@@ -23,7 +23,7 @@ class NewsWidget extends \yii\base\Widget{
     public function run() {
         
          $model= News::getDb()->cache(function($news){
-             return News::find()->indexBy('id')->orderBy('date_up DESC')->limit(10)->innerJoinWith('games')->all();
+             return News::find()->indexBy('id')->orderBy('date_up DESC')->limit(5)->innerJoinWith('games')->all();
          }, \Yii::$app->params['cache10']);
         
         
