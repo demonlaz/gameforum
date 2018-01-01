@@ -17,7 +17,9 @@ $this->title = 'Геймер';
 
 
     <!-- Popular -->
-    <h2 class="container h1">Популярные<a href="#!" class="btn pull-right">See More</a></h2>
+    <h2 class="container h1">Популярные</h2>
+        <!--<h2 class="container h1">Популярные<a href="#!" class="btn pull-right">See More</a></h2>-->
+
     <?=app\components\GlobalLentaWidget::widget(['popular'=>true]) ?>
 
 

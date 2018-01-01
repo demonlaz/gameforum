@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </li>
             <li class="active"><a href="user-profile.html">Профиль</a>
             </li>
-            <!--<li><a href="user-messages.html">Messages <span class="badge">6</span></a>-->
+            <li><a href="<?= \yii\helpers\Url::to(['/profile/messages']);?>">Messages <span class="badge">6</span></a>
             </li>
             <!--<li><a href="user-settings.html">Settings</a>-->
             </li>
