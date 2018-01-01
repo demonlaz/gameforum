@@ -17,7 +17,10 @@ class NewsController extends SiteController {
 
     //Подробная новость
     public function actionPost($id = 1) {
-        return $this->render('post');
+        if(is_numeric($id)){
+        $modelNews= \app\models\News::find()->where('id=:id',[':id'=>$id])->one();
+        return $this->render('post',['modelNews'=>$modelNews]);
+        }
     }
 
 }
