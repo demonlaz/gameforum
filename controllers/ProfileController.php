@@ -39,18 +39,19 @@ class ProfileController extends SiteController {
                         ->asArray()
                         ->orderBy('date_add DESC')
                         ->where(['loginTo' => \Yii::$app->user->identity->username])->all();
-$modelMessagesCount= \app\models\Messages::find()
-        ->select(['loginFrom','count(loginFrom ) as countLoginFrom'])
-      //  ->where(['loginTo' => \Yii::$app->user->identity->username,'readContent'=>null])
-    ->groupBy(['loginFrom','readContent','loginTo'])
-        ->having(['readContent'=>null,'loginTo'=>'demonlaz'])
-        ->asArray()
-        ->all();
+        $modelMessagesCount = \app\models\Messages::find()
+                ->select(['loginFrom', 'count(loginFrom ) as countLoginFrom'])
+                ->groupBy(['loginFrom', 'readContent', 'loginTo'])
+                ->having(['readContent' => null, 'loginTo' => \Yii::$app->user->identity->username])
+                ->asArray()
+                ->all();
+        $fullCount= \app\models\Messages::find()->where(['loginTo'=>\Yii::$app->user->identity->username,'readContent'=>null])->count();
 //select loginFrom,count(loginFrom ) as con,readContent from messages group by loginFrom,readContent,loginTo having readContent is null and loginTo='demonlaz'
         return $this->render('messages', ['modelMessagesLogin' => $modelMessagesLogin,
-            'modelMessagesContent' => $modelMessagesContent,
-            'modelMessagesCount'=>$modelMessagesCount
-            ]);
+                    'modelMessagesContent' => $modelMessagesContent,
+                    'modelMessagesCount' => $modelMessagesCount,
+                'fullCount'=>$fullCount
+        ]);
     }
 
 }

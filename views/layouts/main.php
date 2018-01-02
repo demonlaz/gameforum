@@ -120,7 +120,7 @@ AppAsset::register($this);
                         <li class="dropdown dropdown-hover">
 
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <?= (!empty(\Yii::$app->user->identity->username)) ? \Yii::$app->user->identity->username . '<span class="badge bg-default">2</span> <span class="caret"></span> <span class="glyphicon glyphicon-user"></span>' : '' ?> 
+                                <?= (!empty(\Yii::$app->user->identity->username)) ? \Yii::$app->user->identity->username . '<span class="badge bg-default">'.\app\components\FullCountMessagesWIdget::widget().'</span> <span class="caret"></span> <span class="glyphicon glyphicon-user"></span>' : '' ?> 
                             </a>
                             <div class="dropdown-menu">
                                 <ul role="menu">
@@ -129,7 +129,7 @@ AppAsset::register($this);
 
                                     <li class="divider"></li>
 
-                                    <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <span class="badge pull-right bg-warning">13</span></a>
+                                    <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <span class="badge pull-right bg-warning"><?=\app\components\FullCountMessagesWIdget::widget()?></span></a>
                                     </li>
 
                                     <li class="divider"></li>

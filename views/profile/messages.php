@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                     <li ><a href="<?= \yii\helpers\Url::to(['/user/profile']); ?>">Профиль</a>
                     </li>
-                    <li class="active" ><a href="<?= \yii\helpers\Url::to(['/profile/messagers']); ?>">Сообщения <span class="badge">6</span></a>
+                    <li class="active" ><a href="<?= \yii\helpers\Url::to(['/profile/messagers']); ?>">Сообщения <span class="badge"><?=$fullCount?></span></a>
                     </li>
                     <!--<li><a href="user-settings.html">Settings</a>-->
                     </li>
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!-- Information -->
     <div class="requirements-block">
-        <h2>У вас новых сообщений <span class="messages-count"></span> </h2>
+        <h2>У вас новых сообщений <?=$fullCount?> <span class="messages-count"></span> </h2>
         <div class="panel-group youplay-accordion" id="accordion" role="tablist" aria-multiselectable="false">
 
             <?php $for = 0;
