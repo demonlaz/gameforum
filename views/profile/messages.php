@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!-- Banner -->
     <div class="youplay-banner banner-top youplay-banner-parallax small">
-<?= \app\components\GlobalBanerWidget::widget(['prioritet' => false]) ?>
+        <?= \app\components\GlobalBanerWidget::widget(['prioritet' => false]) ?>
 
         <div class="youplay-user-navigation">
             <div class="container">
@@ -72,71 +72,88 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <!-- /Banner -->
+    <?php
+//echo "<pre>";
+//print_r($modelMessagesCount);
+//{
+// echo $modelMessagesCount[0]['loginFrom'];
+//};
+//echo "</pre>";
+//echo $modelMessagesCount;
+    ?>
 
 
     <!-- Information -->
     <div class="requirements-block">
-        <h2>У вас новых сообщений <span class="messages-count">+2</span> </h2>
+        <h2>У вас новых сообщений <span class="messages-count"></span> </h2>
         <div class="panel-group youplay-accordion" id="accordion" role="tablist" aria-multiselectable="false">
-           
-            <?php for($i=0;$i<5;$i++): ?>
-              <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingOne<?=$i?>">
-                <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne<?=$i?>" aria-expanded="true" aria-controls="collapseOne<?=$i?>">
-                                    Minimum <span class="icon-plus"></span>
-                                </a>
-                            </h4>
-              </div>
-              <div id="collapseOne<?=$i?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne<?=$i?>">
-                <div class="panel-body">
-       
-                    
-                    
-                         <table class="youplay-messages table table-hover">
-                            <tbody>
-                               
 
-                                <tr>
-                                    <td class="message-from">
-                                        <a href="#" class="angled-img">
-                                            <div class="img">
-                                                <img src="assets/images/avatar-user-2.png" width="80" height="80" alt="">
-                                            </div>
-                                        </a>
+            <?php $for = 0;
+            foreach ($modelMessagesLogin as $loginFrom): ?>
 
-                                        <a href="#" class="message-from-name" title="Kiki Cuyler">Kiki Cuyler</a>
-                                        <br>
-                                        <span class="date">9th Dec 2015 at 11:57 pm</span>
-                                    </td>
-                                    <td class="message-description">
-                                        <a href="#" class="message-description-name" title="View Message">Curabitur nec tellus. In semper</a>
-                                        <br>
-                                        <div class="message-excerpt">Quisque sagittis neque. Vestibulum laoreet. Nullam cursus, odio...</div>
-                                    </td>
-                                    <td class="message-action">
-                                        <a class="message-delete" href="#"><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne<?= $loginFrom->loginFrom ?>">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne<?= $loginFrom->loginFrom ?>" aria-expanded="true" aria-controls="collapseOne<?= $loginFrom->loginFrom ?>">
+    <?= $loginFrom->loginFrom ?> <span class="messages-count"><i class="glyphicon glyphicon-envelope"> </i><?= ($modelMessagesCount[$for]['loginFrom'] == $loginFrom->loginFrom) ? " ".$modelMessagesCount[$for]['countLoginFrom'] : '' ?></span>+ <span class="icon-plus"></span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne<?= $loginFrom->loginFrom ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne<?= $loginFrom->loginFrom ?>">
+                        <div class="panel-body">
 
-                          
 
-                            </tbody>
 
-                        </table>
-                    
+                            <table class="youplay-messages table table-hover">
+                                <tbody>
+
+                                    <?php
+                                    foreach ($modelMessagesContent as $content):
+                                        if ($content['loginFrom'] == $loginFrom->loginFrom):
+                                            ?>
+
+                                            <tr>
+                                                <td class="message-from">
+                                                    <!--                                                <a href="#" class="angled-img">
+                                                                                                        <div class="img">
+                                                                                                           
+                                                                                                            <img src="" width="80" height="80" alt="">
+                                                                                                        </div>
+                                                                                                    </a>-->
+
+                                                    <a href="#" class="message-from-name" title="<?= $content['loginFrom'] ?>"><?= Html::encode($content['loginFrom']) ?></a>
+                                                    <br>
+                                                    <span class="date"><?= Yii::$app->formatter->asDatetime($content['date_add']) ?></span>
+                                                </td>
+                                                <td class="message-description">
+                                                    <!--<a href="#" class="message-description-name" title="View Message"></a>-->
+                                                    <br>
+                                                    <div class="message-excerpt"><?= Html::encode($content['content']) ?></div>
+                                                </td>
+                                                <td class="message-action">
+                                                    <a class="message-delete" href="#"><i class="fa fa-times"></i></a>
+                                                </td>
+                                            </tr>
+
+
+                                            <?php
+                                        endif;
+                                    endforeach;
+                                    ?>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            
-            
-            
-            
-            
-            
-       
-            
-            <?php endfor; ?>
+
+
+                <?php
+                $for++;
+            endforeach;
+            ?>
+<?php // endforeach; ?>
         </div>
     </div>
     <!-- /Information -->
