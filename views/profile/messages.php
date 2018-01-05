@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                     <li ><a href="<?= \yii\helpers\Url::to(['/user/profile']); ?>">Профиль</a>
                     </li>
-                    <li class="active" ><a href="<?= \yii\helpers\Url::to(['/profile/messagers']); ?>">Сообщения <span class="badge"><?= $fullCount ?></span></a>
+                    <li class="active" ><a href="<?= \yii\helpers\Url::to(['/profile/messages']); ?>">Сообщения <span class="badge"><?= $fullCount ?></span></a>
                     </li>
                     <!--<li><a href="user-settings.html">Settings</a>-->
                     <!--</li>-->
@@ -185,18 +185,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
             <div id="dial" style="display:none; background-image:url(<?= app\components\GlobalBanerWidget::widget(['url'=>true])?>)">
 
-                <form action="#">
-                    <div class="youplay-input">
-                        <input type="text" placeholder="Send To" name="message-to">
-                    </div>
-                    <div class="youplay-input">
-                        <input type="text" placeholder="Subject" name="message-subject">
-                    </div>
-                    <div class="youplay-textarea">
-                        <textarea placeholder="Message" name="message" rows="5"></textarea>
-                    </div>
-                    <button class="btn btn-default">Send</button>
-                </form>
+             <?= app\components\SendFormMessagesWidget::widget()?>
 
             </div>
 

@@ -79,4 +79,17 @@ class ProfileController extends SiteController {
         }
     }
 
+    
+    public function actionMessagesSend(){
+        
+        $model=new \app\models\Messages();
+        
+        if ($model->load(\Yii::$app->request->post()) && $model->validate($model->save(true))) {
+             return \app\components\SendFormMessagesWidget::widget(['send'=>true]);
+        }else{
+            return \app\components\SendFormMessagesWidget::widget(['error'=>true]);
+        }
+      
+        
+    }
 }

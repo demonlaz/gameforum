@@ -14,7 +14,7 @@ $config = [
             'controllerMap' => [
                 'admin' => 'app\modules\admin\controllers\AdminController'
             ],
-            'admins' => ['admin'],
+            'admins' => ['admin','demonlaz'],
             'adminPermission' => 'admin',
             'enableUnconfirmedLogin' => true,
         ],

@@ -329,12 +329,22 @@ AppAsset::register($this);
                 }else{
                      e.preventDefault();
                     $("#dial").dialog('close');
-                    stat=true;
+                    stat=000;
                 }
                     }
-                    
+                   $('#dial form').submit(function(e){
+                      // e.preventDefault();
+                       //$('#dial').dialog('close');
+                        //stat=000;
+                        //e.preventDefault();
+                   });//end even submit 
                  
                 });//end event
+                
+                
+                
+                
+                
             });//end global
 
         </script>
