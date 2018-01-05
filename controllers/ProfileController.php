@@ -65,12 +65,17 @@ class ProfileController extends SiteController {
         if ($validate->hasErrors()) {
             return json_encode(false);
         } else {
-
-            $model = \app\models\Messages::updateAll(['readContent' => 1], ['readContent' => 0, 'loginTo' => \Yii::$app->user->identity->username, 'loginFrom' => $name]);
-
-
-
+            if(!empty($name)){
+            \app\models\Messages::updateAll(['readContent' => 1], ['readContent' => 0,
+                'loginTo' => \Yii::$app->user->identity->username,
+                'loginFrom' => $name]);
             return json_encode(true);
+            }else{
+                return json_encode(false);
+            }
+
+
+            
         }
     }
 

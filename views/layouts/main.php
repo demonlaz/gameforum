@@ -96,34 +96,36 @@ AppAsset::register($this);
                             <?= \app\components\CategoryWidget::widget(['items' => 5]) ?>
 
                         </li>
-                        
-                              <li class="dropdown dropdown-hover ">
-                                  <a href='<?= \yii\helpers\Url::to(['/news/index'])?>' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+
+                        <li class="dropdown dropdown-hover ">
+                            <a href='<?= \yii\helpers\Url::to(['/news/index']) ?>' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 Новости 
                             </a>
 
                         </li>
-                   
-                         <li>
-                            <?php echo (isset($this->blocks['search']))?'':app\components\SearchWidget::widget() ?>
+
+                        <li>
+                            <?php echo (isset($this->blocks['search'])) ? '' : app\components\SearchWidget::widget() ?>
                         </li> 
                         <li>
                             <p></p>
-                            
+
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <p></p>
-                            
+
                         </li>
                         <li class="dropdown dropdown-hover">
 
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <?php $countMess=\app\components\FullCountMessagesWIdget::widget();
-                                $icon=(!$countMess==0)?'<span class="badge bg-default">'.$countMess
-                                        .'</span> <span class="caret"></span>':"" ; ?>
-                                <?= (!empty(\Yii::$app->user->identity->username)) ? \Yii::$app->user->identity->username.$icon.' <span class="glyphicon glyphicon-user"></span>': '' ?> 
+                                <?php
+                                $countMess = \app\components\FullCountMessagesWIdget::widget();
+                                $icon = (!$countMess == 0) ? '<span class="badge bg-default">' . $countMess
+                                        . '</span> <span class="caret"></span>' : "";
+                                ?>
+                                <?= (!empty(\Yii::$app->user->identity->username)) ? \Yii::$app->user->identity->username . $icon . ' <span class="glyphicon glyphicon-user"></span>' : '' ?> 
                             </a>
                             <div class="dropdown-menu">
                                 <ul role="menu">
@@ -131,11 +133,13 @@ AppAsset::register($this);
                                     </li>
 
                                     <li class="divider"></li>
-                                        <?php $countMess2=\app\components\FullCountMessagesWIdget::widget();
-                                       
-                                $icon2=(!$countMess==0)?'<span class="badge pull-right bg-warning">'.$countMess
-                                        .'</span>':"" ; ?>
-                                    <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <?=$icon2?> </a>
+                                    <?php
+                                    $countMess2 = \app\components\FullCountMessagesWIdget::widget();
+
+                                    $icon2 = (!$countMess == 0) ? '<span class="badge pull-right bg-warning">' . $countMess
+                                            . '</span>' : "";
+                                    ?>
+                                    <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <?= $icon2 ?> </a>
                                     </li>
 
                                     <li class="divider"></li>
@@ -158,7 +162,7 @@ AppAsset::register($this);
         <!-- Main Content -->
         <section class="content-wrap">
 
-            <?php // Breadcrumbs::widget([ 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], ])  ?>
+            <?php // Breadcrumbs::widget([ 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], ])   ?>
             <?= $content ?>
 
 
@@ -171,38 +175,38 @@ AppAsset::register($this);
                 <div class="wrapper" style="background-image: url('/images/footer-bg.jpg')">
 
                     <!-- Social Buttons -->
-<!--                    <div class="social">
-                        <div class="container">
-                            <h3>Connect socially with <strong>youplay</strong></h3>
-
-                            <div class="social-icons">
-                                <div class="social-icon">
-                                    <a href="#!">
-                                        <i class="fa fa-facebook-square"></i>
-                                        <span>Like on Facebook</span>
-                                    </a>
-                                </div>
-                                <div class="social-icon">
-                                    <a href="#!">
-                                        <i class="fa fa-twitter-square"></i>
-                                        <span>Follow on Twitter</span>
-                                    </a>
-                                </div>
-                                <div class="social-icon">
-                                    <a href="#!">
-                                        <i class="fa fa-twitch"></i>
-                                        <span>Watch on Twitch</span>
-                                    </a>
-                                </div>
-                                <div class="social-icon">
-                                    <a href="#!">
-                                        <i class="fa fa-youtube-square"></i>
-                                        <span>Watch on Youtube</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="social">
+                                            <div class="container">
+                                                <h3>Connect socially with <strong>youplay</strong></h3>
+                    
+                                                <div class="social-icons">
+                                                    <div class="social-icon">
+                                                        <a href="#!">
+                                                            <i class="fa fa-facebook-square"></i>
+                                                            <span>Like on Facebook</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="social-icon">
+                                                        <a href="#!">
+                                                            <i class="fa fa-twitter-square"></i>
+                                                            <span>Follow on Twitter</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="social-icon">
+                                                        <a href="#!">
+                                                            <i class="fa fa-twitch"></i>
+                                                            <span>Watch on Twitch</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="social-icon">
+                                                        <a href="#!">
+                                                            <i class="fa fa-youtube-square"></i>
+                                                            <span>Watch on Youtube</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
                     <!-- /Social Buttons -->
 
                     <!-- Copyright -->
@@ -229,6 +233,7 @@ AppAsset::register($this);
                 </div>
             </form>
         </div>
+
         <!-- /Search Block -->
         <!-- jQuery -->
         <script type="text/javascript" src="/assetsb/bower_components/jquery/dist/jquery.min.js"></script>
@@ -254,6 +259,7 @@ AppAsset::register($this);
         <!-- Youplay -->
         <script type="text/javascript" src="/assetsb/youplay/js/youplay.min.js"></script>
         <!-- init youplay -->
+
         <script>
             if (typeof youplay !== 'undefined') {
                 youplay.init({
@@ -276,14 +282,61 @@ AppAsset::register($this);
         </script>
 
 
-        <script type="text/javascript">
+        <script  type="text/javascript">
             $(".countdown").each(function () {
                 $(this).countdown($(this).attr('data-end'), function (event) {
                     $(this).text(
                             event.strftime('%D days %H:%M:%S')
                             );
                 });
-            })
+            });
+
+
+            $(function () {
+               
+                
+                
+                var stat;
+                $('#dialogSendA').click(function (e) {
+                    
+                     if($(window).width()<"768"){
+                           e.preventDefault();
+                    if(stat!==777){
+                        stat=777;
+                    e.preventDefault();
+                    $("#dial").dialog({
+                        show: 'slideDown',
+                        hide: 'slideUp',
+                        css:'background:blue',
+                        width:'100%'
+                    });//end dialog
+                }else{
+                     e.preventDefault();
+                    $("#dial").dialog('close');
+                    stat=true;
+                }
+                    }else{
+                          e.preventDefault();
+                    if(stat!==777){
+                        stat=777;
+                    e.preventDefault();
+                    $("#dial").dialog({
+                        show: 'slideDown',
+                        hide: 'slideUp',
+                        css:'background:blue'
+                        
+                    });//end dialog
+                }else{
+                     e.preventDefault();
+                    $("#dial").dialog('close');
+                    stat=true;
+                }
+                    }
+                    
+                 
+                });//end event
+            });//end global
+
         </script>
         <?php $this->endBody() ?>
     </body>

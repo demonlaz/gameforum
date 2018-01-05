@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="info">
             <div>
                 <div class="container youplay-user">
+
                     <!--            <a href="assets/images/user-photo.jpg" class="angled-img image-popup">
                                   <div class="img">
                                     <img src="assets/images/user-avatar.jpg" alt="">
@@ -85,7 +86,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!-- Information -->
     <div class="requirements-block">
+        <div class="col-md-9">
+            <ul class="pagination pagination-sm mt-0">
+                <li class="active">
+                    <a href="<?= yii\helpers\Url::to(['/profile/messages']) ?>">Почтовый ящик</a>
+                </li>
+                <li>
+                    <a id="dialogSendA" href="">Написать</a>
+                </li>
+            </ul>
+        </div>
         <h2>У вас новых сообщений <?= $fullCount ?> <span class="messages-count"></span> </h2>
+
         <div class="panel-group youplay-accordion" id="accordion" role="tablist" aria-multiselectable="false">
 
             <?php
@@ -103,15 +115,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                aria-controls="collapseOne<?= $loginFrom->loginFrom ?>"
                                value="<?= $loginFrom->loginFrom ?>"
                                >
-    <?= $loginFrom->loginFrom ?> 
-    <span class="messages-count">
-                <?php //(($modelMessagesCount[$for]['loginFrom']) == $loginFrom->loginFrom) ? " " . $modelMessagesCount[$for]['countLoginFrom'] : '' 
-       foreach ($modelMessagesCount as $countMessage):
-       echo  ($countMessage['loginFrom']==$loginFrom->loginFrom)? '<i class="glyphicon glyphicon-envelope"> </i>'." " . $countMessage['countLoginFrom'].'+' : '' ;
-       endforeach;
-                    
-                    ?></span> 
-                <span class="icon-plus"></span>
+                                   <?= $loginFrom->loginFrom ?> 
+                                <span class="messages-count">
+                                    <?php
+                                    //(($modelMessagesCount[$for]['loginFrom']) == $loginFrom->loginFrom) ? " " . $modelMessagesCount[$for]['countLoginFrom'] : '' 
+                                    foreach ($modelMessagesCount as $countMessage):
+                                        echo ($countMessage['loginFrom'] == $loginFrom->loginFrom) ? '<i class="glyphicon glyphicon-envelope"> </i>' . " " . $countMessage['countLoginFrom'] . '+' : '';
+                                    endforeach;
+                                    ?></span> 
+                                <span class="icon-plus"></span>
                             </a>
                         </h4>
                     </div>
@@ -140,7 +152,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <a href="#" class="message-from-name" title="<?= $content['loginFrom'] ?>"
                                                        ><?= Html::encode($content['loginFrom']) ?>
                                                     </a>
-            <?= ($content['readContent'] == null) ? "(Нов!)" : "" ?>
+                                                    <?= ($content['readContent'] == 0) ? "(Нов!)" : "" ?>
                                                     <br>
                                                     <span class="date"><?= Yii::$app->formatter->asDatetime($content['date_add']) ?></span>
                                                 </td>
@@ -169,14 +181,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                 <?php
-                $for++;
             endforeach;
             ?>
+            <div id="dial" style="display:none; background-image:url(<?= app\components\GlobalBanerWidget::widget(['url'=>true])?>)">
+
+                <form action="#">
+                    <div class="youplay-input">
+                        <input type="text" placeholder="Send To" name="message-to">
+                    </div>
+                    <div class="youplay-input">
+                        <input type="text" placeholder="Subject" name="message-subject">
+                    </div>
+                    <div class="youplay-textarea">
+                        <textarea placeholder="Message" name="message" rows="5"></textarea>
+                    </div>
+                    <button class="btn btn-default">Send</button>
+                </form>
+
+            </div>
+
+
             <?php
             // endforeach; 
             $urlAjax = yii\helpers\Url::to(['/profile/read-content-ajax']);
+            $statusAjax = \app\components\FullCountMessagesWIdget::widget();
             $script = <<< JS
   $(function(){
+                   var statusAjaxMessage=$statusAjax;
+                    if(statusAjaxMessage>0){
         $("[aria-expanded=true]").click(function(e){
         var value=$(this).attr('value');
             
@@ -192,6 +224,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         });//конец события collapsed
+                    } // конец if
+                    
+                  
+  
+                    
+                 
     });//конец глобал
      
 JS;
@@ -204,7 +242,7 @@ JS;
     <!-- /Information -->
 
     <script>
-
+      
     </script>
 
 

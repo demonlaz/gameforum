@@ -8,7 +8,7 @@ use app\models\Games;
  * @author demon
  */
 class GlobalBanerWidget extends Widget {
-    
+    public $url=false;
     public $prioritet=null;
     public function init() {
         parent::init();
@@ -22,15 +22,19 @@ class GlobalBanerWidget extends Widget {
     
     
     public function run() {
-       $modelgames= Games::getDb()->cache(function($games){
+        $modelgames= Games::getDb()->cache(function($games){
             return Games::find()->where(['global'=>1])->indexBy('id')->one();;
             
         },\Yii::$app->params['cache10']);
-        
+        if(!$this->url){
        
-        
-        
+      
         return $this->render('globalbaner',['modelgames'=>$modelgames,'prioritet'=>$this->prioritet]);
+        
+       }else{
+           
+           return '/imagesgames/'.$modelgames->globalimag;
+       }
     }
    
 }

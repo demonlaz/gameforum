@@ -24,10 +24,12 @@ class AppAsset extends AssetBundle
         'assetsb/bower_components/font-awesome/css/font-awesome.min.css',
         'assetsb/bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
         'assetsb/youplay/css/youplay.min.css',
-         'css/custom.css'
+         'css/custom.css',
+        'assetsb/jquery-ui.min.css'
         
     ];
     public $js = [
+        '/assetsb/jquery-ui.min.js',
 //         'assetsb/bower_components/jquery/dist/jquery.min.js',
 //        'assetsb/bower_components/HexagonProgress/jquery.hexagonprogress.min.js',
 //        'assetsb/bower_components/bootstrap/dist/js/bootstrap.min.js',
