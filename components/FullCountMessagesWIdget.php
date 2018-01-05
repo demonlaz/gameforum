@@ -19,7 +19,7 @@ class FullCountMessagesWIdget extends \yii\base\Widget {
     }
     
     public function run() {
-                $fullCount= \app\models\Messages::find()->where(['loginTo'=>\Yii::$app->user->identity->username,'readContent'=>null])->count();
+                $fullCount= \app\models\Messages::find()->where(['loginTo'=>\Yii::$app->user->identity->username,'readContent'=>0])->count();
                 return $fullCount;
 
     }

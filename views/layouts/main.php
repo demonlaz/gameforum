@@ -120,7 +120,10 @@ AppAsset::register($this);
                         <li class="dropdown dropdown-hover">
 
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <?= (!empty(\Yii::$app->user->identity->username)) ? \Yii::$app->user->identity->username . '<span class="badge bg-default">'.\app\components\FullCountMessagesWIdget::widget().'</span> <span class="caret"></span> <span class="glyphicon glyphicon-user"></span>' : '' ?> 
+                                <?php $countMess=\app\components\FullCountMessagesWIdget::widget();
+                                $icon=(!$countMess==0)?'<span class="badge bg-default">'.$countMess
+                                        .'</span> <span class="caret"></span>':"" ; ?>
+                                <?= (!empty(\Yii::$app->user->identity->username)) ? \Yii::$app->user->identity->username.$icon.' <span class="glyphicon glyphicon-user"></span>': '' ?> 
                             </a>
                             <div class="dropdown-menu">
                                 <ul role="menu">
@@ -128,8 +131,11 @@ AppAsset::register($this);
                                     </li>
 
                                     <li class="divider"></li>
-
-                                    <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <span class="badge pull-right bg-warning"><?=\app\components\FullCountMessagesWIdget::widget()?></span></a>
+                                        <?php $countMess2=\app\components\FullCountMessagesWIdget::widget();
+                                       
+                                $icon2=(!$countMess==0)?'<span class="badge pull-right bg-warning">'.$countMess
+                                        .'</span>':"" ; ?>
+                                    <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <?=$icon2?> </a>
                                     </li>
 
                                     <li class="divider"></li>

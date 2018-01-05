@@ -42,16 +42,36 @@ class ProfileController extends SiteController {
         $modelMessagesCount = \app\models\Messages::find()
                 ->select(['loginFrom', 'count(loginFrom ) as countLoginFrom'])
                 ->groupBy(['loginFrom', 'readContent', 'loginTo'])
-                ->having(['readContent' => null, 'loginTo' => \Yii::$app->user->identity->username])
+                ->having(['readContent' => 0, 'loginTo' => \Yii::$app->user->identity->username])
                 ->asArray()
                 ->all();
-        $fullCount= \app\models\Messages::find()->where(['loginTo'=>\Yii::$app->user->identity->username,'readContent'=>null])->count();
+        $fullCount = \app\models\Messages::find()->where(['loginTo' => \Yii::$app->user->identity->username, 'readContent' => 0])->count();
 //select loginFrom,count(loginFrom ) as con,readContent from messages group by loginFrom,readContent,loginTo having readContent is null and loginTo='demonlaz'
         return $this->render('messages', ['modelMessagesLogin' => $modelMessagesLogin,
                     'modelMessagesContent' => $modelMessagesContent,
                     'modelMessagesCount' => $modelMessagesCount,
-                'fullCount'=>$fullCount
+                    'fullCount' => $fullCount
         ]);
+    }
+
+    public function actionReadContentAjax($status = false, $name = false) {
+
+        $statusDec = json_decode($status);
+        $validate = \yii\base\DynamicModel::validateData(compact('name', 'statusDec'), [
+                    [['name', 'statusDec'], 'required'],
+                    [['name'], 'string', 'max' => 200],
+                    [['statusDec'], 'boolean'],
+        ]);
+        if ($validate->hasErrors()) {
+            return json_encode(false);
+        } else {
+
+            $model = \app\models\Messages::updateAll(['readContent' => 1], ['readContent' => 0, 'loginTo' => \Yii::$app->user->identity->username, 'loginFrom' => $name]);
+
+
+
+            return json_encode(true);
+        }
     }
 
 }

@@ -25,10 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                     <li ><a href="<?= \yii\helpers\Url::to(['/user/profile']); ?>">Профиль</a>
                     </li>
-                    <li class="active" ><a href="<?= \yii\helpers\Url::to(['/profile/messagers']); ?>">Сообщения <span class="badge"><?=$fullCount?></span></a>
+                    <li class="active" ><a href="<?= \yii\helpers\Url::to(['/profile/messagers']); ?>">Сообщения <span class="badge"><?= $fullCount ?></span></a>
                     </li>
                     <!--<li><a href="user-settings.html">Settings</a>-->
-                    </li>
+                    <!--</li>-->
                 </ul>
             </div>
         </div>
@@ -85,17 +85,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!-- Information -->
     <div class="requirements-block">
-        <h2>У вас новых сообщений <?=$fullCount?> <span class="messages-count"></span> </h2>
+        <h2>У вас новых сообщений <?= $fullCount ?> <span class="messages-count"></span> </h2>
         <div class="panel-group youplay-accordion" id="accordion" role="tablist" aria-multiselectable="false">
 
-            <?php $for = 0;
-            foreach ($modelMessagesLogin as $loginFrom): ?>
+            <?php
+            $for = 0;
+            foreach ($modelMessagesLogin as $loginFrom):
+                ?>
 
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne<?= $loginFrom->loginFrom ?>">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne<?= $loginFrom->loginFrom ?>" aria-expanded="true" aria-controls="collapseOne<?= $loginFrom->loginFrom ?>">
-    <?= $loginFrom->loginFrom ?> <span class="messages-count"><i class="glyphicon glyphicon-envelope"> </i><?= ($modelMessagesCount[$for]['loginFrom'] == $loginFrom->loginFrom) ? " ".$modelMessagesCount[$for]['countLoginFrom'] : '' ?></span>+ <span class="icon-plus"></span>
+                            <a data-toggle="collapse"
+                               data-parent="#accordion"
+                               href="#collapseOne<?= $loginFrom->loginFrom ?>" 
+                               aria-expanded="true"
+                               aria-controls="collapseOne<?= $loginFrom->loginFrom ?>"
+                               value="<?= $loginFrom->loginFrom ?>"
+                               >
+    <?= $loginFrom->loginFrom ?> 
+    <span class="messages-count">
+                <?php //(($modelMessagesCount[$for]['loginFrom']) == $loginFrom->loginFrom) ? " " . $modelMessagesCount[$for]['countLoginFrom'] : '' 
+       foreach ($modelMessagesCount as $countMessage):
+       echo  ($countMessage['loginFrom']==$loginFrom->loginFrom)? '<i class="glyphicon glyphicon-envelope"> </i>'." " . $countMessage['countLoginFrom'].'+' : '' ;
+       endforeach;
+                    
+                    ?></span> 
+                <span class="icon-plus"></span>
                             </a>
                         </h4>
                     </div>
@@ -121,7 +137,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                                                         </div>
                                                                                                     </a>-->
 
-                                                    <a href="#" class="message-from-name" title="<?= $content['loginFrom'] ?>"><?= Html::encode($content['loginFrom']) ?></a>
+                                                    <a href="#" class="message-from-name" title="<?= $content['loginFrom'] ?>"
+                                                       ><?= Html::encode($content['loginFrom']) ?>
+                                                    </a>
+            <?= ($content['readContent'] == null) ? "(Нов!)" : "" ?>
                                                     <br>
                                                     <span class="date"><?= Yii::$app->formatter->asDatetime($content['date_add']) ?></span>
                                                 </td>
@@ -131,7 +150,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <div class="message-excerpt"><?= Html::encode($content['content']) ?></div>
                                                 </td>
                                                 <td class="message-action">
-                                                    <a class="message-delete" href="#"><i class="fa fa-times"></i></a>
+                                                    <!--<a class="message-delete" href="#"></a>-->
                                                 </td>
                                             </tr>
 
@@ -153,12 +172,40 @@ $this->params['breadcrumbs'][] = $this->title;
                 $for++;
             endforeach;
             ?>
-<?php // endforeach; ?>
+            <?php
+            // endforeach; 
+            $urlAjax = yii\helpers\Url::to(['/profile/read-content-ajax']);
+            $script = <<< JS
+  $(function(){
+        $("[aria-expanded=true]").click(function(e){
+        var value=$(this).attr('value');
+            
+      $.ajax({
+               //method:"GET"
+                url:"$urlAjax",
+                data:{'status':'true','name':value},
+                
+                success:function(data){
+                   // alert(data);
+                    },
+            });//конец ajax
+
+
+        });//конец события collapsed
+    });//конец глобал
+     
+JS;
+
+
+            $this->registerJS($script);
+            ?>
         </div>
     </div>
     <!-- /Information -->
 
+    <script>
 
+    </script>
 
 
 </section>
