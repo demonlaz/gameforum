@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 29 2017 г., 21:38
+-- Время создания: Янв 06 2018 г., 18:32
 -- Версия сервера: 5.7.13-log
 -- Версия PHP: 7.0.8
 
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `id_parent` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `category`
@@ -94,7 +94,6 @@ INSERT INTO `category` (`id`, `name`, `id_parent`) VALUES
 (4, 'action', NULL),
 (5, 'emulator', NULL),
 (6, 'rpg', NULL),
-(7, 'emulator', NULL),
 (8, 'emulator', NULL),
 (9, 'Тестовая', NULL),
 (10, 'action', NULL);
@@ -122,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `games` (
   `date_add` datetime DEFAULT NULL COMMENT 'дата дабавления возможно смнеить на int',
   `date_up` datetime DEFAULT NULL COMMENT 'дата обновления возможно смнеить на int',
   `category_id` int(11) DEFAULT NULL COMMENT 'категория игры'
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `games`
@@ -162,6 +161,38 @@ INSERT INTO `images` (`id`, `id_parent_games`, `images_games`) VALUES
 (4, 1, 'banner-witcher-3.jpg'),
 (5, 1, 'banner-witcher-3.jpg'),
 (6, 1, 'banner-witcher-3.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `messages`
+--
+
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` int(11) NOT NULL,
+  `loginFrom` varchar(250) DEFAULT NULL COMMENT 'от кого',
+  `loginTo` varchar(250) DEFAULT NULL COMMENT 'к кому',
+  `content` text COMMENT 'содержание ',
+  `readContent` bit(1) DEFAULT b'0' COMMENT '1 если пользователь прочитал сообщение',
+  `date_add` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'дата создания ',
+  `date_up` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'дат редактирования'
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COMMENT='сообщения между пользователями';
+
+--
+-- Дамп данных таблицы `messages`
+--
+
+INSERT INTO `messages` (`id`, `loginFrom`, `loginTo`, `content`, `readContent`, `date_add`, `date_up`) VALUES
+(34, 'demonlaz', 'demonlaz', 'dtgdfd', b'0', '2018-01-05 19:16:10', '2018-01-05 19:16:10'),
+(35, 'demonlaz', 'fdgfdgfdg', 'dfgdfgdf', b'0', '2018-01-05 19:17:27', '2018-01-05 19:17:27'),
+(36, 'demonlaz', 'cbvbcb', 'xgfccgh', b'0', '2018-01-05 19:18:15', '2018-01-05 19:18:15'),
+(37, 'demonlaz', 'demonlaz', 'dsfjdslkf', b'0', '2018-01-05 19:24:42', '2018-01-05 19:24:42'),
+(38, 'demonlaz', 'fdfsdf', 'sdfdsfsdf', b'0', '2018-01-05 19:24:57', '2018-01-05 19:24:57'),
+(39, 'demonlaz', '', 'rtetreter', b'0', '2018-01-05 19:33:49', '2018-01-05 19:33:49'),
+(40, 'demonlaz', 'demonlaz', 'asdsad', b'0', '2018-01-05 19:37:16', '2018-01-05 19:37:16'),
+(41, 'demonlaz', 'demonlaz', 'asdsad', b'0', '2018-01-05 19:40:27', '2018-01-05 19:40:27'),
+(42, 'demonlaz', 'demonlaz', 'как дела', b'0', '2018-01-05 19:41:30', '2018-01-05 19:41:30'),
+(43, 'demonlaz', 'demonlaz', 'efdsfdf', b'0', '2018-01-06 11:47:22', '2018-01-06 11:47:22');
 
 -- --------------------------------------------------------
 
@@ -215,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 --
 
 INSERT INTO `news` (`id`, `id_games`, `title`, `content_short`, `content`, `date_add`, `date_up`) VALUES
-(1, 11, 'Заголовок', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 10:17:27', '2017-10-21 10:17:24'),
+(1, 11, 'Заголовок', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', 'Jackson Isai? Tu quoque ... A te quidem a ante. Vos scitis quod blinking res Ive ''been vocans super vos? Et conteram illud, et conteram hoc. Maledicant druggie excors. Iam hoc tu facere conatus sum ad te in omni tempore?\r\n\r\nLudum mutavit. Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis certamen est, qui non credunt at.\r\n\r\nNonne vides quid sit? Tu es ... Jesse me respice. Tu ... blowfish sunt. A blowfish! Cogitare. Statura pusillus, nec sapientium panem, nec artificum. Sed predators facile prædam blowfish secretum telum non se habet. Non ille? Quid faciam blowfish, Isai. Blowfish quid faciat? In blowfish inflat, purus?\r\n\r\nBlowfish librantur in se quatuor, quinquies maior quam normalis, et quare? Quare id faciam? Ut terrorem facit, qui quid. Terrent! Ut alter, scarier pisces agminis off. Et quod tu es? Vos blowfish. Tu iustus in omnibus visio. Vides ... suus '' suus ''non aliud aerem. Nunc ... qui cum partibus blowfish Isai? Tu damnare ius. Vos blowfish. Dicere iterum. Dicere illam quasi velis eam. Es BLOWFISH!\r\n\r\nUt sibi fuerat socius sagittis. Ego intervenerit. Vere quia a te nuper iratus occidit illos undecim annorum puer. Deinde, si hoc forte qui fuit imperavit.', '2017-10-21 10:17:27', '2017-10-21 10:17:24'),
 (3, 1, '1', NULL, 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 12:33:49', '2017-10-21 12:33:53');
 
 -- --------------------------------------------------------
@@ -242,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
 
 INSERT INTO `profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`, `timezone`) VALUES
 (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'Дмитрий', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', 'Pacific/Apia');
+(2, 'Дмитрий', '', '', 'd41d8cd98f00b204e9800998ecf8427e', 'Москва', '', '', 'Pacific/Apia');
 
 -- --------------------------------------------------------
 
@@ -310,8 +341,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`, `last_login_at`) VALUES
-(1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, 1514447253),
-(2, 'demonlaz', 'demon-l_91@mail.ru', '$2y$10$STVgNM8qykp8fFlbg5bChuEa66udwMObPKiwbzrz6LbBXsvAHng5e', '2eAinV9k1Wh_b_afC4Epe86DHJ049_uf', 1508323273, NULL, NULL, '127.0.0.1', 1508322611, 1508322611, 0, 1513515768);
+(1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, 1514803716),
+(2, 'demonlaz', 'demon-l_91@mail.ru', '$2y$10$STVgNM8qykp8fFlbg5bChuEa66udwMObPKiwbzrz6LbBXsvAHng5e', '2eAinV9k1Wh_b_afC4Epe86DHJ049_uf', 1508323273, NULL, NULL, '127.0.0.1', 1508322611, 1508322611, 0, 1514830975);
 
 --
 -- Индексы сохранённых таблиц
@@ -365,6 +396,12 @@ ALTER TABLE `images`
   ADD KEY `FK_images_games` (`id_parent_games`);
 
 --
+-- Индексы таблицы `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `migration`
 --
 ALTER TABLE `migration`
@@ -414,17 +451,22 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT для таблицы `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT для таблицы `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT для таблицы `news`
 --
