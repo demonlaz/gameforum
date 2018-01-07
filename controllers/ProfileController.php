@@ -110,7 +110,7 @@ class ProfileController extends SiteController {
                 $statusIsClicuserRating = ($userRaitingClic and $userRaitingClic->id) ? false : true;
             } else {
 
-                $res['message'] = 'Этот голос не учитывается. Вы уже проголосовали ранее...';
+                $res['message'] = 'Ошибка голосования попробуйте позже!';
 
                 return json_encode($res, JSON_NUMERIC_CHECK);
             }

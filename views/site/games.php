@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->namegames);
             </div>
 
             <!-- /Post Text -->
-            <div id="dialoginfo" style="display:none;">
+            <div id="dialoginfo" class="alert alert-warning" style="display:none;">
                 <div class="alert alert-warning">
                     <strong>Предупреждение!</strong><div id="warnin">Обнаружены проблемы с сетевым соединением.</div> 
                 </div>
@@ -147,16 +147,18 @@ echo kartik\rating\StarRating::widget([
                                            
                                         if (typeof data.message !== 'undefined') {
                                        // alert(data.message);   
-                                            $('#warnin').text('sdsdsdsdsdsd');
-                                                 $('#dialoginfo').dialog();    
-                                            setTimeout(function(){
-                                            $('#dialoginfo').dialog('close'); 
-                                      }, 2000);
+                                            $('#warnin').text(data.message);
+                                                       $('#dialoginfo').slideToggle();
+                                               setTimeout(function(){
+                                            $('#dialoginfo').slideToggle();; 
+                                      }, 3000);
+
                                            
                                         }else{
-                                  
-
-                                               $('.youplay-hexagon-rating>canvas').css({
+                                  // $('#warnin').text(data.message);
+                                            
+                                            
+                                $('.youplay-hexagon-rating>canvas').css({
                                                      transform:'rotate(1080deg)', transition: 'transform 0.5s'                        
                                                                     });  
                                                                 $('.youplay-hexagon-rating').attr({'title':data.ratingVotes+' из 10'});  
