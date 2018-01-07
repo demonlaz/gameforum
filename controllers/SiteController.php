@@ -143,6 +143,7 @@ class SiteController extends Controller {
         if (is_numeric($id)) {
         $model= \app\models\Games::findOne($id);
         $category= \app\models\Category::findOne($model->category_id);
+      
               return $this->render('games', ['model'=>$model,'category'=>$category]);
         } else {
              return $this->redirect(['/site/index']);

@@ -6,17 +6,17 @@ use yii\widgets\Breadcrumbs;
 $this->title = Html::encode($model->namegames);
 
 $this->params['breadcrumbs'][] = ['template' => "<li><b>{link}</b></li>", 'label' => $category->name,
-    'url' => ['/site/category','id'=>$model->category_id],];
+    'url' => ['/site/category', 'id' => $model->category_id],];
 $this->params['breadcrumbs'][] = Html::encode($model->namegames);
 ?>
 <section class="content-wrap no-banner">
     <style>
         .breadcrumb>li{
-             color:#FF8c00;
-            
+            color:#FF8c00;
+
         }
         .breadcrumb{
-             background-color: transparent;
+            background-color: transparent;
         }
         .breadcrumb>li+li::before{
             padding: 0 5px;
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->namegames);
     </style>
     <?php
     echo Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ?
-        $this->params['breadcrumbs'] : [],]);
+                $this->params['breadcrumbs'] : [],]);
     ?>
     <h1 class="container"><?= Html::encode($model->namegames) ?> <br>
         <span style="font-size: 20pt;"><?= Html::encode($model->namegamesdop) ?></span>
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->namegames);
 
 
                 <p>
-<?= Html::encode($model->stampgames) ?>
+                    <?= Html::encode($model->stampgames) ?>
                 </p>
 
                 <div class="align-center">
@@ -53,20 +53,20 @@ $this->params['breadcrumbs'][] = Html::encode($model->namegames);
                         <i class="fa icon"><i class="glyphicon glyphicon-zoom-in"></i></i>
                     </a>
                 </div>
-<?php if ($model->tehnik_trebov): ?>
+                <?php if ($model->tehnik_trebov): ?>
                     <h3>Технические требования</h3>
                     <p>
-    <?= $model->tehnik_trebov ?>
+                        <?= $model->tehnik_trebov ?>
                     </p>
 
-<?php endif; ?> 
+                <?php endif; ?> 
 
                 <div class="align-center">
                     <!-- Slider -->
 
                     <div class="youplay-slider gallery-popup">
 
-<?php foreach ($model->images as $modelContent): ?>
+                        <?php foreach ($model->images as $modelContent): ?>
                             <a href="/skringames/<?= $modelContent->images_games ?>" class="angled-img pull-left" target="_blank">
                                 <div class="img">
                                     <img src="/skringames/<?= $modelContent->images_games ?>" alt="">
@@ -74,56 +74,146 @@ $this->params['breadcrumbs'][] = Html::encode($model->namegames);
                                 <i class="fa icon"><i class="glyphicon glyphicon-zoom-in"></i></i>
                             </a>
 
-<?php endforeach; ?>
+                        <?php endforeach; ?>
                     </div>
 
                     <!-- /Slider -->
                 </div>
-<?php if ($model->content): ?>
+                <?php if ($model->content): ?>
                     <h3>Об игре</h3>
                     <p>
-    <?= $model->content ?>
+                        <?= $model->content ?>
                     </p>
-                    <?php endif; ?>
+                <?php endif; ?>
                 <?php if ($model->images): ?>
                     <h3>Все скриншоты</h3>
                     <div class="align-center">
-    <?php foreach ($model->images as $modelContent): ?>
-                        <a href="/skringames/<?= $modelContent->images_games ?>" class="angled-img image-popup mr-0" target="_blank">
+                        <?php foreach ($model->images as $modelContent): ?>
+                            <a href="/skringames/<?= $modelContent->images_games ?>" class="angled-img image-popup mr-0" target="_blank">
                                 <div class="img">
                                     <img src="/skringames/<?= $modelContent->images_games ?>" alt="">
                                 </div>
                                 <i class="fa icon"><i class="glyphicon glyphicon-zoom-in"></i></i>
                             </a>
-    <?php endforeach; ?>
+                        <?php endforeach; ?>
 
                     </div>
-<?php endif; ?>
+                <?php endif; ?>
+                <?php
+                ?>
+
+
 
             </div>
-            <!-- /Post Text -->
 
+            <!-- /Post Text -->
+            <div id="dialoginfo" style="display:none;">
+                <div class="alert alert-warning">
+                    <strong>Предупреждение!</strong><div id="warnin">Обнаружены проблемы с сетевым соединением.</div> 
+                </div>
+            </div>
             <!-- Review Rating -->
             <div class="youplay-review-rating">
                 <div class="row">
+
                     <div class="col-md-4">
-                        <div class="youplay-hexagon-rating" data-max="10" title="<?= $model->rating ?> из 10"><span><?= $model->rating ?></span>
+                        <h5 >Рейтинг по мнению пользователей:</h5>
+                        <div class="youplay-hexagon-rating" data-max="10" title="<?= $model->rating ?> из 10"><span id="rating_round"><?= $model->rating ?></span>
+                            <!--<form action=""></form>-->
+<?php
+echo kartik\rating\StarRating::widget([
+    'name' => 'rating',
+//                                'model' => $modelFormRating,
+//                                'attribute' => 'rating',
+    'pluginOptions' => ['stars' => 10, 'size' => '10', 'min' => 0,
+        'max' => 10,
+        'step' => 1,
+//                                   'value'=>6,
+        'disabled' => Yii::$app->user->isGuest ? true : false, //для гостя блокируем кнопки
+        'showClear' => false,
+        'showCaption' => false,
+    ],
+    'pluginEvents' => [
+        //когда кликаем на звезды всплывает это событие, которое и обробатываем
+        'rating:change' => "function(event, value, caption) {
+                                  $.ajax({
+                                    type: 'POST',
+                                    url: '" . \yii\helpers\Url::to(['/profile/rating-games']) . "',//адрес контроллера и экшена. Так как вид вызван из того же экшена, что и обработка этого запроса, тооставляем пустым или пишем - controller/action
+                                    data: {'rait': value,'idgames':'" . $model->id . "'},// value - число выбранных звезд id игры
+                                    cache: false,
+                                    success: function(data) {
+                                        var data = jQuery.parseJSON(data);//конвертируем json обьект, что передаем из php  в обьект jquery
+                                       // var inputRating = $('#geoinstitutions-rating');
+                                           
+                                        if (typeof data.message !== 'undefined') {
+                                       // alert(data.message);   
+                                            $('#warnin').text('sdsdsdsdsdsd');
+                                                 $('#dialoginfo').dialog();    
+                                            setTimeout(function(){
+                                            $('#dialoginfo').dialog('close'); 
+                                      }, 2000);
+                                           
+                                        }else{
+                                  
+
+                                               $('.youplay-hexagon-rating>canvas').css({
+                                                     transform:'rotate(1080deg)', transition: 'transform 0.5s'                        
+                                                                    });  
+                                                                $('.youplay-hexagon-rating').attr({'title':data.ratingVotes+' из 10'});  
+                                          //  $('#numRait').text(data.ratingVotes);//обновляем цыфры рейтинга в тегах на странице
+                                           $('#rating_round').text(data.ratingVotes);//обновляем цыфры кол-ва голосов в тегах на странице
+                                           // inputRating.rating('refresh', {disabled: true, showClear: false, showCaption: true});//добавляет рейтинг и блокирует повторное нажатие
+                                        }
+
+                                    }
+                                });
+
+
+                            }",
+    ],
+]);
+$js = "   // использование Math.round() даст неравномерное распределение!
+function getRandomInt(min, max)
+{
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+ 
+//  setInterval(function(){
+//     $('.youplay-hexagon-rating>canvas').css({
+//    transform:'rotate(10deg)', transition: 'transform 1s'                        
+//});  
+// 
+//},1000);
+                                         
+";
+
+//                            $this->registerJS($js);
+//                            $avg= \app\models\Rating::find()->select('avg(rating_to_user) as ratinguser')->all();
+//                            echo '<pre>';
+//                            print_r($avg)
+?>
+
+                            <script>
+
+                            </script>
+
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <h3 class="mt-0">Good</h3>
+                        <h3 class="mt-0">Информация:</h3>
                         <ul>
                             <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Дата выхода:</li>
                             <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Жанр:</li>
                             <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Разработчик:</li>
                             <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Тип издания:</li>
-                           <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Платформа:</li>
-                           <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Язык озвучка:</li>
-                           <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Таблетка:</li>
+                            <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Платформа:</li>
+                            <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Язык озвучка:</li>
+                            <li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i> Таблетка:</li>
 
                         </ul>
                     </div>
-                  
+
                 </div>
             </div>
             <!-- /Review Rating -->
