@@ -102,7 +102,7 @@ class ProfileController extends SiteController {
            $validatFrom=New \app\models\forms\DeletMessagesForm();
            if($validatFrom->load(Yii::$app->request->post()) && $validatFrom->validate()){
             \app\models\Messages::deleteAll(['loginFrom'=>$validatFrom->hiddenInpu,'loginTo'=> Yii::$app->user->identity->username]);
-            print_r(Yii::$app->request->post());
+//            print_r(Yii::$app->request->post());
            return $this->redirect(['/profile/messages']);
            }else{
                return $this->redirect(['/profile/messages']);

@@ -97,10 +97,10 @@ $this->params['breadcrumbs'][] = $this->title;
             </ul>
         </div>
         <h2 >У вас новых сообщений <?= $fullCount ?> <span class="messages-count"></span> </h2>
-
+        
         <?php 
         
-        $str="privet moii svet kUda Poper";
+//        $str="privet moii svet kUda Poper";
         
 //       $res= strtolower(str_replace(' ', '-', $str));
 //       
@@ -154,11 +154,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <tbody>
                                     <?php
                                   
-                                  $formD=yii\widgets\ActiveForm::begin(['method'=>"POST",'action'=>'/profile/remove-messages']);
+                                  $formD=yii\widgets\ActiveForm::begin(['method'=>"POST",'action'=>'/profile/remove-messages','options'=>['style'=>'display:block;']]);
                                  echo  $formD->field($formDelet, 'hiddenInpu')->hiddenInput(['value'=>$loginFrom->loginFrom])->label('');
                                  
                                   echo  Html::submitButton('<i class="glyphicon glyphicon-trash"> </i>',
-                                          ['style'=>'background:red;color:white;border:none;float:right;',
+                                          ['style'=>'background:red;color:white;border:none;float:right;margin-bottom:5px;',
                                               'type'=>'submit',
 //                                              'data-confirm'=>'Вы уверенны что хотите удалить всю переписку?'
                                               ]);
