@@ -46,15 +46,19 @@ class ProfileController extends SiteController {
                 ->having(['readContent' => 0, 'loginTo' => \Yii::$app->user->identity->username])
                 ->asArray()
                 ->all();
-        $fullCount = \app\models\Messages::find()->where(['loginTo' => \Yii::$app->user->identity->username, 'readContent' => 0])->count();
+        $fullCount = \app\models\Messages::find()
+                ->where(['loginTo' => \Yii::$app->user->identity->username, 'readContent' => 0])
+                ->count();
+        $formDelet=new \app\models\forms\DeletMessagesForm();
 //select loginFrom,count(loginFrom ) as con,readContent from messages group by loginFrom,readContent,loginTo having readContent is null and loginTo='demonlaz'
         return $this->render('messages', ['modelMessagesLogin' => $modelMessagesLogin,
                     'modelMessagesContent' => $modelMessagesContent,
                     'modelMessagesCount' => $modelMessagesCount,
-                    'fullCount' => $fullCount
+                    'fullCount' => $fullCount,
+                    'formDelet'=>$formDelet
         ]);
     }
-
+//Обработка и изменеия прочитаных сообщений
     public function actionReadContentAjax($status = false, $name = false) {
 
         $statusDec = json_decode($status);
@@ -67,10 +71,15 @@ class ProfileController extends SiteController {
             return json_encode(false);
         } else {
             if (!empty($name)) {
+                 $countRearUser= \app\models\Messages::find()->where(['readContent' => 0,
+                    'loginTo' => \Yii::$app->user->identity->username,
+                    'loginFrom' => $name])->count();
+                $res=\app\components\FullCountMessagesWIdget::widget()-$countRearUser;
                 \app\models\Messages::updateAll(['readContent' => 1], ['readContent' => 0,
                     'loginTo' => \Yii::$app->user->identity->username,
                     'loginFrom' => $name]);
-                return json_encode(true);
+               
+                return json_encode($res);
             } else {
                 return json_encode(false);
             }
@@ -86,6 +95,23 @@ class ProfileController extends SiteController {
         } else {
             return \app\components\SendFormMessagesWidget::widget(['error' => true]);
         }
+    }
+    //удаления сообщений
+    public function actionRemoveMessages(){
+     
+           $validatFrom=New \app\models\forms\DeletMessagesForm();
+           if($validatFrom->load(Yii::$app->request->post()) && $validatFrom->validate()){
+            \app\models\Messages::deleteAll(['loginFrom'=>$validatFrom->hiddenInpu,'loginTo'=> Yii::$app->user->identity->username]);
+            print_r(Yii::$app->request->post());
+           return $this->redirect(['/profile/messages']);
+           }else{
+               return $this->redirect(['/profile/messages']);
+           }
+           
+           
+
+        
+      
     }
 
     public function actionRatingGames() {
@@ -155,23 +181,6 @@ class ProfileController extends SiteController {
                 return json_encode($res, JSON_NUMERIC_CHECK);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // return \Yii::$app->request->post('rating');
     }
 

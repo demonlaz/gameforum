@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                     <li ><a href="<?= \yii\helpers\Url::to(['/user/profile']); ?>">Профиль</a>
                     </li>
-                    <li class="active" ><a href="<?= \yii\helpers\Url::to(['/profile/messages']); ?>">Сообщения <span class="badge"><?= $fullCount ?></span></a>
+                    <li  class="active" ><a  href="<?= \yii\helpers\Url::to(['/profile/messages']); ?>">Сообщения <span class="badge" id="countMess" ><?= $fullCount ?></span></a>
                     </li>
                     <!--<li><a href="user-settings.html">Settings</a>-->
                     <!--</li>-->
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="requirements-block">
         <div class="col-md-9">
             <ul class="pagination pagination-sm mt-0">
-                <li class="active">
+                <li class="active" id="countMess">
                     <a href="<?= yii\helpers\Url::to(['/profile/messages']) ?>">Почтовый ящик</a>
                 </li>
                 <li>
@@ -96,8 +96,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 </li>
             </ul>
         </div>
-        <h2>У вас новых сообщений <?= $fullCount ?> <span class="messages-count"></span> </h2>
+        <h2 >У вас новых сообщений <?= $fullCount ?> <span class="messages-count"></span> </h2>
 
+        <?php 
+        
+        $str="privet moii svet kUda Poper";
+        
+//       $res= strtolower(str_replace(' ', '-', $str));
+//       
+//        echo $res;
+        
+        ?> 
         <div class="panel-group youplay-accordion" id="accordion" role="tablist" aria-multiselectable="false">
 
             <?php
@@ -107,6 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne<?= $loginFrom->loginFrom ?>">
+
                         <h4 class="panel-title">
                             <a data-toggle="collapse"
                                data-parent="#accordion"
@@ -117,6 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                >
                                    <?= $loginFrom->loginFrom ?> 
                                 <span class="messages-count">
+
                                     <?php
                                     //(($modelMessagesCount[$for]['loginFrom']) == $loginFrom->loginFrom) ? " " . $modelMessagesCount[$for]['countLoginFrom'] : '' 
                                     foreach ($modelMessagesCount as $countMessage):
@@ -124,6 +135,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     endforeach;
                                     ?></span> 
                                 <span class="icon-plus"></span>
+
+
                             </a>
                         </h4>
                     </div>
@@ -133,44 +146,66 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                             <table class="youplay-messages table table-hover">
+                                <style>
+                                    #trash{
+                                        float:right;display:block;
+                                    }
+                                    </style>
                                 <tbody>
-
                                     <?php
-                                    foreach ($modelMessagesContent as $content):
-                                        if ($content['loginFrom'] == $loginFrom->loginFrom):
-                                            ?>
-
-                                            <tr>
-                                                <td class="message-from">
-                                                    <!--                                                <a href="#" class="angled-img">
-                                                                                                        <div class="img">
-                                                                                                           
-                                                                                                            <img src="" width="80" height="80" alt="">
-                                                                                                        </div>
-                                                                                                    </a>-->
-
-                                                    <a href="#" class="message-from-name" title="<?= $content['loginFrom'] ?>"
-                                                       ><?= Html::encode($content['loginFrom']) ?>
-                                                    </a>
-                                                    <?= ($content['readContent'] == 0) ? "(Нов!)" : "" ?>
-                                                    <br>
-                                                    <span class="date"><?= Yii::$app->formatter->asDatetime($content['date_add']) ?></span>
-                                                </td>
-                                                <td class="message-description">
-                                                    <!--<a href="#" class="message-description-name" title="View Message"></a>-->
-                                                    <br>
-                                                    <div class="message-excerpt"><?= Html::encode($content['content']) ?></div>
-                                                </td>
-                                                <td class="message-action">
-                                                    <!--<a class="message-delete" href="#"></a>-->
-                                                </td>
-                                            </tr>
+                                  
+                                  $formD=yii\widgets\ActiveForm::begin(['method'=>"POST",'action'=>'/profile/remove-messages']);
+                                 echo  $formD->field($formDelet, 'hiddenInpu')->hiddenInput(['value'=>$loginFrom->loginFrom])->label('');
+                                 
+                                  echo  Html::submitButton('<i class="glyphicon glyphicon-trash"> </i>',
+                                          ['style'=>'background:red;color:white;border:none;float:right;',
+                                              'type'=>'submit',
+//                                              'data-confirm'=>'Вы уверенны что хотите удалить всю переписку?'
+                                              ]);
+                                           
+                                  
+                                           $formD::end(); ?>
 
 
-                                            <?php
-                                        endif;
-                                    endforeach;
-                                    ?>
+                                    
+                                
+
+                                <?php
+                                foreach ($modelMessagesContent as $content):
+                                    if ($content['loginFrom'] == $loginFrom->loginFrom):
+                                        ?>
+
+                                        <tr>
+                                            <td class="message-from">
+                                                <!--                                                <a href="#" class="angled-img">
+                                                                                                    <div class="img">
+                                                                                                       
+                                                                                                        <img src="" width="80" height="80" alt="">
+                                                                                                    </div>
+                                                                                                </a>-->
+
+                                                <a href="#" class="message-from-name" title="<?= $content['loginFrom'] ?>"
+                                                   ><?= Html::encode($content['loginFrom']) ?>
+                                                </a>
+            <?= ($content['readContent'] == 0) ? "(Нов!)" : "" ?>
+                                                <br>
+                                                <span class="date"><?= Yii::$app->formatter->asDatetime($content['date_add']) ?></span>
+                                            </td>
+                                            <td class="message-description">
+                                                <!--<a href="#" class="message-description-name" title="View Message"></a>-->
+                                                <br>
+                                                <div class="message-excerpt"><?= Html::encode($content['content']) ?></div>
+                                            </td>
+                                            <td class="message-action">
+                                                <!--<a class="message-delete" href="#"></a>-->
+                                            </td>
+                                        </tr>
+
+
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
                                 </tbody>
 
                             </table>
@@ -183,9 +218,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php
             endforeach;
             ?>
-            <div id="dial" style="display:none; background-image:url(<?= app\components\GlobalBanerWidget::widget(['url'=>true])?>)">
+            <div id="dial" style="display:none; background-image:url(<?= app\components\GlobalBanerWidget::widget(['url' => true]) ?>)">
 
-             <?= app\components\SendFormMessagesWidget::widget()?>
+<?= app\components\SendFormMessagesWidget::widget() ?>
 
             </div>
 
@@ -207,7 +242,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 data:{'status':'true','name':value},
                 
                 success:function(data){
-                   // alert(data);
+                   
+                    $('.messages-count').text(' ');
+                   
+                    $('#countMess').text(data);
+                    $('h2').text('У вас новых сообщений '+data);
+                    $('span#countMess').text(data);
+           
+                    
+                    
+                    
                     },
             });//конец ajax
 
@@ -231,7 +275,7 @@ JS;
     <!-- /Information -->
 
     <script>
-      
+
     </script>
 
 

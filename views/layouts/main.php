@@ -122,7 +122,7 @@ AppAsset::register($this);
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <?php
                                 $countMess = \app\components\FullCountMessagesWIdget::widget();
-                                $icon = (!$countMess == 0) ? '<span class="badge bg-default">' . $countMess
+                                $icon = (!$countMess == 0) ? '<span id="countMess" class="badge bg-default">' . $countMess
                                         . '</span> <span class="caret"></span>' : "";
                                 ?>
                                 <?= (!empty(\Yii::$app->user->identity->username)) ? \Yii::$app->user->identity->username . $icon . ' <span class="glyphicon glyphicon-user"></span>' : '' ?> 
@@ -136,7 +136,7 @@ AppAsset::register($this);
                                     <?php
                                     $countMess2 = \app\components\FullCountMessagesWIdget::widget();
 
-                                    $icon2 = (!$countMess == 0) ? '<span class="badge pull-right bg-warning">' . $countMess
+                                    $icon2 = (!$countMess == 0) ? '<span id="countMess" class="badge pull-right bg-warning">' . $countMess
                                             . '</span>' : "";
                                     ?>
                                     <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <?= $icon2 ?> </a>
