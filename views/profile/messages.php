@@ -6,7 +6,10 @@ use yii\helpers\Html;
  * @var \yii\web\View $this
  * @var \dektrium\user\models\Profile $profile
  */
-$this->title = Yii::$app->user->identity->username;
+
+$this->title = empty(Yii::$app->user->identity->profile->name) ? Html::encode(Yii::$app->user->identity->username) : 
+    Html::encode(Yii::$app->user->identity->profile->name);
+//$this->title = Yii::$app->user->identity->username;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
