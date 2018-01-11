@@ -156,7 +156,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </style>
                                 <tbody>
                                     <?php
-                                  
+            
+                                    
                                   $formD=yii\widgets\ActiveForm::begin(['method'=>"POST",'action'=>'/profile/remove-messages','options'=>['style'=>'display:block;']]);
                                  echo  $formD->field($formDelet, 'hiddenInpu')->hiddenInput(['value'=>$loginFrom->loginFrom])->label('');
                                  

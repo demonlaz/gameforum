@@ -155,15 +155,38 @@ class SiteController extends Controller {
     public function actionSearch($search=null){
         
         $model= new \app\models\SearchForm();
-         if ($model->validate()) {
-           $modelsGames= \app\models\Games::find()->where(['like','namegames', \yii\helpers\Html::encode($search)])->indexBy('id')->asArray()->all();
-           $modelsNews= \app\models\News::find()->where(['like','title', \yii\helpers\Html::encode($search)])->all();
-           return $this->render('search',['model'=>$model,'modelsGames'=>$modelsGames,'modelsNews'=>$modelsNews]);
-         }else{
-              return $this->render('search',['model'=>$model]);
+         if ($model->validate() && $model->load(\Yii::$app->request->post())) {
+           $modelsGames= \app\models\Games::find()->where(['like','namegames', \yii\helpers\Html::encode($model->search)])->indexBy('id')->asArray()->all();
+           $modelsNews= \app\models\News::find()->where(['like','title', \yii\helpers\Html::encode($model->search)])->all();
+           return $this->render('search',['model'=>$model,'modelsGames'=>$modelsGames,'modelsNews'=>$modelsNews,'autoCompleteArr'=> $this->autoCompleteArr() ]);
+         }
+         else{
+             
+              return $this->redirect(['/']);
          }
         
        
+    }
+    
+    private function autoCompleteArr(){
+         $arrAutiComplete = \app\models\Games::find()->select(['namegames'])->asArray()->all();
+            $arrAutiCompleteNews = \app\models\News::find()->select(['title'])->asArray()->all();
+
+            $arr = [];
+            $i = 0;
+            foreach ($arrAutiComplete as $namegames) {
+
+                $arr[$i] = $namegames['namegames'];
+                $i++;
+            }
+            $arrNews = [];
+            $r = 0;
+            foreach ($arrAutiCompleteNews as $namegames) {
+
+                $arrNews[$r] = $namegames['title'];
+                $r++;
+            }
+       return array_merge($arr,$arrNews);
     }
 
 }
