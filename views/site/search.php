@@ -27,12 +27,27 @@ $this->title = 'Поиск';
 
     <div class="container youplay-search">
 
-        <form method="GET">
+<!--        <form method="GET">
             <div class="youplay-input">
                 <input type="text" name="search" placeholder="Найти..." autofocus>
             </div>
-        </form>
+        </form>-->
+ <?php
+ 
+    $form= \yii\bootstrap\ActiveForm::begin(['options'=>[]]);
+?>
+        <div class="youplay-input">
+<?= $form->field($model, 'search')->widget(\yii\jui\AutoComplete::classname(), [
+    'clientOptions' => [
+        'source' =>$autoCompleteArr,
+    ],'options'=>['placeholder'=>"Найти..."],
 
+    
+])->label(''); ?>
+        </div>
+        <?php $form::end();
+ 
+        ?>
         <div class="row">
             <div class="col-md-6">
                 <h2>Игры</h2>

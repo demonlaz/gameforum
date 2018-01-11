@@ -98,9 +98,10 @@ AppAsset::register($this);
                         </li>
 
                         <li class="dropdown dropdown-hover ">
-                            <a href='<?= \yii\helpers\Url::to(['/news/index']) ?>' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href='<?= \yii\helpers\Url::to(['/news/index']) ?>' class="dropdown-toggle">
                                 Новости 
                             </a>
+                           
 
                         </li>
 
