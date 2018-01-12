@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 <?= $form->field($model, 'search')->widget(\yii\jui\AutoComplete::classname(), [
     'clientOptions' => [
         'source' =>$arrAutiComplete,
-    ],'options'=>['style'=>'margin:0;height:20px;border-radius:10px;padding:10%;width:100%;', 'placeholder'=>"Найти"],
+    ],'options'=>['style'=>'height:20px;border-radius:10px;padding:10%;width:100%;border:none;margin:4px;text-align:center;', 'placeholder'=>"Найти"],
 //    'placeholder'=>"Найти",
     
 ])->label(''); ?>
