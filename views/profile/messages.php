@@ -9,7 +9,6 @@ use yii\helpers\Html;
 
 $this->title = empty(Yii::$app->user->identity->profile->name) ? Html::encode(Yii::$app->user->identity->username) : 
     Html::encode(Yii::$app->user->identity->profile->name);
-//$this->title = Yii::$app->user->identity->username;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
