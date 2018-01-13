@@ -262,118 +262,13 @@ function getRandomInt(min, max)
         </article>
         <!-- /Post Info -->
 
-        <!-- Post Comments -->
-        <!--      <div class="comments-block">
-                <h2>Comments <small>(4)</small></h2>
-        
-                 Comments List 
-                <ul class="comments-list">
-                   John Doe comment 
-                  <li>
-                    <article>
-                      <div class="comment-avatar pull-left">
-                        <img src="assets/images/avatar-user-2.png" alt="">
-                      </div>
-                      <div class="comment-cont clearfix">
-                        <a class="comment-author h4" href="#!">Timmothy Stevens</a>
-                        <div class="date">
-                          <i class="fa fa-calendar"></i> December 23, 2014
-                          <a href="#!" class="pull-right"><i class="fa fa-reply"></i> Reply</a>
-                        </div>
-                        <div class="comment-text">
-                          Ut sibi fuerat socius sagittis. Ego intervenerit. Vere quia a te nuper iratus occidit illos undecim annorum puer?
-                        </div>
-                      </div>
-                    </article>
-        
-                    <ul class="child-comment">
-                       Mike Pearson comment 
-                      <li>
-                        <article>
-                          <div class="comment-avatar pull-left">
-                            <img src="assets/images/avatar-user-3.png" alt="">
-                          </div>
-                          <div class="comment-cont clearfix">
-                            <a class="comment-author h4" href="#!">Richard Lambert</a>
-                            <div class="date">
-                              <i class="fa fa-calendar"></i> January 12, 2015
-                              <a href="#!" class="pull-right"><i class="fa fa-reply"></i> Reply</a>
-                            </div>
-                            <div class="comment-text">
-                              Prohibere. Striga! Ut custodiant te sermonem dicens - periculi ... periculo!
-                            </div>
-                          </div>
-                        </article>
-        
-                        <ul class="child-comment">
-                           Mike Pearson comment 
-                          <li>
-                            <article>
-                              <div class="comment-avatar pull-left">
-                                <img src="assets/images/avatar-user-4.png" alt="">
-                              </div>
-                              <div class="comment-cont clearfix">
-                                <a class="comment-author h4" href="#!">Clyde Fields</a>
-                                <div class="date">
-                                  <i class="fa fa-calendar"></i> January 30, 2015
-                                  <a href="#!" class="pull-right"><i class="fa fa-reply"></i> Reply</a>
-                                </div>
-                                <div class="comment-text">
-                                  Suarum impotens prohibere eum.
-                                </div>
-                              </div>
-                            </article>
-                          </li>
-                           /Mike Pearson comment 
-                        </ul>
-                      </li>
-                       /Mike Pearson comment 
-                    </ul>
-                  </li>
-                   /John Doe comment 
-        
-                   Mike Pearson comment 
-                  <li>
-                    <article>
-                      <div class="comment-avatar pull-left">
-                        <img src="assets/images/avatar.png" alt="">
-                      </div>
-                      <div class="comment-cont clearfix">
-                        <a class="comment-author h4" href="#!">Scott Sutton</a>
-                        <div class="date">
-                          <i class="fa fa-calendar"></i> December 24, 2014
-                          <a href="#!" class="pull-right"><i class="fa fa-reply"></i> Reply</a>
-                        </div>
-                        <div class="comment-text">
-                          Gus! Est, ante me factus singulis decem gradibus. Et nunc ad aliud opus mihi tandem tollendum est puer ille consensus et nunc fugit.
-                        </div>
-                      </div>
-                    </article>
-                  </li>
-                   /Mike Pearson comment 
-                </ul>
-                 /Comments List 
-        
-                <h2>Leave a Reply</h2>
-                 Comment Form 
-                <form action="#!" class="comment-form">
-                  <div class="comment-cont clearfix">
-                    <div class="youplay-input">
-                      <input type="text" name="username" placeholder="Your Name *">
-                    </div>
-                    <div class="youplay-input">
-                      <input type="email" name="email" placeholder="Your Email *">
-                    </div>
-                    <div class="youplay-textarea">
-                      <textarea name="message" rows="5" placeholder="Your Comment..."></textarea>
-                    </div>
-                    <button class="btn btn-default pull-right">Submit</button>
-                  </div>
-                </form>
-                 /Comment Form 
-              </div>
-               /Post Comments -->
-
+       <?= \app\components\CommentsReadWidget::widget(['id_games'=>$model->id])?>
+        <?php if(!Yii::$app->user->isGuest): ?>
+        <h2>Оставить комментарий</h2>
+           <?= \app\components\SendFormComments::widget(['urlSend'=>'/profile/comments-send','id_games'=>$model->id])?>
+        <?php else: ?>
+        <h2>Комментарий могут  оставить только автаризованные пользователи <a href="<?= yii\helpers\Url::to(['/user/security/login'])?>">войти</a></h2>
+         <?php endif; ?>
     </div>
 
 

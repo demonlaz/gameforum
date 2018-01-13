@@ -181,7 +181,27 @@ class ProfileController extends SiteController {
                 return json_encode($res, JSON_NUMERIC_CHECK);
             }
         }
-        // return \Yii::$app->request->post('rating');
+   
+    }
+    
+    public function actionCommentsSend(){
+        
+        $formModel= new \app\models\forms\CommentForm();
+        
+        if($formModel->load(Yii::$app->request->post())&&$formModel->validate()){
+            $modelComments= new \app\models\Comments();
+            $modelComments->content=$formModel->content;
+            $modelComments->reply=$formModel->id_commenta;
+             $modelComments->id_games=$formModel->id_games;
+              $modelComments->login=$formModel->login;
+             $modelComments->save(true);
+             return \app\components\SendFormComments::widget(['urlSend'=>'/profile/comments-send',
+                 'id_games'=>$formModel->id_games,
+                     'send'=>true
+                     ]);// $this->redirect(['/site/games','id'=>$formModel->id_games]);
+             
+        }
+        
     }
 
 }

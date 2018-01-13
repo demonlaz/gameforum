@@ -222,7 +222,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
             <div id="dial" style="display:none; background-image:url(<?= app\components\GlobalBanerWidget::widget(['url' => true]) ?>)">
 
-<?= app\components\SendFormMessagesWidget::widget() ?>
+<?= app\components\SendFormMessagesWidget::widget(['urlSend'=>'/profile/messages-send']) ?>
 
             </div>
 
