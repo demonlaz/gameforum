@@ -140,8 +140,14 @@ AppAsset::register($this);
                                     $icon2 = (!$countMess == 0) ? '<span id="countMess" class="badge pull-right bg-warning">' . $countMess
                                             . '</span>' : "";
                                     ?>
-                                    <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <?= $icon2 ?> </a>
+                                      <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль </a>
                                     </li>
+
+                                    <li><a href="<?= \yii\helpers\Url::to(['/profile/messages']) ?>" >Сообщения <?= $icon2 ?> </a>
+                                    </li>
+                                   
+                                    <?php 
+                                     ?>
 
                                     <li class="divider"></li>
 

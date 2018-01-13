@@ -33,12 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
           <ul>
             <!--<li><a href="user-activity.html">Activity</a>-->
             <!--</li>-->
-            <li class="active"><a href="user-profile.html">Профиль</a>
+            <li class="active"><a href="<?= \yii\helpers\Url::to(['/user/profile']);?>">Профиль</a>
             </li>
             <li><a href="<?= \yii\helpers\Url::to(['/profile/messages']);?>">Сообщения <span class="badge"><?= \app\components\FullCountMessagesWIdget::widget()?></span></a>
             </li>
             <!--<li><a href="user-settings.html">Settings</a>-->
-            </li>
+            <!--</li>-->
           </ul>
         </div>
       </div>
