@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 use app\components\GlobalBanerWidget;
 $this->title = 'Геймер';
+
 ?>
 
     <!-- Banner -->

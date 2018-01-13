@@ -16,10 +16,13 @@ class NewsController extends SiteController {
     }
 
     //Подробная новость
-    public function actionPost($id = 1) {
+    public function actionPost($id = null) {
         if(is_numeric($id)){
         $modelNews= \app\models\News::find()->where('id=:id',[':id'=>$id])->one();
-        return $this->render('post',['modelNews'=>$modelNews]);
+        
+        return ($modelNews)?$this->render('post',['modelNews'=>$modelNews]):$this->goHome();
+        }else{
+           return $this->goHome();
         }
     }
 

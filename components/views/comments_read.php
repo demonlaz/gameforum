@@ -92,7 +92,7 @@ $modelCommentsReply;
              
              $('#hiddeninputcomment').val($(this).attr('date-comment'));
              $('#commentform-content').focus();
-             $('#commentform-content').attr({'placeholder':'Теперь вы можете ответить автору комментария,или обновить стеринцу для написания собственного коммента'});
+             $('#commentform-content').attr({'placeholder':'Теперь вы можете ответить автору комментария,или нажмите сброс'});
           });
       });
     

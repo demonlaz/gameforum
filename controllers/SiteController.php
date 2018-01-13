@@ -121,7 +121,7 @@ class SiteController extends Controller {
      *   Категории принемает id
      * */
 
-    public function actionCategory($id = 1) {
+    public function actionCategory($id = null) {
 
 //        echo "<script>alert('.$id.');</script>";
         if (is_numeric($id)) {
@@ -131,20 +131,22 @@ class SiteController extends Controller {
 
             $model = $query->offset($paginations->offset)->limit($paginations->limit)->all();
             $modelCategoryName = \app\models\Category::findOne($id);
-            return $this->render('category', ['model' => $model, 'paginations' => $paginations, 'modelCategoryName' => $modelCategoryName]);
+          return  ($modelCategoryName)?$this->render('category', ['model' => $model, 'paginations' => $paginations, 'modelCategoryName' => $modelCategoryName]):
+              $this->goHome();
+            
         } else {
 
-           
+           return $this->goHome();
         }
     }
 
-    public function actionGames($id = 1) {
+    public function actionGames($id = null) {
 
         if (is_numeric($id)) {
         $model= \app\models\Games::findOne($id);
         $category= \app\models\Category::findOne($model->category_id);
       
-              return $this->render('games', ['model'=>$model,'category'=>$category]);
+              return ($model)? $this->render('games', ['model'=>$model,'category'=>$category]):$this->goHome();
         } else {
              return $this->redirect(['/site/index']);
         }
