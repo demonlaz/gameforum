@@ -25,62 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <section class="content-wrap">
 
     <!-- Banner -->
-    <div class="youplay-banner banner-top youplay-banner-parallax small">
-    <?= \app\components\GlobalBanerWidget::widget(['prioritet'=>false]) ?>
-
-      <div class="youplay-user-navigation">
-        <div class="container">
-          <ul>
-            <!--<li><a href="user-activity.html">Activity</a>-->
-            <!--</li>-->
-            <li class="active"><a href="<?= \yii\helpers\Url::to(['/user/profile']);?>">Профиль</a>
-            </li>
-            <li><a href="<?= \yii\helpers\Url::to(['/profile/messages']);?>">Сообщения <span class="badge"><?= \app\components\FullCountMessagesWIdget::widget()?></span></a>
-            </li>
-            <!--<li><a href="user-settings.html">Settings</a>-->
-            <!--</li>-->
-          </ul>
-        </div>
-      </div>
-
-      <div class="info">
-        <div>
-          <div class="container youplay-user">
-<!--            <a href="assets/images/user-photo.jpg" class="angled-img image-popup">
-              <div class="img">
-                <img src="assets/images/user-avatar.jpg" alt="">
-              </div>
-              <i class="fa fa-search-plus icon"></i>
-            </a>-->
-            <!--
-                -->
-            <div class="user-data">
-              <h2><?=Html::encode($profile->user->username)?></h2>
-              <div class="location"><i class="f"><i class="glyphicon glyphicon-map-marker"></i></i> <?= (Html::encode($profile->location))?Html::encode($profile->location):'Не известно' ?></div>
-              <div class="activity">
-                <div>
-                  <div class="num">69</div>
-                  <div class="title">Posts</div>
-                </div>
-                <div>
-                  <div class="num">12</div>
-                  <div class="title">Games</div>
-                </div>
-                <div>
-                  <div class="num">689</div>
-                  <div class="title">Followers</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container mt-20">
-            <a href="#!" class="btn btn-sm btn-default ml-0">Add Friend</a>
-            <a href="#!" class="btn btn-sm btn-default">Private Message</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?=$this->render('/settings/_menu')?>
     <!-- /Banner -->
 
     <div class="container youplay-content">
@@ -127,6 +72,22 @@ $this->params['breadcrumbs'][] = $this->title;
                   <p><?= ($profile->public_email)?Html::a(Html::encode($profile->public_email), 'mailto:' . Html::encode($profile->public_email)) :'Не известно'?></p>
                 </td>
               </tr>
+                <tr>
+                <td>
+                  <p>Вебсайт</p>
+                </td>
+                <td>
+                  <p><?= ($profile->website)?Html::encode($profile->website):'Не известно'?></p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Часовой пояс</p>
+                </td>
+                <td>
+                  <p><?= ($profile->timezone)?Html::encode($profile->timezone):'Не известно'?></p>
+                </td>
+              </tr>
               <tr>
 <!--                <td>
                   <p>Instagram</p>
@@ -161,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
           <div class="side-block">
             <h4 class="block-title">Обо мне</h4>
             <div class="block-content">
-             В разработке
+            <?= ($profile->bio)?Html::encode($profile->bio):'Не известно'?>
             </div>
           </div>
 <!--          <div class="side-block">
@@ -186,6 +147,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
   </section>
   <!-- /Main Content -->
-     <?php if (!empty($profile->bio)): ?>
-                    <p><?= Html::encode($profile->bio) ?></p>
-                <?php endif; ?>
+ 

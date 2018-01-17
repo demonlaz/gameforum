@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!--
                     -->
                     <div class="user-data">
-                        <h2><?= Html::encode(Yii::$app->user->identity->username) ?></h2>
+                        <h2><?= Html::encode($this->title) ?></h2>
                         <div class="location"><i class="f"><i class="glyphicon glyphicon-map-marker"></i></i> <?= (Html::encode(Yii::$app->user->identity->profile->location)) ? Html::encode(Yii::$app->user->identity->profile->location) : 'Не известно' ?></div>
                         <div class="activity">
                             <div>

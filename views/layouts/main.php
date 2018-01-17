@@ -152,13 +152,7 @@ AppAsset::register($this);
                                     <?php }
                                      ?>
 
-                                    <li><a href="<?= \yii\helpers\Url::to(['/profile/messages']) ?>" >Сообщения <?= $icon2 ?> </a>
-                                    </li>
-                                   
-                                    <?php 
-                                     ?>
-
-
+                                 
                                     <li class="divider"></li>
 
                                     <li><a href=<?= \yii\helpers\Url::to('/site/logout') ?>>Выйти</a>
