@@ -17,11 +17,14 @@ use yii\widgets\ActiveForm;
  * @var dektrium\user\models\ResendForm $model
  */
 
-$this->title = Yii::t('user', 'Request new confirmation message');
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="content-wrap full youplay-login">
+<?php 
 
+$this->title = Yii::t('user', 'Сообшение отправленно!');
+?>
     <!-- Banner -->
     <div class="youplay-banner banner-top">
       <?= \app\components\GlobalBanerWidget::widget()?>

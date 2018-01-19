@@ -122,9 +122,11 @@ AppAsset::register($this);
 
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <?php
+                                if(!Yii::$app->user->isGuest){
                                 $countMess = \app\components\FullCountMessagesWIdget::widget();
                                 $icon = (!$countMess == 0) ? '<span id="countMess" class="badge bg-default">' . $countMess
                                         . '</span> <span class="caret"></span>' : "";
+                                }
                                 ?>
                                 <?= (!empty(\Yii::$app->user->identity->username)) ? \Yii::$app->user->identity->username . $icon . ' <span class="glyphicon glyphicon-user"></span>' : '' ?> 
                             </a>
@@ -135,14 +137,22 @@ AppAsset::register($this);
 
                                     <li class="divider"></li>
                                     <?php
+                                    if(!Yii::$app->user->isGuest){
                                     $countMess2 = \app\components\FullCountMessagesWIdget::widget();
 
                                     $icon2 = (!$countMess == 0) ? '<span id="countMess" class="badge pull-right bg-warning">' . $countMess
                                             . '</span>' : "";
                                     ?>
-                                    <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль <?= $icon2 ?> </a>
+                                      <li><a href="<?= \yii\helpers\Url::to(['/user/profile']) ?>" >Профиль </a>
                                     </li>
 
+                                    <li><a href="<?= \yii\helpers\Url::to(['/profile/messages']) ?>" >Сообщения <?= $icon2 ?> </a>
+                                    </li>
+                                   
+                                    <?php }
+                                     ?>
+
+                                 
                                     <li class="divider"></li>
 
                                     <li><a href=<?= \yii\helpers\Url::to('/site/logout') ?>>Выйти</a>

@@ -11,6 +11,7 @@ namespace app\components;
 class SendFormMessagesWidget extends \yii\base\Widget {
    public $error=false;
    public $send=false;
+   public $urlSend=false;
     public function init() {
         parent::init();
         $this->error=($this->error==false)?false:true;
@@ -21,6 +22,6 @@ class SendFormMessagesWidget extends \yii\base\Widget {
         $modelForm= new \app\models\Messages();
         
         return $this->render('sendformmessages',['modelForm'=>$modelForm,'error'=>$this->error,
-            'send'=>$this->send]);
+            'send'=>$this->send,'urlSend'=>$this->urlSend]);
     }
 }

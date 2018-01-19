@@ -29,6 +29,9 @@ $config = [
                     '@dektrium/user/views/registration' => '@app/views/user/registration',
                     '@dektrium/user/views/recovery' => '@app/views/user/recovery',
                     '@dektrium/user/views/profile' => '@app/views/user/profile',
+                    '@dektrium/user/views/settings' => '@app/views/user/settings',
+                   
+                    
                 ],
             ],
         ],

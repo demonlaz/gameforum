@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.4.15.7
+-- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 08 2018 г., 20:05
--- Версия сервера: 5.7.16-log
--- Версия PHP: 7.1.0
+-- Время создания: Янв 16 2018 г., 20:38
+-- Версия сервера: 5.7.13-log
+-- Версия PHP: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `auth_assignment`
 --
 
-CREATE TABLE `auth_assignment` (
+CREATE TABLE IF NOT EXISTS `auth_assignment` (
   `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` int(11) DEFAULT NULL
@@ -38,7 +38,7 @@ CREATE TABLE `auth_assignment` (
 -- Структура таблицы `auth_item`
 --
 
-CREATE TABLE `auth_item` (
+CREATE TABLE IF NOT EXISTS `auth_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` smallint(6) NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
@@ -54,7 +54,7 @@ CREATE TABLE `auth_item` (
 -- Структура таблицы `auth_item_child`
 --
 
-CREATE TABLE `auth_item_child` (
+CREATE TABLE IF NOT EXISTS `auth_item_child` (
   `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -65,7 +65,7 @@ CREATE TABLE `auth_item_child` (
 -- Структура таблицы `auth_rule`
 --
 
-CREATE TABLE `auth_rule` (
+CREATE TABLE IF NOT EXISTS `auth_rule` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `data` blob,
   `created_at` int(11) DEFAULT NULL,
@@ -78,18 +78,17 @@ CREATE TABLE `auth_rule` (
 -- Структура таблицы `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `id_parent` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `id_parent`) VALUES
-(1, 'mmo', NULL),
 (3, 'rpgnnn', NULL),
 (4, 'action', NULL),
 (5, 'emulator', NULL),
@@ -101,10 +100,62 @@ INSERT INTO `category` (`id`, `name`, `id_parent`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL,
+  `id_games` int(11) NOT NULL DEFAULT '0',
+  `reply` int(11) NOT NULL DEFAULT '0' COMMENT 'id коментария на который отвечают',
+  `login` varchar(255) DEFAULT NULL,
+  `content` text,
+  `date_add` datetime DEFAULT NULL,
+  `date_up` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='таблица с комментариями';
+
+--
+-- Дамп данных таблицы `comments`
+--
+
+INSERT INTO `comments` (`id`, `id_games`, `reply`, `login`, `content`, `date_add`, `date_up`) VALUES
+(1, 1, 0, 'admin', 'http://web/site/games/1', '2018-01-13 10:31:15', NULL),
+(2, 1, 1, 'admin', 'test test2', '2018-01-13 10:31:18', NULL),
+(3, 1, 2, 'admin', 'test test4', '2018-01-13 10:31:20', NULL),
+(4, 1, 1, 'admin', 'test test3', '2018-01-13 10:31:22', NULL),
+(5, 1, 0, 'admin', 'test testdjf gsgfds fgshf jhdsgf sdf hds fjh', '2018-01-13 10:31:15', NULL),
+(9, 1, 0, 'demonlaz', 'rabotaet', '2018-01-13 14:09:17', '2018-01-13 14:09:17'),
+(10, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(11, 1, 0, 'demonlaz', 'nnsdf', '2018-01-13 14:13:00', '2018-01-13 14:13:00'),
+(12, 1, 0, 'demonlaz', 'fdgfdg', '2018-01-13 14:23:22', '2018-01-13 14:23:22'),
+(13, 1, 0, 'demonlaz', '9999', '2018-01-13 14:24:03', '2018-01-13 14:24:03'),
+(14, 1, 0, 'demonlaz', 'дубаль ХХ', '2018-01-13 14:25:52', '2018-01-13 14:25:52'),
+(15, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(16, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(17, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(18, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(19, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(20, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(21, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(22, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(23, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(24, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(25, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(26, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(27, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(28, 1, 0, 'demonlaz', 'hf,sdfds', '2018-01-13 14:09:38', '2018-01-13 14:09:38'),
+(29, 1, 26, 'demonlaz', 'тестим', '2018-01-13 15:21:16', '2018-01-13 15:21:16'),
+(30, 3, 0, 'demonlaz2', 'ой какая охуенная игра))', '2018-01-13 21:45:31', '2018-01-13 21:45:31'),
+(31, 3, 30, 'demonlaz2', 'потрисающея игра)', '2018-01-13 21:47:08', '2018-01-13 21:47:08'),
+(32, 1, 26, 'demonlaz', 'иди нахуй', '2018-01-13 22:21:18', '2018-01-13 22:21:18'),
+(33, 1, 9, 'demonlaz', 'так себе', '2018-01-16 19:37:17', '2018-01-16 19:37:17');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `games`
 --
 
-CREATE TABLE `games` (
+CREATE TABLE IF NOT EXISTS `games` (
   `id` int(11) NOT NULL,
   `namegames` varchar(255) DEFAULT NULL COMMENT 'название игры',
   `namegamesdop` varchar(255) DEFAULT NULL COMMENT 'дополнительно к названию игры',
@@ -121,20 +172,20 @@ CREATE TABLE `games` (
   `date_add` datetime DEFAULT NULL COMMENT 'дата дабавления возможно смнеить на int',
   `date_up` datetime DEFAULT NULL COMMENT 'дата обновления возможно смнеить на int',
   `category_id` int(11) DEFAULT NULL COMMENT 'категория игры'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `games`
 --
 
 INSERT INTO `games` (`id`, `namegames`, `namegamesdop`, `stampgames`, `rating`, `globalimag`, `content`, `url_dowload`, `tehnik_trebov`, `global`, `popular`, `central`, `date_exit`, `date_add`, `date_up`, `category_id`) VALUES
-(1, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, '2018-01-08 17:37:44', 9),
+(1, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 2, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, '2018-01-13 10:28:31', 9),
 (2, '5', NULL, NULL, 10, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL, '2018-01-07 17:22:10', 9),
-(3, '4', NULL, NULL, 10, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL, '2018-01-07 22:54:10', 9),
-(4, '3', NULL, NULL, 9, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL, '2018-01-08 17:36:32', 9),
-(5, '2', NULL, NULL, NULL, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL, NULL, 9),
+(3, '4', NULL, NULL, 7.5, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL, '2018-01-13 21:47:26', 9),
+(4, '3', NULL, NULL, 10, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'0', b'1', NULL, NULL, '2018-01-13 08:10:01', 9),
+(5, '2', NULL, NULL, 9, 'banner-bg.jpg', NULL, NULL, NULL, b'0', b'1', b'1', NULL, NULL, '2018-01-13 09:27:17', 9),
 (6, '1', NULL, NULL, 9, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis certamen est, qui non credunt at.', NULL, NULL, b'0', b'0', b'1', '2017-12-17 16:58:21', NULL, '2018-01-07 16:54:33', 9),
-(7, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8.6667, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, '2018-01-07 14:00:14', 9),
+(7, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 8.6, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, '2018-01-07 14:00:14', 9),
 (8, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 7.5, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, '2018-01-07 14:21:10', 9),
 (11, 'DIABLO III', 'REAPER OF SOULS', 'One of the best grind games', 2, 'banner-bg.jpg', 'Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis <p>certamen est</p>, qui non credunt at.', NULL, NULL, b'1', b'0', b'1', NULL, NULL, '2018-01-07 17:24:24', 9);
 
@@ -144,11 +195,11 @@ INSERT INTO `games` (`id`, `namegames`, `namegamesdop`, `stampgames`, `rating`, 
 -- Структура таблицы `images`
 --
 
-CREATE TABLE `images` (
+CREATE TABLE IF NOT EXISTS `images` (
   `id` int(11) NOT NULL,
   `id_parent_games` int(11) DEFAULT NULL COMMENT 'id игры',
   `images_games` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `images`
@@ -168,7 +219,7 @@ INSERT INTO `images` (`id`, `id_parent_games`, `images_games`) VALUES
 -- Структура таблицы `messages`
 --
 
-CREATE TABLE `messages` (
+CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL,
   `loginFrom` varchar(250) DEFAULT NULL COMMENT 'от кого',
   `loginTo` varchar(250) DEFAULT NULL COMMENT 'к кому',
@@ -176,25 +227,19 @@ CREATE TABLE `messages` (
   `readContent` bit(1) DEFAULT b'0' COMMENT '1 если пользователь прочитал сообщение',
   `date_add` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'дата создания ',
   `date_up` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'дат редактирования'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='сообщения между пользователями';
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='сообщения между пользователями';
 
 --
 -- Дамп данных таблицы `messages`
 --
 
 INSERT INTO `messages` (`id`, `loginFrom`, `loginTo`, `content`, `readContent`, `date_add`, `date_up`) VALUES
-(34, 'demonlaz', 'demonlaz', 'dtgdfd', b'1', '2018-01-05 19:16:10', '2018-01-05 19:16:10'),
 (35, 'demonlaz', 'fdgfdgfdg', 'dfgdfgdf', b'0', '2018-01-05 19:17:27', '2018-01-05 19:17:27'),
 (36, 'demonlaz', 'cbvbcb', 'xgfccgh', b'0', '2018-01-05 19:18:15', '2018-01-05 19:18:15'),
-(37, 'demonlaz', 'demonlaz', 'dsfjdslkf', b'1', '2018-01-05 19:24:42', '2018-01-05 19:24:42'),
 (38, 'demonlaz', 'fdfsdf', 'sdfdsfsdf', b'0', '2018-01-05 19:24:57', '2018-01-05 19:24:57'),
 (39, 'demonlaz', '', 'rtetreter', b'0', '2018-01-05 19:33:49', '2018-01-05 19:33:49'),
-(40, 'demonlaz', 'demonlaz', 'asdsad', b'1', '2018-01-05 19:37:16', '2018-01-05 19:37:16'),
-(41, 'demonlaz', 'demonlaz', 'asdsad', b'1', '2018-01-05 19:40:27', '2018-01-05 19:40:27'),
-(42, 'demonlaz', 'demonlaz', 'как дела', b'1', '2018-01-05 19:41:30', '2018-01-05 19:41:30'),
-(43, 'demonlaz', 'demonlaz', 'efdsfdf', b'1', '2018-01-06 11:47:22', '2018-01-06 11:47:22'),
 (44, 'demonlaz', 'admin', 'asdsa', b'1', '2018-01-06 16:52:58', '2018-01-06 16:52:58'),
-(45, 'admin', 'demonlaz', 'все работает!', b'1', '2018-01-06 17:34:03', '2018-01-06 17:34:03');
+(45, 'demonlaz2', 'demonlaz', 'все работает нормально))', b'1', '2018-01-13 19:44:17', '2018-01-13 19:44:17');
 
 -- --------------------------------------------------------
 
@@ -202,7 +247,7 @@ INSERT INTO `messages` (`id`, `loginFrom`, `loginTo`, `content`, `readContent`, 
 -- Структура таблицы `migration`
 --
 
-CREATE TABLE `migration` (
+CREATE TABLE IF NOT EXISTS `migration` (
   `version` varchar(180) NOT NULL,
   `apply_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -233,7 +278,7 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- Структура таблицы `news`
 --
 
-CREATE TABLE `news` (
+CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL,
   `id_games` int(11) NOT NULL DEFAULT '0',
   `title` text,
@@ -241,14 +286,14 @@ CREATE TABLE `news` (
   `content` text,
   `date_add` datetime DEFAULT NULL,
   `date_up` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='новости';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='новости';
 
 --
 -- Дамп данных таблицы `news`
 --
 
 INSERT INTO `news` (`id`, `id_games`, `title`, `content_short`, `content`, `date_add`, `date_up`) VALUES
-(1, 11, 'Заголовок', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', 'Jackson Isai? Tu quoque ... A te quidem a ante. Vos scitis quod blinking res Ive \'been vocans super vos? Et conteram illud, et conteram hoc. Maledicant druggie excors. Iam hoc tu facere conatus sum ad te in omni tempore?\r\n\r\nLudum mutavit. Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis certamen est, qui non credunt at.\r\n\r\nNonne vides quid sit? Tu es ... Jesse me respice. Tu ... blowfish sunt. A blowfish! Cogitare. Statura pusillus, nec sapientium panem, nec artificum. Sed predators facile prædam blowfish secretum telum non se habet. Non ille? Quid faciam blowfish, Isai. Blowfish quid faciat? In blowfish inflat, purus?\r\n\r\nBlowfish librantur in se quatuor, quinquies maior quam normalis, et quare? Quare id faciam? Ut terrorem facit, qui quid. Terrent! Ut alter, scarier pisces agminis off. Et quod tu es? Vos blowfish. Tu iustus in omnibus visio. Vides ... suus \' suus \'non aliud aerem. Nunc ... qui cum partibus blowfish Isai? Tu damnare ius. Vos blowfish. Dicere iterum. Dicere illam quasi velis eam. Es BLOWFISH!\r\n\r\nUt sibi fuerat socius sagittis. Ego intervenerit. Vere quia a te nuper iratus occidit illos undecim annorum puer. Deinde, si hoc forte qui fuit imperavit.', '2017-10-21 10:17:27', '2017-10-21 10:17:24'),
+(1, 11, 'Заголовок', 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', 'Jackson Isai? Tu quoque ... A te quidem a ante. Vos scitis quod blinking res Ive ''been vocans super vos? Et conteram illud, et conteram hoc. Maledicant druggie excors. Iam hoc tu facere conatus sum ad te in omni tempore?\r\n\r\nLudum mutavit. Verbum est ex. Et ... sunt occidat. Videtur quod est super omne oppidum. Quis transfretavit tu iratus es contudit cranium cum dolor apparatus. Qui curis! Modo nobis certamen est, qui non credunt at.\r\n\r\nNonne vides quid sit? Tu es ... Jesse me respice. Tu ... blowfish sunt. A blowfish! Cogitare. Statura pusillus, nec sapientium panem, nec artificum. Sed predators facile prædam blowfish secretum telum non se habet. Non ille? Quid faciam blowfish, Isai. Blowfish quid faciat? In blowfish inflat, purus?\r\n\r\nBlowfish librantur in se quatuor, quinquies maior quam normalis, et quare? Quare id faciam? Ut terrorem facit, qui quid. Terrent! Ut alter, scarier pisces agminis off. Et quod tu es? Vos blowfish. Tu iustus in omnibus visio. Vides ... suus '' suus ''non aliud aerem. Nunc ... qui cum partibus blowfish Isai? Tu damnare ius. Vos blowfish. Dicere iterum. Dicere illam quasi velis eam. Es BLOWFISH!\r\n\r\nUt sibi fuerat socius sagittis. Ego intervenerit. Vere quia a te nuper iratus occidit illos undecim annorum puer. Deinde, si hoc forte qui fuit imperavit.', '2017-10-21 10:17:27', '2017-10-21 10:17:24'),
 (3, 1, '1', NULL, 'Gus sit amet suum motum. Nescio quando, aut quomodo, nescio quo. Illud scio, amet tortor. Suarum impotens prohibere eum.', '2017-10-21 12:33:49', '2017-10-21 12:33:53');
 
 -- --------------------------------------------------------
@@ -257,7 +302,7 @@ INSERT INTO `news` (`id`, `id_games`, `title`, `content_short`, `content`, `date
 -- Структура таблицы `profile`
 --
 
-CREATE TABLE `profile` (
+CREATE TABLE IF NOT EXISTS `profile` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `public_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -275,7 +320,8 @@ CREATE TABLE `profile` (
 
 INSERT INTO `profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`, `timezone`) VALUES
 (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'Дмитрий', '', '', 'd41d8cd98f00b204e9800998ecf8427e', 'Москва', '', '', 'Pacific/Apia');
+(2, 'Дмитрий', '', '', 'd41d8cd98f00b204e9800998ecf8427e', 'Москва', '', '', 'Pacific/Apia'),
+(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -283,7 +329,7 @@ INSERT INTO `profile` (`user_id`, `name`, `public_email`, `gravatar_email`, `gra
 -- Структура таблицы `rating`
 --
 
-CREATE TABLE `rating` (
+CREATE TABLE IF NOT EXISTS `rating` (
   `id` int(11) NOT NULL,
   `id_games` int(11) DEFAULT NULL,
   `id_username` int(11) DEFAULT NULL,
@@ -291,7 +337,7 @@ CREATE TABLE `rating` (
   `rating_full_with_user` int(11) DEFAULT NULL,
   `data_add` timestamp NULL DEFAULT NULL,
   `data_up` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `rating`
@@ -309,9 +355,11 @@ INSERT INTO `rating` (`id`, `id_games`, `id_username`, `rating_to_user`, `rating
 (17, 6, 2, 10, NULL, NULL, NULL),
 (18, 6, 456546, 8, NULL, NULL, NULL),
 (19, 11, 2, 2, NULL, NULL, NULL),
-(20, 3, 2, 10, NULL, NULL, NULL),
-(21, 4, 2, 9, NULL, NULL, NULL),
-(22, 1, 2, 8, NULL, NULL, NULL);
+(20, 3, 2, 5, NULL, NULL, NULL),
+(21, 4, 2, 10, NULL, NULL, NULL),
+(22, 1, 2, 2, NULL, NULL, NULL),
+(23, 5, 2, 9, NULL, NULL, NULL),
+(24, 3, 3, 10, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -319,7 +367,7 @@ INSERT INTO `rating` (`id`, `id_games`, `id_username`, `rating_to_user`, `rating
 -- Структура таблицы `social_account`
 --
 
-CREATE TABLE `social_account` (
+CREATE TABLE IF NOT EXISTS `social_account` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `provider` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -337,7 +385,7 @@ CREATE TABLE `social_account` (
 -- Структура таблицы `token`
 --
 
-CREATE TABLE `token` (
+CREATE TABLE IF NOT EXISTS `token` (
   `user_id` int(11) NOT NULL,
   `code` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` int(11) NOT NULL,
@@ -349,8 +397,10 @@ CREATE TABLE `token` (
 --
 
 INSERT INTO `token` (`user_id`, `code`, `created_at`, `type`) VALUES
+(1, '9PvXBxzJxlkMs3as5FhQYRQF4wh992Lj', 1515873646, 1),
 (1, 'Yr9rDedCAg1l5oD4WLsl6pH6CVuOoJBB', 1508068444, 0),
-(2, 'ksUziU9JJxn0sHBAx1thvAJDSSdrYqCp', 1508322611, 0);
+(2, 'ksUziU9JJxn0sHBAx1thvAJDSSdrYqCp', 1508322611, 0),
+(3, 'Rw_7zGPqrjFn_6Y7inPkeR8EgMYzXBDu', 1515872548, 0);
 
 -- --------------------------------------------------------
 
@@ -358,7 +408,7 @@ INSERT INTO `token` (`user_id`, `code`, `created_at`, `type`) VALUES
 -- Структура таблицы `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -372,7 +422,7 @@ CREATE TABLE `user` (
   `updated_at` int(11) NOT NULL,
   `flags` int(11) NOT NULL DEFAULT '0',
   `last_login_at` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `user`
@@ -380,7 +430,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`, `last_login_at`) VALUES
 (1, 'admin', 'demonlaz@yandex.ru', '$2y$10$GKJdNU.RrGpTLPUSDSqSbe/2SV4rikPrIK8p6GFcm2Qs07LY.WPRC', 'pdqY4sBs_HQC2VoZchmAsG_gyKX0H4Lk', 1508166649, NULL, NULL, '127.0.0.1', 1508068444, 1508068444, 0, 1515260164),
-(2, 'demonlaz', 'demon-l_91@mail.ru', '$2y$10$STVgNM8qykp8fFlbg5bChuEa66udwMObPKiwbzrz6LbBXsvAHng5e', '2eAinV9k1Wh_b_afC4Epe86DHJ049_uf', 1508323273, NULL, NULL, '127.0.0.1', 1508322611, 1508322611, 0, 1515359355);
+(2, 'demonlaz', 'demon-l_91@mail.ru', '$2y$10$STVgNM8qykp8fFlbg5bChuEa66udwMObPKiwbzrz6LbBXsvAHng5e', '2eAinV9k1Wh_b_afC4Epe86DHJ049_uf', 1508323273, NULL, NULL, '127.0.0.1', 1508322611, 1508322611, 0, 1515875591),
+(3, 'demonlaz2', 'deddd@mail.ru', '$2y$10$8I4DLKiAtcVdlHZoDVXSvOlZSAhJ9EyXS4wDhGBOcW9Yg8JnC/ES6', 'O5gq_8r-nFsvqQENL3P3Pk_PWEcsIapm', NULL, NULL, NULL, '127.0.0.1', 1515872548, 1515872548, 0, 1515872589);
 
 --
 -- Индексы сохранённых таблиц
@@ -418,6 +469,13 @@ ALTER TABLE `auth_rule`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_comments_games` (`id_games`);
 
 --
 -- Индексы таблицы `games`
@@ -495,32 +553,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT для таблицы `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT для таблицы `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT для таблицы `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT для таблицы `social_account`
 --
@@ -530,7 +593,7 @@ ALTER TABLE `social_account`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -553,6 +616,12 @@ ALTER TABLE `auth_item`
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `FK_comments_games` FOREIGN KEY (`id_games`) REFERENCES `games` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `games`
