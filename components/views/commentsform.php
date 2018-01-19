@@ -1,3 +1,4 @@
+
 <?php
 
 use yii\bootstrap\ActiveForm;
@@ -20,7 +21,9 @@ $options = ['style' => "color:white;"]
     <?= $form->field($modelForm, 'id_games')->hiddenInput(['value' => $id_games])->label('') ?>
     <?= $form->field($modelForm, 'id_commenta')->hiddenInput(['value' => 0,'id'=>'hiddeninputcomment'])->label('') ?>
 <div class="youplay-textarea">
-<?= $form->field($modelForm, 'content')->textarea(['placeholder' => "Написать комментарий", 'rows' => 8])->label('') ?>
+
+
+<?= $form->field($modelForm, 'content')->textarea(['placeholder' => "Написать комментарий", 'rows' => 8, 'style'=>'outline: none;border:none;transform:skew(-4.96deg);'])->label('') ?>
 
 </div>
 <button class="btn btn-default">Отправить</button><a id="reset-a" href="">Сброс</a>

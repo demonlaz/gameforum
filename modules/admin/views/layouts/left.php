@@ -34,7 +34,9 @@
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/admin/admin/index']],
                     ['label' => 'Категории', 'icon' => 'edit', 'url' => ['/admin/category/index']],
+                      ['label' => 'Игры', 'icon' => 'gamepad', 'url' => ['/admin/games/index']],
                     
+                 
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],

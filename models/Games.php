@@ -1,26 +1,33 @@
 <?php
 
 namespace app\models;
-use yii\behaviors\TimestampBehavior;
-use app\models\News;
+
+use Yii;
 
 /**
  * This is the model class for table "games".
  *
- * @property integer $id
- * @property string $namegames
- * @property string $namegamesdop
- * @property string $stampgames
- * @property double $rating
- * @property string $globalimag
- * @property string $content
- * @property string $url_dowload
+ * @property int $id
+ * @property string $namegames название игры
+ * @property string $namegamesdop дополнительно к названию игры
+ * @property string $stampgames пометка к игре
+ * @property double $rating рейтинг игры макс 10
+ * @property string $globalimag главная картинка
+ * @property string $content описание игры
+ * @property string $url_dowload сайт производитель
  * @property string $tehnik_trebov
- * @property boolean $global
- * @property boolean $popular
- * @property boolean $central
- * @property string $date_add
- * @property string $date_up
+ * @property bool $global главаня игра 1 да
+ * @property bool $popular популярная игра 1 да
+ * @property bool $central 1 отоброжать 
+ * @property string $date_exit дата выхода игры 
+ * @property string $date_add дата дабавления возможно смнеить на int
+ * @property string $date_up дата обновления возможно смнеить на int
+ * @property int $category_id категория игры
+ *
+ * @property Comments[] $comments
+ * @property Category $category
+ * @property Images[] $images
+ * @property News[] $news
  */
 class Games extends \yii\db\ActiveRecord
 {
@@ -41,8 +48,10 @@ class Games extends \yii\db\ActiveRecord
             [['rating'], 'number'],
             [['content', 'tehnik_trebov'], 'string'],
             [['global', 'popular', 'central'], 'boolean'],
-            [['date_add', 'date_up'], 'safe'],
+            [['date_exit', 'date_add', 'date_up'], 'safe'],
+            [['category_id'], 'integer'],
             [['namegames', 'namegamesdop', 'stampgames', 'globalimag', 'url_dowload'], 'string', 'max' => 255],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
 
@@ -53,39 +62,53 @@ class Games extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'namegames' => 'Namegames',
-            'namegamesdop' => 'Namegamesdop',
-            'stampgames' => 'Stampgames',
-            'rating' => 'Rating',
-            'globalimag' => 'Globalimag',
-            'content' => 'Content',
-            'url_dowload' => 'Url Dowload',
+            'namegames' => 'название игры',
+            'namegamesdop' => 'дополнительно к названию игры',
+            'stampgames' => 'пометка к игре',
+            'rating' => 'рейтинг игры макс 10',
+            'globalimag' => 'главная картинка',
+            'content' => 'описание игры',
+            'url_dowload' => 'сайт производитель',
             'tehnik_trebov' => 'Tehnik Trebov',
-            'global' => 'Global',
-            'popular' => 'Popular',
-            'central' => 'Central',
-            'date_add' => 'Date Add',
-            'date_up' => 'Date Up',
+            'global' => 'главаня игра 1 да',
+            'popular' => 'популярная игра 1 да',
+            'central' => '1 отоброжать ',
+            'date_exit' => 'дата выхода игры ',
+            'date_add' => 'дата дабавления возможно смнеить на int',
+            'date_up' => 'дата обновления возможно смнеить на int',
+            'category_id' => 'категория игры',
         ];
-        
-        
     }
-    
-     public function getImages(){
-        
-        return $this->hasMany(Images::className(), ['id_parent_games'=>'id']);
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(Comments::className(), ['id_games' => 'id']);
     }
-    
-    
-    public function behaviors()
-  {
-      return [
-          [
-              'class' => TimestampBehavior::className(),
-             'createdAtAttribute' => 'date_add',
-              'updatedAtAttribute' => 'date_up',
-              'value' => new \yii\db\Expression('NOW()'),
-          ],
-     ];
-  }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Images::className(), ['id_parent_games' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNews()
+    {
+        return $this->hasMany(News::className(), ['id_games' => 'id']);
+    }
 }
