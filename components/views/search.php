@@ -17,6 +17,7 @@ use yii\widgets\ActiveForm;
 <div style="height: 20px;">
     
     <?php
+
   
     $form= ActiveForm::begin(['options'=>['style'=>'margin:0;height:20px;width:50%']]);
 ?>
@@ -25,12 +26,11 @@ use yii\widgets\ActiveForm;
     'clientOptions' => [
         'source' =>$arrAutiComplete,
     ],'options'=>['style'=>'margin:0;height:20px;border-radius:10px;padding:10%;width:100%;outline: none;color:white;background-color:antiquewhite;', 'placeholder'=>"Найти"],
-//    'placeholder'=>"Найти",
-    
-])->label(''); ?>
-    
-<?php //$form->field($model, 'search')->input('text',['options'=>['style'=>'margin:0;height:20px;'],'placeholder'=>"Найти"])->label('');?>
 
+ 
+
+])->label(''); ?>
+  
    
     <?php
 ActiveForm::end();

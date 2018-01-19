@@ -43,7 +43,7 @@ public $returnArray=false;
           $arrNews[$r]=$namegames['title'];
            $r++;
         }
-        $res= array_merge($arrNews,$arr);
+        $res= array_merge($arr,$arrNews);
       
         return $this->render('search', ['model' => $model,'arrAutiComplete'=>$res]);
     }
