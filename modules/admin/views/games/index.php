@@ -19,29 +19,29 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Games', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+//            ['class' => 'yii\grid\SerialColumn'],
+//            'id',
             'namegames',
             'namegamesdop',
             'stampgames',
+//            'content:ntext',s
             'rating',
-            //'globalimag',
-            //'content:ntext',
-            //'url_dowload:url',
-            //'tehnik_trebov:ntext',
-            //'global:boolean',
-            //'popular:boolean',
-            //'central:boolean',
-            //'date_exit',
-            //'date_add',
-            //'date_up',
-            //'category_id',
-[
+            //'/imagesgames/'.'globalimag:image',
+            [
+                'label' => 'Картинка',
+                'format' => 'raw',
+                'value' => function($data) {
+                    return Html::img('/imagesgames/' . $data->globalimag, [
+                                'alt' => 'yii2 - картинка в gridview',
+                                'style' => 'width:200px;'
+                    ]);
+                },
+            ], [
                 'attribute' => 'category_id',
                 'label' => 'Категория',
 //                'filter' => \app\models\Rubric::getModelsListWhere(),
@@ -49,7 +49,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->category->name;
                 },
             ],
+            'url_dowload:url',
+            'tehnik_trebov:ntext',
+            'global:boolean',
+            'popular:boolean',
+            'central:boolean',
+            //'date_exit',
+            'date_add:date',
+            //'date_up',
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

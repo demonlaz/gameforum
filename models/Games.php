@@ -29,86 +29,110 @@ use Yii;
  * @property Images[] $images
  * @property News[] $news
  */
-class Games extends \yii\db\ActiveRecord
-{
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'games';
-    }
+class Games extends \yii\db\ActiveRecord {
+
+    public $uploadImage;
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public static function tableName() {
+        return 'games';
+    }
+public function behaviors()
+  {
+      return [
+          [
+              'class' => \yii\behaviors\TimestampBehavior::className(),
+             'createdAtAttribute' => 'date_add',
+              'updatedAtAttribute' => 'date_up',
+              'value' => new \yii\db\Expression('NOW()'),
+          ],
+     ];
+  }
+    /**
+     * @inheritdoc
+     */
+    public function rules() {
         return [
-            [['rating'], 'number'],
             [['content', 'tehnik_trebov'], 'string'],
             [['global', 'popular', 'central'], 'boolean'],
+            [['global'], 'filter', 'filter' => function($value) {
+                    if ($value == 1) {
+                        $model = parent::findOne(['global' => 1]);
+                        if($model->global){
+                             $model->global = 0;
+                        $model->save();
+                        }
+                       
+                        return 1;
+                    } else {
+                   
+                             return 0;
+                        
+                       
+                    }
+                }],
             [['date_exit', 'date_add', 'date_up'], 'safe'],
-            [['category_id'], 'integer'],
-            [['namegames', 'namegamesdop', 'stampgames', 'globalimag', 'url_dowload'], 'string', 'max' => 255],
+            [['category_id', 'rating'], 'integer'],
+            [['namegames', 'namegamesdop', 'stampgames', 'url_dowload', 'globalimag'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            ['uploadImage', 'image', 'extensions' => 'png,jpg,gif', 'message' => 'Форматы для загрузки png,jpg,gif',
+                'maxWidth' => 2500, 'maxHeight' => 2500,],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
-            'namegames' => 'название игры',
-            'namegamesdop' => 'дополнительно к названию игры',
-            'stampgames' => 'пометка к игре',
-            'rating' => 'рейтинг игры макс 10',
-            'globalimag' => 'главная картинка',
-            'content' => 'описание игры',
-            'url_dowload' => 'сайт производитель',
-            'tehnik_trebov' => 'Tehnik Trebov',
-            'global' => 'главаня игра 1 да',
-            'popular' => 'популярная игра 1 да',
-            'central' => '1 отоброжать ',
+            'namegames' => 'Название игры',
+            'namegamesdop' => 'Дополнительно к названию игры',
+            'stampgames' => 'Краткое описание',
+            'rating' => 'Рейтинг',
+            'globalimag' => 'Главная картинка',
+            'content' => 'Описание игры',
+            'url_dowload' => 'Где скачать',
+            'tehnik_trebov' => 'Технические требования',
+            'global' => 'Главной игра',
+            'popular' => 'В ленте популярная',
+            'central' => 'В центральной ленте ',
             'date_exit' => 'дата выхода игры ',
-            'date_add' => 'дата дабавления возможно смнеить на int',
+            'date_add' => 'Дата дабавления',
             'date_up' => 'дата обновления возможно смнеить на int',
-            'category_id' => 'категория игры',
+            'category_id' => 'Категория игры',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getComments()
-    {
+    public function getComments() {
         return $this->hasMany(Comments::className(), ['id_games' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
-    {
+    public function getCategory() {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getImages()
-    {
+    public function getImages() {
         return $this->hasMany(Images::className(), ['id_parent_games' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNews()
-    {
+    public function getNews() {
         return $this->hasMany(News::className(), ['id_games' => 'id']);
     }
+
+    
 }

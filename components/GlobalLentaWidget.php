@@ -28,7 +28,7 @@ class GlobalLentaWidget extends \yii\base\Widget{
             
              $model= Games::getDb()->cache(function($Games){
             
-            return Games::find()->where('central=:central',[':central'=>1])->asArray()->indexBy('id')->all();
+            return Games::find()->where('central=:central',[':central'=>1])->asArray()->indexBy('id')->orderBy('date_add DESC')->all();
         },\Yii::$app->params['cache10']);
             
         }

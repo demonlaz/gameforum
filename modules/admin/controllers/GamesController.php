@@ -77,6 +77,19 @@ class GamesController extends Controller {
         $model = new Games();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+         $model->uploadImage= \yii\web\UploadedFile::getInstance($model,'uploadImage');
+            $path=Yii::$app->params['pathUploads'].'imagesgames/';
+            if(!empty($model->uploadImage->name)) {
+                $model->globalimag = $model->uploadImage->name;
+                
+                $model->save();
+                
+                $model->uploadImage->saveAs($path . $model->uploadImage);
+               
+            }
+            
+            
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -96,6 +109,17 @@ class GamesController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             $model->uploadImage= \yii\web\UploadedFile::getInstance($model,'uploadImage');
+            $path=Yii::$app->params['pathUploads'].'imagesgames/';
+            if(!empty($model->uploadImage->name)) {
+                $model->globalimag = $model->uploadImage->name;
+                
+                $model->save();
+                
+                $model->uploadImage->saveAs($path . $model->uploadImage);
+               
+            }
+            
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

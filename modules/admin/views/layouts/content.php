@@ -29,7 +29,7 @@ if(!empty(Yii::$app->user->identity->isAdmin)):
         ) ?>
     </section>
 
-    <section class="content">
+    <section class="content" style="overflow:auto;">
         <?= Alert::widget() ?>
         <?= $content ?>
     </section>
