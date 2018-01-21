@@ -22,7 +22,7 @@ class GlobalLentaWidget extends \yii\base\Widget{
         if($this->popular){
        $model= Games::getDb()->cache(function($Games){
             
-            return Games::find()->where('rating>=7')->asArray()->indexBy('id')->all();
+            return Games::find()->where('rating>=7')->orWhere('popular=1')->orderBy('date_add DESC')->asArray()->indexBy('id')->all();
         },\Yii::$app->params['cache10']);
         }else{
             

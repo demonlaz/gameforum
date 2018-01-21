@@ -39,9 +39,20 @@ use yii\widgets\ActiveForm;
 
 
     <?php
+    //банер
+    if(!$model->isNewRecord){
+    echo  Html::img("/imagesgames/$baner->globalimag",['width'=>'100px','height'=>'100px','style'=>'border:solid;']);
+    }
     echo $form->field($model, 'uploadImage')->widget(kartik\file\FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
     ]);
+    //скриншоты
+    if(!$imagesModel->isNewRecord){
+    foreach ($skrin as $image) {
+
+      echo  Html::img("/skringames/$image->images_games",['width'=>'100px','height'=>'100px','style'=>'border:solid;']);
+    }
+    }
        echo $form->field($imagesModel, 'uploadArrImages[]')->widget(kartik\file\FileInput::classname(), [
         'options' => ['accept' => 'image/*','multiple'=>true],
     ]);

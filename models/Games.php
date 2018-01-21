@@ -56,6 +56,7 @@ class Games extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
+            [['content','date_exit','category_id','namegames'], 'required'],
             [['content', 'tehnik_trebov'], 'string'],
             [['global', 'popular', 'central'], 'boolean'],
             [['date_exit', 'date_add', 'date_up'], 'safe'],
@@ -63,7 +64,7 @@ class Games extends \yii\db\ActiveRecord {
             [['namegames', 'namegamesdop', 'stampgames', 'url_dowload', 'globalimag'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             ['uploadImage', 'image', 'extensions' => 'png,jpg,gif', 'message' => 'Форматы для загрузки png,jpg,gif',
-                'maxWidth' => 2500, 'maxHeight' => 2500,],
+                'maxWidth' => 2500, 'maxHeight' => 2500, 'minWidth' => 1200, 'minHeight' => 800],
         ];
     }
 
@@ -88,6 +89,7 @@ class Games extends \yii\db\ActiveRecord {
             'date_add' => 'Дата дабавления',
             'date_up' => 'дата обновления возможно смнеить на int',
             'category_id' => 'Категория игры',
+             'uploadImage'=>'Главный банер игры',
         ];
     }
 

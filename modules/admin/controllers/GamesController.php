@@ -124,10 +124,13 @@ class GamesController extends Controller {
 
             return $this->redirect(['index', 'id' => $model->id]);
         }
-
+            $baner= Games::findOne($id);
+           $skrin= \app\models\Images::findAll(['id_parent_games'=>$id]);
         return $this->render('update', [
                     'model' => $model,
-            'imagesModel'=>$imagesModel
+            'imagesModel'=>$imagesModel,
+                'skrin'=>$skrin,
+                'baner'=>$baner
         ]);
     }
 
@@ -139,15 +142,12 @@ class GamesController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id) {
-        if ($this->findModel($id)->global == 0) {
+      
             \app\models\Comments::deleteAll(['id_games' => $id]);
             \app\models\News::deleteAll(['id_games' => $id]);
             \app\models\Images::deleteAll(['id_parent_games' => $id]);
             $this->findModel($id)->delete();
-        } else {
-            new NotFoundHttpException("Данная игра является главной вначале установите другую игру на главную после чего можно удадлить"
-                    . "для этого зайдите и обновите любую игру или создайте новую");
-        }
+       
         return $this->redirect(['index']);
     }
 

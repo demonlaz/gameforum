@@ -6,7 +6,7 @@ use yii\helpers\Url;
        <?php foreach ($model as $modelContent): ?>
        <a class="angled-img" href="<?= Url::to(['/site/games','id'=>$modelContent['id']])?>">
            <div class="img" style="min-height: 180px">
-               <img src="/imagesgames/<?=$modelContent['globalimag']?>" alt="no images" style="min-height:180px;">
+               <img src="/imagesgames/<?=$modelContent['globalimag']?>" alt="no images" style="min-height:200px;max-height:200px;">
         </div>
         <div class="over-info">
           <div>

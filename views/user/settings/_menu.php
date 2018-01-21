@@ -1,7 +1,7 @@
  <?php
  use \yii\helpers\Html;
  use yii\helpers\ArrayHelper;
-
+//echo Yii::$app->controller->route;
  $arr=[];
  switch (Yii::$app->controller->route) {
     case 'user/profile/show':
@@ -13,6 +13,9 @@
         break;
     case 'user/settings/account':
         $arr['settingsAccount']='active';
+        break;
+      case 'profile/messages':
+        $arr['messages']='active';
         break;
     
     default:
@@ -32,8 +35,9 @@
                     <!--</li>-->
                     <li class="<?= (ArrayHelper::keyExists('profile', $arr)?$arr['profile']:"")?>" ><a href="<?= \yii\helpers\Url::to(['/user/profile']); ?>">Профиль</a>
                     </li>
-                    <li  class="" ><a  href="<?= \yii\helpers\Url::to(['/profile/messages']); ?>">Сообщения <span class="badge" id="countMess" ></span></a>
+                    <li  class="<?= (ArrayHelper::keyExists('messages', $arr)?$arr['messages']:"")?>" ><a  href="<?= \yii\helpers\Url::to(['/profile/messages']); ?>">Сообщения <span class="badge" id="countMess" ><?= \app\components\FullCountMessagesWIdget::widget()?></span></a>
                     </li>
+                    
                     <li  class="<?= (ArrayHelper::keyExists('settingsProfile', $arr)?$arr['settingsProfile']:"")?>" ><a  href="<?= \yii\helpers\Url::to(['/user/settings/profile']); ?>">Настройки О себе<span class="badge"  ></span></a>
                     </li>
                    <li  class="<?= (ArrayHelper::keyExists('settingsAccount', $arr)?$arr['settingsAccount']:"")?>" ><a  href="<?= \yii\helpers\Url::to(['/user/settings/account']); ?>">Настройки Аккаунта<span class="badge"  ></span></a>

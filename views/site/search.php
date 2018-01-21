@@ -89,7 +89,7 @@ $this->title = 'Поиск';
                 <h2>Новости</h2>
                 <?php foreach ($modelsNews as $modelNews): ?>
                     <!-- Single News -->
-                    <a href="<?= Url::to(['/site/news','id'=>$modelNews->id])?>" class="angled-bg">
+                    <a href="<?= Url::to(['/news/post','id'=>$modelNews->id])?>" class="angled-bg">
                         <div class="row">
                             <div class="col-md-3 col-xs-4">
                                 <div class="angled-img">

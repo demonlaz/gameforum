@@ -29,7 +29,9 @@ class Images extends \yii\db\ActiveRecord {
         return [
             [['id_parent_games'], 'integer'],
             [['images_games'], 'string', 'max' => 255],
-            [['uploadArrImages'], 'file', 'extensions' => 'png,jpg,gif','maxFiles' => 6]
+//            [['uploadArrImages'], 'file', 'extensions' => 'png,jpg,gif','maxFiles' => 6],
+            ['uploadArrImages', 'image', 'extensions' => 'png,jpg,gif', 'message' => 'Форматы для загрузки png,jpg,gif',
+                'maxWidth' => 2500, 'maxHeight' => 2500, 'minWidth' => 300, 'minHeight' => 300,'maxFiles' => 6],
         ];
     }
 
@@ -40,7 +42,8 @@ class Images extends \yii\db\ActiveRecord {
         return [
             'id' => 'ID',
             'id_parent_games' => 'Id Parent Games',
-            'images_games' => 'Images Games',
+            'images_games' => 'Скриншоты или картинки из игры',
+           'uploadArrImages'=>'Скриншоты или картинки из игры',
         ];
     }
 
