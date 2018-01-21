@@ -75,17 +75,28 @@ class GamesController extends Controller {
      */
     public function actionCreate() {
         $model = new Games();
+        $imagesModel = new \app\models\Images();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-       $this->uploadImages($model);
-            
-            
+
+            $this->uploadImages($model);
+            //------------------------------------
+            if ($imagesModel->load(Yii::$app->request->post())) {
+                $imagesModel->uploadArrImages = \yii\web\UploadedFile::getInstances($imagesModel, 'uploadArrImages');
+
+                if ($imagesModel->upload($model->id)) {
+//                damp($imagesModel->uploadArrImages);
+                }
+            }
             return $this->redirect(['index', 'id' => $model->id]);
         }
 
+        // 
+
+
         return $this->render('create', [
                     'model' => $model,
+                    'imagesModel' => $imagesModel
         ]);
     }
 
@@ -98,15 +109,25 @@ class GamesController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-
+        $imagesModel = new \app\models\Images();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-             
+
             $this->uploadImages($model);
+            if ($imagesModel->load(Yii::$app->request->post())) {
+                $imagesModel->uploadArrImages = \yii\web\UploadedFile::getInstances($imagesModel, 'uploadArrImages');
+
+                if ($imagesModel->upload($model->id)) {
+//                damp($imagesModel->uploadArrImages);
+                }
+            }
+
+
             return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('update', [
                     'model' => $model,
+            'imagesModel'=>$imagesModel
         ]);
     }
 
@@ -118,13 +139,15 @@ class GamesController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id) {
-        if($this->findModel($id)->global==0){
-        \app\models\Comments::deleteAll(['id_games'=>$id]);
-        $this->findModel($id)->delete();
-}else{
-    new NotFoundHttpException("Данная игра является главной вначале установите другую игру на главную после чего можно удадлить"
-            . "для этого зайдите и обновите любую игру или создайте новую");
-} 
+        if ($this->findModel($id)->global == 0) {
+            \app\models\Comments::deleteAll(['id_games' => $id]);
+            \app\models\News::deleteAll(['id_games' => $id]);
+            \app\models\Images::deleteAll(['id_parent_games' => $id]);
+            $this->findModel($id)->delete();
+        } else {
+            new NotFoundHttpException("Данная игра является главной вначале установите другую игру на главную после чего можно удадлить"
+                    . "для этого зайдите и обновите любую игру или создайте новую");
+        }
         return $this->redirect(['index']);
     }
 
@@ -142,24 +165,25 @@ class GamesController extends Controller {
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    
+
     /* @var $model object
      * @throws имя картинки
      *  */
-protected function uploadImages($model){
-    $model->uploadImage= \yii\web\UploadedFile::getInstance($model,'uploadImage');
-            $path=Yii::$app->params['pathUploads'].'imagesgames/';
-            if(!empty($model->uploadImage->name)) {
-                $md5= md5(time());
-                $model->uploadImage->name=$md5.$model->uploadImage->name;
-                $model->globalimag = $model->uploadImage->name;
-                
-                $model->save();
-                
-                $model->uploadImage->saveAs($path . $model->uploadImage);
-               
-            }else{
-                new NotFoundHttpException('Имя картинки не обнаружено');
-            }
-}
+
+    protected function uploadImages($model) {
+        $model->uploadImage = \yii\web\UploadedFile::getInstance($model, 'uploadImage');
+        $path = Yii::$app->params['pathUploads'] . 'imagesgames/';
+        if (!empty($model->uploadImage->name)) {
+            $md5 = md5(time());
+            $model->uploadImage->name = $md5 . $model->uploadImage->name;
+            $model->globalimag = $model->uploadImage->name;
+
+            $model->save();
+
+            $model->uploadImage->saveAs($path . $model->uploadImage);
+        } else {
+            new NotFoundHttpException('Имя картинки не обнаружено');
+        }
+    }
+
 }

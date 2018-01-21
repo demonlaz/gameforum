@@ -25,63 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <section class="content-wrap">
 
     <!-- Banner -->
-<<<<<<< HEAD
-    <div class="youplay-banner banner-top youplay-banner-parallax small">
-    <?= \app\components\GlobalBanerWidget::widget(['prioritet'=>false]) ?>
 
-      <div class="youplay-user-navigation">
-        <div class="container">
-          <ul>
-            <!--<li><a href="user-activity.html">Activity</a>-->
-            <!--</li>-->
-            <li class="active"><a href="<?= \yii\helpers\Url::to(['/user/profile']);?>">Профиль</a>
-            </li>
-            <li><a href="<?= \yii\helpers\Url::to(['/profile/messages']);?>">Сообщения <span class="badge"><?= \app\components\FullCountMessagesWIdget::widget()?></span></a>
-            </li>
-            <!--<li><a href="user-settings.html">Settings</a>-->
-            <!--</li>-->
-          </ul>
-        </div>
-      </div>
-
-      <div class="info">
-        <div>
-          <div class="container youplay-user">
-<!--            <a href="assets/images/user-photo.jpg" class="angled-img image-popup">
-              <div class="img">
-                <img src="assets/images/user-avatar.jpg" alt="">
-              </div>
-              <i class="fa fa-search-plus icon"></i>
-            </a>-->
-            <!--
-                -->
-            <div class="user-data">
-              <h2><?=Html::encode($profile->user->username)?></h2>
-              <div class="location"><i class="f"><i class="glyphicon glyphicon-map-marker"></i></i> <?= (Html::encode($profile->location))?Html::encode($profile->location):'Не известно' ?></div>
-              <div class="activity">
-                <div>
-                  <div class="num">69</div>
-                  <div class="title">Posts</div>
-                </div>
-                <div>
-                  <div class="num">12</div>
-                  <div class="title">Games</div>
-                </div>
-                <div>
-                  <div class="num">689</div>
-                  <div class="title">Followers</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container mt-20">
-            <a href="#!" class="btn btn-sm btn-default ml-0">Add Friend</a>
-            <a href="#!" class="btn btn-sm btn-default">Private Message</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <?=$this->render('/settings/_menu')?>
 

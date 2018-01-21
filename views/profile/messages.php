@@ -29,6 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                     <li  class="active" ><a  href="<?= \yii\helpers\Url::to(['/profile/messages']); ?>">Сообщения <span class="badge" id="countMess" ><?= $fullCount ?></span></a>
                     </li>
+                     <li  class="" ><a  href="<?= \yii\helpers\Url::to(['/user/settings/profile']); ?>">Настройки О себе<span class="badge"  ></span></a>
+                    </li>
+                   <li  class="" ><a  href="<?= \yii\helpers\Url::to(['/user/settings/account']); ?>">Настройки Аккаунта<span class="badge"  ></span></a>
+                    </li>
                     <!--<li><a href="user-settings.html">Settings</a>-->
                     <!--</li>-->
                 </ul>

@@ -42,7 +42,10 @@ use yii\widgets\ActiveForm;
     echo $form->field($model, 'uploadImage')->widget(kartik\file\FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
     ]);
-// редактор
+       echo $form->field($imagesModel, 'uploadArrImages[]')->widget(kartik\file\FileInput::classname(), [
+        'options' => ['accept' => 'image/*','multiple'=>true],
+    ]);
+// редактор 'multiple'=>true
 //            $form->field($model, 'globalimag')->widget(\vova07\imperavi\Widget::className(), [
 //    'settings' => [
 //        'lang' => 'ru',
@@ -62,7 +65,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'tehnik_trebov')->textarea(['rows' => 6]) ?>
 
 
-    <?= $form->field($model, 'date_exit')->widget(\yii\jui\DatePicker::className(),['language'=>'ru','dateFormat'=>'yyyy-MM-DD','inline'=>true]) ?>
+    <?= $form->field($model, 'date_exit')->widget(\yii\jui\DatePicker::className(),['language'=>'ru','dateFormat'=>'yyyy-MM-dd','inline'=>true]) ?>
 
 
 

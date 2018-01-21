@@ -58,12 +58,6 @@ class Games extends \yii\db\ActiveRecord {
         return [
             [['content', 'tehnik_trebov'], 'string'],
             [['global', 'popular', 'central'], 'boolean'],
-            [['global'], 'filter', 'filter' => function($value) {
-
-                    parent::updateAll(['global' => 0], 'global=1');
-                    return $value;
-                }],
-           
             [['date_exit', 'date_add', 'date_up'], 'safe'],
             [['category_id', 'rating'], 'integer'],
             [['namegames', 'namegamesdop', 'stampgames', 'url_dowload', 'globalimag'], 'string', 'max' => 255],
@@ -124,5 +118,6 @@ class Games extends \yii\db\ActiveRecord {
     public function getNews() {
         return $this->hasMany(News::className(), ['id_games' => 'id']);
     }
+
 
 }
