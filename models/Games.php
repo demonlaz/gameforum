@@ -39,17 +39,18 @@ class Games extends \yii\db\ActiveRecord {
     public static function tableName() {
         return 'games';
     }
-public function behaviors()
-  {
-      return [
-          [
-              'class' => \yii\behaviors\TimestampBehavior::className(),
-             'createdAtAttribute' => 'date_add',
-              'updatedAtAttribute' => 'date_up',
-              'value' => new \yii\db\Expression('NOW()'),
-          ],
-     ];
-  }
+
+    public function behaviors() {
+        return [
+            [
+                'class' => \yii\behaviors\TimestampBehavior::className(),
+                'createdAtAttribute' => 'date_add',
+                'updatedAtAttribute' => 'date_up',
+                'value' => new \yii\db\Expression('NOW()'),
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -58,20 +59,9 @@ public function behaviors()
             [['content', 'tehnik_trebov'], 'string'],
             [['global', 'popular', 'central'], 'boolean'],
             [['global'], 'filter', 'filter' => function($value) {
-                    if ($value == 1) {
-                        $model = parent::findOne(['global' => 1]);
-                        if($model->global){
-                             $model->global = 0;
-                        $model->save();
-                        }
-                       
-                        return 1;
-                    } else {
-                   
-                             return 0;
-                        
-                       
-                    }
+
+                    parent::updateAll(['global' => 0], 'global=1');
+                    return 1;
                 }],
             [['date_exit', 'date_add', 'date_up'], 'safe'],
             [['category_id', 'rating'], 'integer'],
@@ -134,5 +124,4 @@ public function behaviors()
         return $this->hasMany(News::className(), ['id_games' => 'id']);
     }
 
-    
 }

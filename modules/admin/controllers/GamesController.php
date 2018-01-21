@@ -90,7 +90,7 @@ class GamesController extends Controller {
             }
             
             
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -120,7 +120,7 @@ class GamesController extends Controller {
                
             }
             
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('update', [

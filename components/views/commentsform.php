@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> a3f31ba2fe6a0a87eb031c1e992e11292306eeaa
 <?php
 
 use yii\bootstrap\ActiveForm;
@@ -24,13 +21,10 @@ $options = ['style' => "color:white;"]
     <?= $form->field($modelForm, 'id_games')->hiddenInput(['value' => $id_games])->label('') ?>
     <?= $form->field($modelForm, 'id_commenta')->hiddenInput(['value' => 0,'id'=>'hiddeninputcomment'])->label('') ?>
 <div class="youplay-textarea">
-<<<<<<< HEAD
-<?= $form->field($modelForm, 'content')->textarea(['placeholder' => "Написать комментарий", 'rows' => 8])->label('') ?>
-=======
 
 
 <?= $form->field($modelForm, 'content')->textarea(['placeholder' => "Написать комментарий", 'rows' => 8, 'style'=>'outline: none;border:none;transform:skew(-4.96deg);'])->label('') ?>
->>>>>>> a3f31ba2fe6a0a87eb031c1e992e11292306eeaa
+
 
 </div>
 <button class="btn btn-default">Отправить</button><a id="reset-a" href="">Сброс</a>

@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?php
 
   
-    $form= ActiveForm::begin(['options'=>['style'=>'margin:0;height:20px;width:50%']]);
+    $form= ActiveForm::begin(['action'=>'/site/search', 'options'=>['style'=>'margin:0;height:20px;width:50%']]);
 ?>
 
   

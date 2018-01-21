@@ -157,12 +157,11 @@ class SiteController extends Controller {
     public function actionSearch($search=null){
         
         $model= new \app\models\SearchForm();
-         if ($model->validate() && $model->load(\Yii::$app->request->post())) {
+         if ($model->load(\Yii::$app->request->post())&& $model->validate()) {
            $modelsGames= \app\models\Games::find()->where(['like','namegames', \yii\helpers\Html::encode($model->search)])->indexBy('id')->asArray()->all();
            $modelsNews= \app\models\News::find()->where(['like','title', \yii\helpers\Html::encode($model->search)])->all();
            return $this->render('search',['model'=>$model,'modelsGames'=>$modelsGames,'modelsNews'=>$modelsNews,'autoCompleteArr'=> $this->autoCompleteArr() ]);
-         }
-         else{
+         }else{
              
               return $this->redirect(['/']);
          }
