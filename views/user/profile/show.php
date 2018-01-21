@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <section class="content-wrap">
 
     <!-- Banner -->
+<<<<<<< HEAD
     <div class="youplay-banner banner-top youplay-banner-parallax small">
     <?= \app\components\GlobalBanerWidget::widget(['prioritet'=>false]) ?>
 
@@ -81,6 +82,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
       </div>
     </div>
+
+    <?=$this->render('/settings/_menu')?>
+
     <!-- /Banner -->
 
     <div class="container youplay-content">
@@ -127,6 +131,22 @@ $this->params['breadcrumbs'][] = $this->title;
                   <p><?= ($profile->public_email)?Html::a(Html::encode($profile->public_email), 'mailto:' . Html::encode($profile->public_email)) :'Не известно'?></p>
                 </td>
               </tr>
+                <tr>
+                <td>
+                  <p>Вебсайт</p>
+                </td>
+                <td>
+                  <p><?= ($profile->website)?Html::encode($profile->website):'Не известно'?></p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Часовой пояс</p>
+                </td>
+                <td>
+                  <p><?= ($profile->timezone)?Html::encode($profile->timezone):'Не известно'?></p>
+                </td>
+              </tr>
               <tr>
 <!--                <td>
                   <p>Instagram</p>
@@ -161,7 +181,7 @@ $this->params['breadcrumbs'][] = $this->title;
           <div class="side-block">
             <h4 class="block-title">Обо мне</h4>
             <div class="block-content">
-             В разработке
+            <?= ($profile->bio)?Html::encode($profile->bio):'Не известно'?>
             </div>
           </div>
 <!--          <div class="side-block">
@@ -186,6 +206,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
   </section>
   <!-- /Main Content -->
-     <?php if (!empty($profile->bio)): ?>
-                    <p><?= Html::encode($profile->bio) ?></p>
-                <?php endif; ?>
+ 

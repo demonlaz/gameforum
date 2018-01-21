@@ -8,7 +8,7 @@ if($error==true){
 if($send==true){echo "<span style='color:green;'>Сообщение отправленно!</span>";}
 $form = ActiveForm::begin([
           'method' => 'post',
-          'action' => ['/profile/messages-send'],
+          'action' => [$urlSend],
           'options'=>['data-pjax'=>true,'style'=>'color:white;font-size:16px;']
       ]);
 $options=['style'=>"color:white;"]

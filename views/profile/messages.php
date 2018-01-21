@@ -9,7 +9,6 @@ use yii\helpers\Html;
 
 $this->title = empty(Yii::$app->user->identity->profile->name) ? Html::encode(Yii::$app->user->identity->username) : 
     Html::encode(Yii::$app->user->identity->profile->name);
-//$this->title = Yii::$app->user->identity->username;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -49,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!--
                     -->
                     <div class="user-data">
-                        <h2><?= Html::encode(Yii::$app->user->identity->username) ?></h2>
+                        <h2><?= Html::encode($this->title) ?></h2>
                         <div class="location"><i class="f"><i class="glyphicon glyphicon-map-marker"></i></i> <?= (Html::encode(Yii::$app->user->identity->profile->location)) ? Html::encode(Yii::$app->user->identity->profile->location) : 'Не известно' ?></div>
                         <div class="activity">
                             <div>
@@ -224,7 +223,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
             <div id="dial" style="display:none; background-image:url(<?= app\components\GlobalBanerWidget::widget(['url' => true]) ?>)">
 
-<?= app\components\SendFormMessagesWidget::widget() ?>
+<?= app\components\SendFormMessagesWidget::widget(['urlSend'=>'/profile/messages-send']) ?>
 
             </div>
 

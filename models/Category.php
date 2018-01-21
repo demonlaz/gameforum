@@ -48,4 +48,14 @@ class Category extends \yii\db\ActiveRecord
         
         return $this->hasMany(Games::className(), ['category_id'=>'id'])->count();
     }
+    
+    public static function getArrayCategory(){
+          $result=[];
+        $categorys= parent::find()->select(['name','id'])->all();
+        foreach ($categorys as $category){
+            $result[$category->id]=$category->name;
+        }
+        return $result;
+    }
+    
 }
