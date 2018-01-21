@@ -78,16 +78,7 @@ class GamesController extends Controller {
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
-         $model->uploadImage= \yii\web\UploadedFile::getInstance($model,'uploadImage');
-            $path=Yii::$app->params['pathUploads'].'imagesgames/';
-            if(!empty($model->uploadImage->name)) {
-                $model->globalimag = $model->uploadImage->name;
-                
-                $model->save();
-                
-                $model->uploadImage->saveAs($path . $model->uploadImage);
-               
-            }
+       $this->uploadImages($model);
             
             
             return $this->redirect(['index', 'id' => $model->id]);
@@ -109,17 +100,8 @@ class GamesController extends Controller {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-             $model->uploadImage= \yii\web\UploadedFile::getInstance($model,'uploadImage');
-            $path=Yii::$app->params['pathUploads'].'imagesgames/';
-            if(!empty($model->uploadImage->name)) {
-                $model->globalimag = $model->uploadImage->name;
-                
-                $model->save();
-                
-                $model->uploadImage->saveAs($path . $model->uploadImage);
-               
-            }
-            
+             
+            $this->uploadImages($model);
             return $this->redirect(['index', 'id' => $model->id]);
         }
 
@@ -136,8 +118,13 @@ class GamesController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id) {
+        if($this->findModel($id)->global==0){
+        \app\models\Comments::deleteAll(['id_games'=>$id]);
         $this->findModel($id)->delete();
-
+}else{
+    new NotFoundHttpException("Данная игра является главной вначале установите другую игру на главную после чего можно удадлить"
+            . "для этого зайдите и обновите любую игру или создайте новую");
+} 
         return $this->redirect(['index']);
     }
 
@@ -155,5 +142,24 @@ class GamesController extends Controller {
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
+    
+    /* @var $model object
+     * @throws имя картинки
+     *  */
+protected function uploadImages($model){
+    $model->uploadImage= \yii\web\UploadedFile::getInstance($model,'uploadImage');
+            $path=Yii::$app->params['pathUploads'].'imagesgames/';
+            if(!empty($model->uploadImage->name)) {
+                $md5= md5(time());
+                $model->uploadImage->name=$md5.$model->uploadImage->name;
+                $model->globalimag = $model->uploadImage->name;
+                
+                $model->save();
+                
+                $model->uploadImage->saveAs($path . $model->uploadImage);
+               
+            }else{
+                new NotFoundHttpException('Имя картинки не обнаружено');
+            }
+}
 }

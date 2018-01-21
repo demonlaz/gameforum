@@ -61,8 +61,9 @@ class Games extends \yii\db\ActiveRecord {
             [['global'], 'filter', 'filter' => function($value) {
 
                     parent::updateAll(['global' => 0], 'global=1');
-                    return 1;
+                    return $value;
                 }],
+           
             [['date_exit', 'date_add', 'date_up'], 'safe'],
             [['category_id', 'rating'], 'integer'],
             [['namegames', 'namegamesdop', 'stampgames', 'url_dowload', 'globalimag'], 'string', 'max' => 255],

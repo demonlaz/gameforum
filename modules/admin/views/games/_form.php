@@ -62,7 +62,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'tehnik_trebov')->textarea(['rows' => 6]) ?>
 
 
-    <?= $form->field($model, 'date_exit')->textInput() ?>
+    <?= $form->field($model, 'date_exit')->widget(\yii\jui\DatePicker::className(),['language'=>'ru','dateFormat'=>'yyyy-MM-DD','inline'=>true]) ?>
 
 
 
