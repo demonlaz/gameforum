@@ -52,12 +52,23 @@ class Games extends \yii\db\ActiveRecord {
     }
 
     /**
-     * @inheritdoc
+     * @inheritdoc 
      */
     public function rules() {
         return [
             [['content','date_exit','category_id','namegames'], 'required'],
             [['content', 'tehnik_trebov'], 'string'],
+        [['tehnik_trebov'],'filter','filter'=> function($value){
+              $res=  strpos($value, '<li><i class="fa icon"><i class="glyphicon glyphicon-ok">');
+              if($res===false){
+                   return  str_replace('<li>', '<li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i>', $value);
+              }else{
+                    $li= str_replace('<li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i>', '<li>', $value);
+                    return  str_replace('<li>', '<li><i class="fa icon"><i class="glyphicon glyphicon-ok"></i></i>', $li);
+                    
+              }
+             
+        }],
             [['global', 'popular', 'central'], 'boolean'],
             [['date_exit', 'date_add', 'date_up'], 'safe'],
             [['category_id', 'rating'], 'integer'],

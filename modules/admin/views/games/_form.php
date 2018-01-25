@@ -32,10 +32,29 @@ use yii\widgets\ActiveForm;
     ])->label('Категория');
     ?>
 
-    <?= $form->field($model, 'stampgames')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'stampgames')->widget(\vova07\imperavi\Widget::className(), [
+    'settings' => [
+        'lang' => 'ru',
+        'minHeight' => 200,
+        'plugins' => [
+            'clips',
+            'fullscreen',
+        ],
+        'placeholder'=>''
+    ],
+]); ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
-
+    <?= $form->field($model, 'content')->widget(\vova07\imperavi\Widget::className(), [
+    'settings' => [
+        'lang' => 'ru',
+        'minHeight' => 200,
+        'plugins' => [
+            'clips',
+            'fullscreen',
+        ],
+        'placeholder'=>''
+    ],
+]);?>
 
 
     <?php
@@ -70,10 +89,20 @@ use yii\widgets\ActiveForm;
     ?>
 
 
-
+    
     <?= $form->field($model, 'url_dowload')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tehnik_trebov')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'tehnik_trebov')->widget(\vova07\imperavi\Widget::className(), [
+    'settings' => [
+        'lang' => 'ru',
+        'minHeight' => 200,
+        'plugins' => [
+            'clips',
+            'fullscreen',
+        ],
+        'placeholder'=>'Упакуйти содержимое в список для красивого отоброжения'
+    ],
+]);  ?>
 
 
     <?= $form->field($model, 'date_exit')->widget(\yii\jui\DatePicker::className(),['language'=>'ru','dateFormat'=>'yyyy-MM-dd','inline'=>true]) ?>

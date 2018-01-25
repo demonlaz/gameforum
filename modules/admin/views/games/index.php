@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'url_dowload:url',
-            'tehnik_trebov:ntext',
+//            'tehnik_trebov:ntext',
             'global:boolean',
             'popular:boolean',
             'central:boolean',
