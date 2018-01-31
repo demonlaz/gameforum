@@ -22,7 +22,8 @@ AppAsset::register($this);
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-
+        <!-- Последняя компиляция и сжатый CSS -->  
+<link rel="stylesheet" href="assetsb/bootstrap/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 
 
@@ -104,12 +105,20 @@ AppAsset::register($this);
                            
 
                         </li>
+ <li class="dropdown dropdown-hover ">
+     <a id="a-yandex-money" href='' class="dropdown-toggle">
+                              Пожертвовать
+                            </a>
+                           
 
+                        </li>
                         <li>
                             <?php echo (isset($this->blocks['search'])) ? '' : app\components\SearchWidget::widget() ?>
                         </li> 
                         <li>
-                            <p></p>
+                            <div id="yandex-money"  style="position: absolute; ">;
+                        <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%B6%D0%B5%D1%80%D1%82%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20%D0%BD%D0%B0%20%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0&targets-hint=&default-sum=&button-text=11&hint=&successURL=&quickpay=shop&account=41001606591041" width="450" height="170" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+                    </div>
 
                         </li>
                     </ul>
@@ -220,7 +229,7 @@ AppAsset::register($this);
                                             </div>
                                         </div>-->
                     <!-- /Social Buttons -->
-
+                   
                     <!-- Copyright -->
                     <div class="copyright">
                         <div class="container">
@@ -305,7 +314,12 @@ AppAsset::register($this);
 
 
             $(function () {
-               
+                 $('#yandex-money').hide();
+                    $('#a-yandex-money').click(function(e){
+                       
+                         e.preventDefault();
+                        $('#yandex-money').slideToggle();
+                    });
                 
                 
                 var stat;
