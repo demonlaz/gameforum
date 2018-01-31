@@ -59,7 +59,10 @@
                     <!--
                     -->
                     <div class="user-data">
-                      
+                      <?php //  Html::img(Yii::$app->user->identity->profile->getAvatarUrl(230), [
+//                    'class' => 'img-rounded img-responsive',
+//                    'alt' => $profile->user->username,
+//                ]) ?>
                         <h2><?=(!empty(Yii::$app->user->identity->profile->name))?
                     Html::encode(Yii::$app->user->identity->profile->name):
                         Html::encode(Yii::$app->user->identity->username);  ?></h2>
@@ -82,8 +85,8 @@
                 </div>
 
                 <div class="container mt-20">
-                    <a href="#!" class="btn btn-sm btn-default ml-0">Add Friend</a>
-                    <a href="#!" class="btn btn-sm btn-default">Private Message</a>
+                    <!--<a href="#!" class="btn btn-sm btn-default ml-0">Add Friend</a>-->
+                    <!--<a href="#!" class="btn btn-sm btn-default">Private Message</a>-->
                 </div>
             </div>
         </div>

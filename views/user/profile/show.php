@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </td>
                 <td>
                   <p><a href="#"> <?= (Html::encode($profile->location))?Html::encode($profile->location):'Не известно' ?></a>
+                      
                   </p>
                 </td>
               </tr>

@@ -94,10 +94,10 @@ $this->title = 'Поиск';
                             <div class="col-md-3 col-xs-4">
                                 <div class="angled-img">
                                     <div class="img">
-                                        <?php foreach ($modelNews->games as $games): ?>
+                                        <?php // foreach ($modelNews->games as $games): ?>
 
-                                            <img src="/imagesgames/<?= $games->globalimag ?>" alt="not images" height="100px">
-                                        <?php endforeach; ?>
+                                            <img src="/imagesgames/<?= $modelNews->games->globalimag ?>" alt="not images"  height="120px">
+                                        <?php // endforeach; ?>
                                     </div>
                                 </div>
                             </div>
