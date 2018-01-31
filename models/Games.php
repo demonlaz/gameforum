@@ -104,6 +104,11 @@ class Games extends \yii\db\ActiveRecord {
         ];
     }
 
+    
+   
+    
+    
+    
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -132,5 +137,16 @@ class Games extends \yii\db\ActiveRecord {
         return $this->hasMany(News::className(), ['id_games' => 'id']);
     }
 
-
+ /* @return array namegames & id
+  * 
+  *  */
+    
+    public static function getArrayGames(){
+        
+        $model= parent::find()->select(['id','namegames'])->all();
+        $i=[];
+        return \yii\helpers\ArrayHelper::map($model, 'id', 'namegames');
+        
+    }
+    
 }

@@ -27,7 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'id_games',
+
+    ['attribute'=>'id_games',
+        'value'=>function($model){
+        
+        return $model->games->namegames;
+        
+        }
+        
+        ],
             'title:ntext',
             'content_short:ntext',
             'content:ntext',

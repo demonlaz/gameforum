@@ -8,7 +8,7 @@ if ($sidbar == false) {
     <?php
     foreach ($model as $news) :
 
-        foreach ($news->games as $games):
+//        foreach ($news->games as $games):
             ?>
 
             <section class="youplay-news container">
@@ -18,9 +18,9 @@ if ($sidbar == false) {
                         <div class="col-md-4">
                             <a href="<?= Url::to(['/news/post', 'id' => $news->id]) ?>" class="angled-img">
                                 <div class="img" style="background:none;">
-                                    <img src="/imagesgames/<?= $games->globalimag ?>" alt="" height="200px">
+                                    <img src="/imagesgames/<?=$news->games->globalimag ?>" alt="" height="200px">
                                 </div>
-                                <div class="youplay-hexagon-rating youplay-hexagon-rating-small" data-max="10" data-size="50" title="<?= $games->rating ?> из 10"><span><?= $games->rating ?></span>
+                                <div class="youplay-hexagon-rating youplay-hexagon-rating-small" data-max="10" data-size="50" title="<?= $news->games->rating ?> из 10"><span><?= $games->rating ?></span>
                                 </div>
                             </a>
                         </div>
@@ -40,13 +40,13 @@ if ($sidbar == false) {
                                 </p>
                             </div>
                             <a href="<?= Url::to(['/news/post', 'id' => $news->id]) ?>" class="btn read-more pull-left">Подробнее</a>
-                            <a href="<?= Url::to(['/site/games', 'id' => $games->id]) ?>" class="btn read-more pull-left">Об игре</a>
+                            <a href="<?= Url::to(['/site/games', 'id' => $news->games->id]) ?>" class="btn read-more pull-left">Об игре</a>
                         </div>
                     </div>
                 </div>
             </section>
         <?php
-        endforeach;
+//        endforeach;
     endforeach;
     ?>
 
@@ -56,7 +56,7 @@ if ($sidbar == false) {
 }else {
     foreach ($model as $news) :
 
-        foreach ($news->games as $games):
+//        foreach ($news->games as $games):
             ?>
 
 
@@ -65,7 +65,7 @@ if ($sidbar == false) {
                 <div class="col-xs-3 col-md-4">
                     <a href="<?= Url::to(['/news/post', 'id' => $news->id]) ?>" class="angled-img">
                         <div class="img" style="background: none;">
-                            <img src="/imagesgames/<?= $games->globalimag ?>" width="65px" height="49px" alt="">
+                            <img src="/imagesgames/<?= $news->games->globalimag ?>" width="65px" height="49px" alt="">
                         </div>
                     </a>
                 </div>
@@ -79,7 +79,7 @@ if ($sidbar == false) {
 
 
             <?php
-        endforeach;
+//        endforeach;
     endforeach;
 }
 ?>

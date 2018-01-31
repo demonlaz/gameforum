@@ -30,14 +30,14 @@ $this->title = "Архив новостей"
         <div class="col-md-9 col-md-push-3">
 
             <?php foreach ($modelFullNews as $news): ?>  
-                <?php foreach ($news->games as $games): ?>  
+                <?php // foreach ($news->games as $games): ?>  
                     <!-- Single News Block -->
                     <div class="news-one">
                         <div class="row vertical-gutter">
                             <div class="col-md-4">
                                 <a href="<?= Url::to(['/news/post', 'id' => $news->id]) ?>" class="angled-img">
                                     <div class="img">
-                                        <img src="/imagesgames/<?=$games->globalimag?>" alt="" height="200px">
+                                        <img src="/imagesgames/<?=$news->games->globalimag?>" alt="" height="200px">
                                     </div>
                                     <div class="over-info bottom h4"><?=\Yii::$app->formatter->asDate($news->date_add)?></div>
                                 </a>
@@ -47,7 +47,7 @@ $this->title = "Архив новостей"
                                     <h3 class="h2 pull-left m-0"><a href="<?= Url::to(['/news/post', 'id' => $news->id]) ?>"><?=$news->title?></a></h3>
                                 </div>
                                 <div class="tags">
-                                    <i class="glyphicon glyphicon-eye-open"></i>  <a href="<?= Url::to(['/site/games', 'id' => $games->id]) ?>"><?=$games->namegames?></a>
+                                    <i class="glyphicon glyphicon-eye-open"></i>  <a href="<?= Url::to(['/site/games', 'id' => $news->games->id]) ?>"><?=$news->games->namegames?></a>
                                 </div>
                                 <div class="description">
                                   <?=$news->content_short?>
@@ -58,7 +58,7 @@ $this->title = "Архив новостей"
                     </div>
                     <!-- /Single News Block -->
 
-                <?php endforeach;
+                <?php // endforeach;
             endforeach; ?>
 
                     

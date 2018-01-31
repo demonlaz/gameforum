@@ -1,13 +1,13 @@
 <?php 
 
 $this->title= \yii\helpers\Html::encode($modelNews->title);
-foreach ($modelNews->games as $games): 
+//foreach ($modelNews->games as $games): 
 ?>
 
 
     <!-- Banner -->
     <div class="youplay-banner banner-top youplay-banner-parallax xsmall">
-      <div class="image" style="background-image: url('/imagesgames/<?=$games->globalimag?>')">
+      <div class="image" style="background-image: url('/imagesgames/<?=$modelNews->games->globalimag?>')">
       </div>
 
       <div class="info">
@@ -30,9 +30,9 @@ foreach ($modelNews->games as $games):
 
           <!-- Post Text -->
           <div class="description">
-              <a href="<?= \yii\helpers\Url::to(['/site/games','id'=>$games->id])?>" class="angled-img pull-left video-popup" target="_blank">
+              <a href="<?= \yii\helpers\Url::to(['/site/games','id'=>$modelNews->games->id])?>" class="angled-img pull-left video-popup" target="_blank">
                   <div class="img" style="background:none;">
-                  <img src="/imagesgames/<?=$games->globalimag?>" alt="" width="400" height="300">
+                  <img src="/imagesgames/<?=$modelNews->games->globalimag?>" alt="" width="400" height="300">
               </div>
               <!--<i class="fa fa-play icon"></i>-->
             </a>
@@ -45,7 +45,7 @@ foreach ($modelNews->games as $games):
           <div class="youplay-review-rating">
             <div class="row">
               <div class="col-md-4">
-                  <div class="youplay-hexagon-rating" data-max="10" title="<?=$games->rating?> из 10"><span><?=$games->rating?></span>
+                  <div class="youplay-hexagon-rating" data-max="10" title="<?=$modelNews->games->rating?> из 10"><span><?=$modelNews->games->rating?></span>
                 </div>
               </div>
 <!--              <div class="col-md-4">
@@ -116,6 +116,6 @@ foreach ($modelNews->games as $games):
 
       </div>
       <!-- /Right Side -->
-             <?php endforeach;?>
+             <?php // endforeach;?>
 
     </div>

@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'stampgames',
 //            'content:ntext',s
             'rating',
-            //'/imagesgames/'.'globalimag:image',
             [
                 'label' => 'Картинка',
                 'format' => 'raw',
@@ -69,16 +68,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ['value' => $model->namegames, 'label' => "Включено(" . Yii::$app->formatter->asBoolean($model->central) . ")"];
                 },
             ],
-            //'date_exit',
-            'date_add:date',
-            //'date_up',
-            ['class' => 'yii\grid\ActionColumn'],
+                        'date_add:date',
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'delete' => function ($url, $model) {
+                        $ContentRubricmodel = $model->news;
+                        return (!empty($ContentRubricmodel)) ?
+                                Html::a(
+                                        '<span class="glyphicon glyphicon-ban-circle" title="Удалить невозможно игра  используется в новостях!"></span>', "#") :
+                                Html::a(
+                                        '<span class="glyphicon glyphicon-trash" title="Удалить!"></span>', $url, ['data-confirm' => 'Вы уверены, что хотите удалить этот элемент?']);
+                    },],
+            ],
+        //'date_exit',
+        //'date_up',
+//            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);
     ?>
 </div>
-<a id="ttt" style="color:red;" >Установить как популярные</a>
-<a id="ccc" style="color:red;" >Установить как центральных</a>
+<a id="ttt" style="color:red;"  class="btn btn-warning">Установить как популярные</a>
+<a id="ccc" style="color:red;" class="btn btn-warning" >Установить как центральных</a>
     <?php
     \yii\widgets\Pjax::end();
 

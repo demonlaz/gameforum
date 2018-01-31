@@ -20,6 +20,20 @@ class NewsController extends Controller
     public function behaviors()
     {
         return [
+             'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => [],
+                'rules' => [
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        // 'roles'=>['?'],
+                        'matchCallback' => function($rule, $action) {
+                            return !empty(Yii::$app->user->identity->isAdmin);
+                        }
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

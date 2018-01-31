@@ -33,6 +33,7 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['id_games','title','content','content_short'],'required'],
             [['id_games'], 'integer'],
             [['title', 'content_short', 'content'], 'string'],
             [['date_add', 'date_up'], 'safe'],
