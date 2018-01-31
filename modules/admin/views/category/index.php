@@ -22,12 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php 
     \yii\widgets\Pjax::begin(['id'=>'category','timeout'=>3000]);
 ?>
-    <?= GridView::widget([
+    <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'id'=>'grid',
         'columns' => [
             
-           
+          
             'name',
             [
                 'attribute'=>'Count Games',
@@ -50,8 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
                  
                 ],
         ],
-    ]); ?>
-    <?php 
-\yii\widgets\Pjax::end();
-?>
+    ]); 
+                \yii\widgets\Pjax::end();
+                
+                ?>
+    
 </div>
+
+

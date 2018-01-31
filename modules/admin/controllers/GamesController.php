@@ -165,7 +165,32 @@ class GamesController extends Controller {
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    
+    
+    /* @var $checkbox array */
+ public function actionAjax(){
+     
+ if($checkbox=\Yii::$app->request->get('checkbox')){
+  $checkbox= explode(',', $checkbox);
+ $model= Games::find()->where(['in','id',$checkbox])->all();
+     foreach ($model as $value) {
+         $value->popular=($value->popular==1)?false:true;
+         $value->save(false);
+     }
+     
+return \yii\helpers\Json::encode(true);  
+ }else
+ {
+     return (new NotFoundHttpException('Ошибка')); 
+ }
 
+//        if(\Yii::$app->request->post()==\Yii::$app->request->isAjax){
+//            
+//        }else
+//        {return false;}
+      
+        
+    }
     /* @var $model object
      * @throws имя картинки
      *  */
@@ -185,5 +210,5 @@ class GamesController extends Controller {
             new NotFoundHttpException('Имя картинки не обнаружено');
         }
     }
-
+   
 }

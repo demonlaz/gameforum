@@ -18,10 +18,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Games', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+<?php
+    \yii\widgets\Pjax::begin(['id'=>'games','timeout'=>3000]);
 
+?>
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
+        'id'=>'grid',
         'filterModel' => $searchModel,
         'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
@@ -53,6 +57,14 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'tehnik_trebov:ntext',
             'global:boolean',
             'popular:boolean',
+                         ['class'=>'yii\grid\CheckboxColumn',
+                             'header'=>'Популярные(вкл\выкл)',
+                            
+               'checkboxOptions'=>function($model,$key,$index,$column){
+                return ['value'=>$model->namegames,'label'=> Yii::$app->formatter->asBoolean($model->popular)];
+               },
+               
+               ],
             'central:boolean',
             //'date_exit',
             'date_add:date',
@@ -62,3 +74,29 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
     ?>
 </div>
+<a id="ttt" style="color:red;" >Установить как популярные</a>
+    <?php 
+
+    \yii\widgets\Pjax::end();
+
+$js=<<<JS
+      $(function(){
+        $('#ttt').click(function(){
+        var key=$('#grid').yiiGridView('getSelectedRows');
+        $.ajax({url:'/admin/games/ajax',
+        data:'checkbox='+key,
+        success:function(res){
+            //$('#ttt').text(res);
+        alert('Вы обновили ленту с популярными');
+   }
+            
+   
+   });
+           }); 
+   
+   });  
+JS;
+
+$this->registerJs($js);
+
+?>
