@@ -18,14 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Games', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php
-    \yii\widgets\Pjax::begin(['id'=>'games','timeout'=>3000]);
-
-?>
+    <?php
+    \yii\widgets\Pjax::begin(['id' => 'games', 'timeout' => 3000]);
+    ?>
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
-        'id'=>'grid',
+        'id' => 'grid',
         'filterModel' => $searchModel,
         'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
@@ -56,16 +55,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'url_dowload:url',
 //            'tehnik_trebov:ntext',
             'global:boolean',
-            'popular:boolean',
-                         ['class'=>'yii\grid\CheckboxColumn',
-                             'header'=>'Популярные(вкл\выкл)',
-                            
-               'checkboxOptions'=>function($model,$key,$index,$column){
-                return ['value'=>$model->namegames,'label'=> Yii::$app->formatter->asBoolean($model->popular)];
-               },
-               
-               ],
-            'central:boolean',
+//            'popular:boolean',
+            ['class' => 'yii\grid\CheckboxColumn',
+                'header' => 'Популярные(вкл\выкл)',
+                'checkboxOptions' => function($model, $key, $index, $column) {
+                    return ['value' => $model->namegames, 'label' => "Включено(" . Yii::$app->formatter->asBoolean($model->popular) . ")"];
+                },
+            ],
+//            'central:boolean',
+            ['class' => 'yii\grid\CheckboxColumn',
+                'header' => 'Центральная(вкл\выкл)',
+                'checkboxOptions' => function($model, $key, $index, $column) {
+                    return ['value' => $model->namegames, 'label' => "Включено(" . Yii::$app->formatter->asBoolean($model->central) . ")"];
+                },
+            ],
             //'date_exit',
             'date_add:date',
             //'date_up',
@@ -75,28 +78,51 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 </div>
 <a id="ttt" style="color:red;" >Установить как популярные</a>
-    <?php 
-
+<a id="ccc" style="color:red;" >Установить как центральных</a>
+    <?php
     \yii\widgets\Pjax::end();
 
-$js=<<<JS
+    $js = <<<JS
       $(function(){
         $('#ttt').click(function(){
         var key=$('#grid').yiiGridView('getSelectedRows');
         $.ajax({url:'/admin/games/ajax',
         data:'checkbox='+key,
         success:function(res){
-            //$('#ttt').text(res);
-        alert('Вы обновили ленту с популярными');
+            if(res=='true'){
+            alert('Вы обновили ленту с популярными');
+                }else{
+                    alert('Вы не обновили ленту!');
+   }
+        
    }
             
    
-   });
-           }); 
+   });//аджакс
+           }); //события
+            
+            
+            
+            //центральных
+               $('#ccc').click(function(){
+        var key=$('#grid').yiiGridView('getSelectedRows');
+        $.ajax({url:'/admin/games/ajax-central',
+        data:'checkbox='+key,
+        success:function(res){
+            if(res=='true'){
+            alert('Вы обновили ленту центральную');
+                }else{
+                    alert('Вы не обновили ленту!');
+   }
+   }
+            
    
-   });  
+   });//аджакс
+           }); //события
+            
+   
+   });  //глобал
 JS;
 
-$this->registerJs($js);
-
-?>
+    $this->registerJs($js);
+    ?>

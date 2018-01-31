@@ -35,7 +35,7 @@
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/admin/admin/index']],
                     ['label' => 'Категории', 'icon' => 'edit', 'url' => ['/admin/category/index']],
                       ['label' => 'Игры', 'icon' => 'gamepad', 'url' => ['/admin/games/index']],
-                    
+                     ['label' => 'Новости', 'icon' => 'newspaper-o', 'url' => ['/admin/news/index']],
                  
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],

@@ -124,13 +124,13 @@ class GamesController extends Controller {
 
             return $this->redirect(['index', 'id' => $model->id]);
         }
-            $baner= Games::findOne($id);
-           $skrin= \app\models\Images::findAll(['id_parent_games'=>$id]);
+        $baner = Games::findOne($id);
+        $skrin = \app\models\Images::findAll(['id_parent_games' => $id]);
         return $this->render('update', [
                     'model' => $model,
-            'imagesModel'=>$imagesModel,
-                'skrin'=>$skrin,
-                'baner'=>$baner
+                    'imagesModel' => $imagesModel,
+                    'skrin' => $skrin,
+                    'baner' => $baner
         ]);
     }
 
@@ -142,12 +142,12 @@ class GamesController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id) {
-      
-            \app\models\Comments::deleteAll(['id_games' => $id]);
-            \app\models\News::deleteAll(['id_games' => $id]);
-            \app\models\Images::deleteAll(['id_parent_games' => $id]);
-            $this->findModel($id)->delete();
-       
+
+        \app\models\Comments::deleteAll(['id_games' => $id]);
+        \app\models\News::deleteAll(['id_games' => $id]);
+        \app\models\Images::deleteAll(['id_parent_games' => $id]);
+        $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
@@ -165,32 +165,48 @@ class GamesController extends Controller {
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    
-    
-    /* @var $checkbox array */
- public function actionAjax(){
-     
- if($checkbox=\Yii::$app->request->get('checkbox')){
-  $checkbox= explode(',', $checkbox);
- $model= Games::find()->where(['in','id',$checkbox])->all();
-     foreach ($model as $value) {
-         $value->popular=($value->popular==1)?false:true;
-         $value->save(false);
-     }
-     
-return \yii\helpers\Json::encode(true);  
- }else
- {
-     return (new NotFoundHttpException('Ошибка')); 
- }
 
-//        if(\Yii::$app->request->post()==\Yii::$app->request->isAjax){
-//            
-//        }else
-//        {return false;}
-      
-        
+    /* @var $checkbox array (для популярных выкл вкл)
+     * 
+     */
+
+    public function actionAjax() {
+
+        if (!empty($checkbox = \Yii::$app->request->get('checkbox'))) {
+            $checkbox = explode(',', $checkbox);
+            $model = Games::find()->where(['in', 'id', $checkbox])->all();
+            foreach ($model as $value) {
+                $value->popular = ($value->popular == 1) ? false : true;
+                $value->save(false);
+            }
+
+            return \yii\helpers\Json::encode(true);
+        } else {
+            return \yii\helpers\Json::encode(false);
+        }
     }
+    
+    
+    /* @var $checkbox array (для централ выкл вкл)
+     * 
+     */
+
+    public function actionAjaxCentral() {
+
+        if (!empty($checkbox = \Yii::$app->request->get('checkbox'))) {
+            $checkbox = explode(',', $checkbox);
+            $model = Games::find()->where(['in', 'id', $checkbox])->all();
+            foreach ($model as $value) {
+                $value->central = ($value->central == 1) ? false : true;
+                $value->save(false);
+            }
+
+            return \yii\helpers\Json::encode(true);
+        } else {
+            return \yii\helpers\Json::encode(false);
+        }
+    }
+
     /* @var $model object
      * @throws имя картинки
      *  */
@@ -210,5 +226,5 @@ return \yii\helpers\Json::encode(true);
             new NotFoundHttpException('Имя картинки не обнаружено');
         }
     }
-   
+
 }
